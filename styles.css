@@ -721,6 +721,14 @@ h2 {
   font-size: 0.98rem;
 }
 
+.pill-logo {
+  width: 0.95rem;
+  height: 0.95rem;
+  object-fit: contain;
+  margin-right: 0.45rem;
+  flex-shrink: 0;
+}
+
 .pill-symbol {
   width: 1rem;
   text-align: center;
