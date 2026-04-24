@@ -1,31 +1,17 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
   <defs>
-    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0%" stop-color="#0d1226" />
-      <stop offset="100%" stop-color="#070914" />
-    </linearGradient>
-    <linearGradient id="mark" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0%" stop-color="#ff6fd8" />
-      <stop offset="55%" stop-color="#ff4ecd" />
-      <stop offset="100%" stop-color="#b76cff" />
-    </linearGradient>
-    <linearGradient id="accent" x1="0" y1="0" x2="1" y2="0">
-      <stop offset="0%" stop-color="#ff4ecd" />
-      <stop offset="50%" stop-color="#8f67ff" />
-      <stop offset="100%" stop-color="#00d7ff" />
+    <linearGradient id="tile" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#8b5cf6" />
+      <stop offset="100%" stop-color="#6d28d9" />
     </linearGradient>
   </defs>
 
-  <rect width="64" height="64" rx="14" fill="url(#bg)" />
-  <rect x="0.75" y="0.75" width="62.5" height="62.5" rx="13.5"
-        fill="none" stroke="rgba(255,255,255,0.08)" stroke-width="0.75" />
+  <rect width="64" height="64" rx="12" fill="url(#tile)" />
 
   <path
-    d="M13 49 L28.5 13 H35.5 L51 49 H43.3 L32 22.4 L20.7 49 Z"
-    fill="url(#mark)"
+    d="M12.5 50 L28.4 13 H35.6 L51.5 50 H42.6 L32 24.2 L21.4 50 Z"
+    fill="#ffffff"
   />
 
-  <rect x="24" y="36" width="16" height="5.5" rx="1.4" fill="#0a0e1e" />
-
-  <rect x="16" y="54" width="32" height="2.2" rx="1.1" fill="url(#accent)" opacity="0.9" />
+  <rect x="23.2" y="36.4" width="17.6" height="5.2" rx="0.6" fill="url(#tile)" />
 </svg>
