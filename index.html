@@ -3,11 +3,34 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Ammar Malick - Portfolio</title>
+    <meta name="theme-color" content="#070710" />
+    <title>Ammar Malick - Software Engineer & AI Builder</title>
     <meta
       name="description"
-      content="High-impact software engineering portfolio for Ammar Malick featuring AI, full-stack systems, and real internship outcomes."
+      content="Software engineer and AI builder shipping real-world systems. Portfolio of Ammar Malick: UTA Honors SWE, internships at EY, Intel, Recording Academy, BlueCiate."
     />
+    <meta name="author" content="Ammar Malick" />
+    <meta name="keywords" content="Ammar Malick, software engineer, AI builder, full-stack, UTA, Honors, portfolio, internship, ForgeAI" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://ammarmalick.dev/" />
+    <meta property="og:title" content="Ammar Malick - Software Engineer & AI Builder" />
+    <meta
+      property="og:description"
+      content="High-impact software engineering portfolio featuring AI, full-stack systems, and real internship outcomes."
+    />
+    <meta property="og:image" content="assets/og-image.svg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Ammar Malick - Software Engineer & AI Builder" />
+    <meta
+      name="twitter:description"
+      content="AI + full-stack systems with measurable impact. UTA Honors, EY, Intel, Recording Academy."
+    />
+    <meta name="twitter:image" content="assets/og-image.svg" />
+
     <link rel="icon" type="image/svg+xml" href="favicon.svg?v=6" />
     <link rel="shortcut icon" href="favicon.svg?v=6" />
     <link rel="apple-touch-icon" href="favicon.svg?v=6" />
@@ -22,6 +45,34 @@
       href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css"
     />
     <link rel="stylesheet" href="styles.css" />
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Ammar Malick",
+        "url": "https://ammarmalick.dev/",
+        "jobTitle": "Software Engineer",
+        "description": "Software Engineering & Honors student at The University of Texas at Arlington, focused on AI-driven and full-stack systems.",
+        "alumniOf": {
+          "@type": "CollegeOrUniversity",
+          "name": "The University of Texas at Arlington"
+        },
+        "knowsAbout": [
+          "Software Engineering",
+          "Artificial Intelligence",
+          "Full-Stack Development",
+          "Data Analytics",
+          "React",
+          "Python",
+          "TypeScript"
+        ],
+        "sameAs": [
+          "https://github.com/amalick8",
+          "https://www.linkedin.com/in/ammar-malick-1023b9278"
+        ]
+      }
+    </script>
   </head>
   <body>
     <div class="noise-overlay" aria-hidden="true"></div>
@@ -37,7 +88,7 @@
     <div class="scroll-progress" aria-hidden="true"></div>
 
     <header class="site-header glass">
-      <a class="logo" href="#top">AM</a>
+      <a class="logo" href="#top" aria-label="Ammar Malick — home">a</a>
       <nav>
         <a href="#work">Work</a>
         <a href="#skills">Skills</a>
@@ -46,10 +97,83 @@
         <a href="#contact">Contact</a>
       </nav>
       <a class="nav-cta magnetic" href="#contact">Hire me</a>
+      <button
+        class="mobile-toggle"
+        id="mobileToggle"
+        type="button"
+        aria-label="Toggle navigation"
+        aria-expanded="false"
+        aria-controls="mobileDrawer"
+      >
+        <span></span><span></span><span></span>
+      </button>
     </header>
 
+    <nav class="side-dots" aria-label="Section navigation">
+      <a href="#hero" data-label="Top"><span></span></a>
+      <a href="#work" data-label="Work"><span></span></a>
+      <a href="#skills" data-label="Skills"><span></span></a>
+      <a href="#github" data-label="GitHub"><span></span></a>
+      <a href="#process" data-label="Journey"><span></span></a>
+      <a href="#contact" data-label="Contact"><span></span></a>
+    </nav>
+
+    <aside class="mobile-drawer" id="mobileDrawer" aria-hidden="true">
+      <div class="mobile-drawer-backdrop" data-drawer-close></div>
+      <div class="mobile-drawer-panel glass">
+        <nav aria-label="Mobile navigation">
+          <a href="#work" data-drawer-close>Work</a>
+          <a href="#skills" data-drawer-close>Skills</a>
+          <a href="#github" data-drawer-close>GitHub</a>
+          <a href="#process" data-drawer-close>Journey</a>
+          <a href="#contact" data-drawer-close>Contact</a>
+        </nav>
+        <div class="mobile-drawer-hint">
+          Press <kbd>&#8984;</kbd><kbd>K</kbd> on desktop
+        </div>
+      </div>
+    </aside>
+
+    <div
+      class="cmd-palette"
+      id="cmdPalette"
+      role="dialog"
+      aria-hidden="true"
+      aria-modal="true"
+      aria-label="Command palette"
+    >
+      <div class="cmd-palette-backdrop" data-cmd-close></div>
+      <div class="cmd-palette-panel glass" role="document">
+        <div class="cmd-palette-header">
+          <span class="cmd-palette-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="11" cy="11" r="8"></circle>
+              <path d="m21 21-4.3-4.3"></path>
+            </svg>
+          </span>
+          <input
+            type="text"
+            id="cmdInput"
+            placeholder="Search actions..."
+            aria-label="Search commands"
+            autocomplete="off"
+            spellcheck="false"
+          />
+          <kbd class="cmd-esc">esc</kbd>
+        </div>
+        <ul class="cmd-list" id="cmdList" role="listbox"></ul>
+        <div class="cmd-footer">
+          <span><kbd>&uarr;</kbd><kbd>&darr;</kbd> navigate</span>
+          <span><kbd>enter</kbd> select</span>
+          <span><kbd>esc</kbd> close</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
     <main id="top">
-      <section class="hero section">
+      <section id="hero" class="hero section">
         <div class="bg-orbs">
           <div class="orb orb-1 parallax" data-depth="0.2"></div>
           <div class="orb orb-2 parallax" data-depth="0.35"></div>
@@ -100,19 +224,20 @@
         </div>
 
         <div class="hero-stats reveal">
-          <article>
-            <h3>3.93</h3>
+          <article class="hero-stat-card">
+            <h3 data-counter="3.93" data-decimals="2">3.93</h3>
             <p>UTA GPA (Software Engineering & Honors)</p>
           </article>
-          <article>
-            <h3>2,600+</h3>
+          <article class="hero-stat-card">
+            <h3 data-counter="2600" data-suffix="+" data-format="commas">2,600+</h3>
             <p>LinkedIn followers</p>
           </article>
-          <article>
-            <h3>840+</h3>
+          <article class="hero-stat-card">
+            <h3 data-counter="840" data-suffix="+">840+</h3>
             <p>GitHub contributions</p>
           </article>
         </div>
+
       </section>
 
       <section id="work" class="section work">
@@ -121,96 +246,157 @@
           <h2>Hands-on roles across software, analytics, and product execution.</h2>
         </div>
 
+        <div class="experience-controls reveal">
+          <button
+            class="expand-all-btn"
+            id="expandAllBtn"
+            type="button"
+            aria-pressed="false"
+          >
+            <span class="expand-all-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="6 9 12 15 18 9"></polyline>
+              </svg>
+            </span>
+            <span class="expand-all-label">Expand all</span>
+          </button>
+        </div>
+
         <div class="experience-timeline">
-          <article class="exp-item glass reveal">
-            <p class="exp-meta">Mar 2026 - Present</p>
-            <h3>Expedition EY Program Participant <span>EY</span></h3>
-            <p class="exp-location">Remote</p>
-            <ul>
+          <article class="exp-item exp-item--current reveal">
+            <header class="exp-head">
+              <span class="exp-index">01</span>
+              <div class="exp-head-info">
+                <p class="exp-tag">EY &middot; Remote</p>
+                <h3 class="exp-title">Expedition EY Program Participant</h3>
+              </div>
+              <span class="exp-date">Mar 2026 &mdash; Present</span>
+            </header>
+            <ul class="exp-bullets">
               <li>Participating in a structured apprenticeship focused on consulting, technology, and delivery workflows.</li>
               <li>Developing stronger business context for engineering decisions in real-world teams.</li>
             </ul>
           </article>
 
-          <article class="exp-item glass reveal">
-            <p class="exp-meta">Feb 2026 - Present</p>
-            <h3>Researcher <span>ACM @ UT Arlington</span></h3>
-            <p class="exp-location">Dallas, TX - On-site</p>
-            <ul>
+          <article class="exp-item exp-item--current reveal">
+            <header class="exp-head">
+              <span class="exp-index">02</span>
+              <div class="exp-head-info">
+                <p class="exp-tag">ACM @ UT Arlington &middot; Dallas, TX</p>
+                <h3 class="exp-title">Researcher</h3>
+              </div>
+              <span class="exp-date">Feb 2026 &mdash; Present</span>
+            </header>
+            <ul class="exp-bullets">
               <li>Supporting introductory machine learning research through technical and market analysis.</li>
               <li>Contributing structured research notes and exploratory findings for team discussions.</li>
             </ul>
           </article>
 
-          <article class="exp-item glass reveal">
-            <p class="exp-meta">Mar 2025 - Present</p>
-            <h3>Campus Tour Guide <span>The University of Texas at Arlington</span></h3>
-            <p class="exp-location">Dallas, TX - On-site</p>
-            <ul>
+          <article class="exp-item exp-item--current reveal">
+            <header class="exp-head">
+              <span class="exp-index">03</span>
+              <div class="exp-head-info">
+                <p class="exp-tag">UT Arlington &middot; Dallas, TX</p>
+                <h3 class="exp-title">Campus Tour Guide</h3>
+              </div>
+              <span class="exp-date">Mar 2025 &mdash; Present</span>
+            </header>
+            <ul class="exp-bullets">
               <li>Representing UTA to prospective students and families through structured campus walkthroughs.</li>
               <li>Strengthening communication and live stakeholder-facing presentation skills.</li>
             </ul>
           </article>
 
-          <article class="exp-item glass reveal">
-            <p class="exp-meta">Jan 2026 - Mar 2026</p>
-            <h3>Software Engineer Intern <span>BlueCiate</span></h3>
-            <p class="exp-location">Dallas - Hybrid</p>
-            <ul>
+          <article class="exp-item reveal">
+            <header class="exp-head">
+              <span class="exp-index">04</span>
+              <div class="exp-head-info">
+                <p class="exp-tag">BlueCiate &middot; Dallas, Hybrid</p>
+                <h3 class="exp-title">Software Engineer Intern</h3>
+              </div>
+              <span class="exp-date">Jan 2026 &mdash; Mar 2026</span>
+            </header>
+            <ul class="exp-bullets">
               <li>Built Python automation pipelines (pandas + file handling) for recurring internal data prep workflows.</li>
-              <li>Reduced manual processing time by roughly 20-25% through repeatable script-based formatting steps.</li>
+              <li>Reduced manual processing time by roughly 20&ndash;25% through repeatable script-based formatting steps.</li>
               <li>Contributed updates to application components while learning React architecture and data flow.</li>
             </ul>
           </article>
 
-          <article class="exp-item glass reveal">
-            <p class="exp-meta">Oct 2025 - Dec 2025</p>
-            <h3>Frontend Developer <span>BlueCiate</span></h3>
-            <p class="exp-location">Internship</p>
-            <ul>
+          <article class="exp-item reveal">
+            <header class="exp-head">
+              <span class="exp-index">05</span>
+              <div class="exp-head-info">
+                <p class="exp-tag">BlueCiate &middot; Internship</p>
+                <h3 class="exp-title">Frontend Developer</h3>
+              </div>
+              <span class="exp-date">Oct 2025 &mdash; Dec 2025</span>
+            </header>
+            <ul class="exp-bullets">
               <li>Implemented and refined responsive UI components for active product surfaces.</li>
               <li>Shipped incremental front-end improvements using React and modern design patterns.</li>
             </ul>
           </article>
 
-          <article class="exp-item glass reveal">
-            <p class="exp-meta">Jun 2025 - Aug 2025</p>
-            <h3>Web Performance <span>@ Recording Academy x GCA</span></h3>
-            <p class="exp-location">Remote</p>
-            <ul>
+          <article class="exp-item reveal">
+            <header class="exp-head">
+              <span class="exp-index">06</span>
+              <div class="exp-head-info">
+                <p class="exp-tag">Recording Academy x GCA &middot; Remote</p>
+                <h3 class="exp-title">Web Performance</h3>
+              </div>
+              <span class="exp-date">Jun 2025 &mdash; Aug 2025</span>
+            </header>
+            <ul class="exp-bullets">
               <li>Analyzed 2,300+ days of traffic/engagement data using Python (Pandas) to evaluate site behavior.</li>
               <li>Built Plotly visualizations to compare trends before and after the platform split.</li>
               <li>Automated analysis workflows, reducing manual reporting effort by around 30%.</li>
             </ul>
           </article>
 
-          <article class="exp-item glass reveal">
-            <p class="exp-meta">Jun 2025 - Aug 2025</p>
-            <h3>Sustainability Analytics <span>@ Intel x GCA</span></h3>
-            <p class="exp-location">Remote</p>
-            <ul>
+          <article class="exp-item reveal">
+            <header class="exp-head">
+              <span class="exp-index">07</span>
+              <div class="exp-head-info">
+                <p class="exp-tag">Intel x GCA &middot; Remote</p>
+                <h3 class="exp-title">Sustainability Analytics</h3>
+              </div>
+              <span class="exp-date">Jun 2025 &mdash; Aug 2025</span>
+            </header>
+            <ul class="exp-bullets">
               <li>Used Python (Pandas) and SQL to analyze repurposed-device and environmental impact datasets.</li>
-              <li>Built dashboards to explore energy savings, e-waste reduction, and CO2 impact trends.</li>
-              <li>Automated cleaning/analysis stages and reduced manual processing by roughly 25-30%.</li>
+              <li>Built dashboards to explore energy savings, e-waste reduction, and CO<sub>2</sub> impact trends.</li>
+              <li>Automated cleaning/analysis stages and reduced manual processing by roughly 25&ndash;30%.</li>
             </ul>
           </article>
 
-          <article class="exp-item glass reveal">
-            <p class="exp-meta">Oct 2024 - May 2025</p>
-            <h3>Client Solutions &amp; Web Development Intern <span>Caliph Digital</span></h3>
-            <p class="exp-location">Edmonton - Hybrid</p>
-            <ul>
+          <article class="exp-item reveal">
+            <header class="exp-head">
+              <span class="exp-index">08</span>
+              <div class="exp-head-info">
+                <p class="exp-tag">Caliph Digital &middot; Edmonton, Hybrid</p>
+                <h3 class="exp-title">Client Solutions &amp; Web Dev Intern</h3>
+              </div>
+              <span class="exp-date">Oct 2024 &mdash; May 2025</span>
+            </header>
+            <ul class="exp-bullets">
               <li>Built and maintained client websites primarily in Webflow with targeted HTML/CSS customizations.</li>
               <li>Improved responsiveness and usability through iterative styling and layout updates.</li>
               <li>Collaborated with team members on feedback cycles and production issue resolution.</li>
             </ul>
           </article>
 
-          <article class="exp-item glass reveal">
-            <p class="exp-meta">Jan 2023 - Jun 2023</p>
-            <h3>Admin &amp; IT Support <span>Iqra Islamic School</span></h3>
-            <p class="exp-location">On-site</p>
-            <ul>
+          <article class="exp-item reveal">
+            <header class="exp-head">
+              <span class="exp-index">09</span>
+              <div class="exp-head-info">
+                <p class="exp-tag">Iqra Islamic School &middot; On-site</p>
+                <h3 class="exp-title">Admin &amp; IT Support</h3>
+              </div>
+              <span class="exp-date">Jan 2023 &mdash; Jun 2023</span>
+            </header>
+            <ul class="exp-bullets">
               <li>Handled daily operations support, basic IT troubleshooting, and documentation tasks.</li>
               <li>Built a foundation for dependable execution in structured, fast-paced environments.</li>
             </ul>
@@ -323,8 +509,9 @@
             <p class="stat-label">Account Stats (2026)</p>
             <h3>42 repos | 840+ contributions</h3>
             <p class="stat-copy">
-              3 stars, 2 followers, 2 following, Pro account, and active across
-              Python, TypeScript, JavaScript, Jupyter, and C++.
+              <span data-gh="followers">2</span> followers,
+              <span data-gh="following">2</span> following, Pro account, and
+              active across Python, TypeScript, JavaScript, Jupyter, and C++.
             </p>
           </article>
           <article class="stat-card glass tilt reveal">
@@ -430,13 +617,12 @@
             </div>
           </article>
         </div>
-        <div class="github-flex reveal">
-          <p>
-            Flex: <span>42 repos</span> / <span>840+ contributions</span> /
-            <span>YOLO + Pull Shark</span> / <span>Building in public while
-            shipping private production work.</span>
-          </p>
-        </div>
+        <ul class="github-stat-strip reveal">
+          <li><strong>42</strong><span>repositories</span></li>
+          <li><strong data-counter="840" data-suffix="+">840+</strong><span>contributions</span></li>
+          <li><strong data-gh="followers">2</strong><span>followers</span></li>
+          <li><strong>Pull Shark + YOLO</strong><span>achievements</span></li>
+        </ul>
       </section>
 
       <section id="process" class="section process">
@@ -445,38 +631,113 @@
           <h2>Numbers that show traction across projects.</h2>
         </div>
 
-        <div class="timeline">
-          <article class="step reveal">
-            <span>01</span>
-            <h3>Recording Academy Web Analytics</h3>
-            <p>
-              Processed 2,800+ days of platform data and identified a 4,190%
-              awards-night traffic spike (1.39M vs ~32K daily average).
+        <div class="result-grid">
+          <article class="result-card reveal">
+            <header class="result-card-head">
+              <span class="result-index">01</span>
+              <div class="result-card-head-text">
+                <p class="result-tag">Recording Academy &middot; Analytics</p>
+                <h3 class="result-title">Awards-night traffic anomaly</h3>
+              </div>
+            </header>
+            <div class="result-metrics">
+              <div class="result-metric result-metric--primary">
+                <span class="result-metric-value">1.39M</span>
+                <span class="result-metric-label">Peak daily traffic</span>
+              </div>
+              <div class="result-metric">
+                <span class="result-metric-value">~32K</span>
+                <span class="result-metric-label">Avg daily baseline</span>
+              </div>
+              <div class="result-metric result-metric--delta">
+                <span class="result-metric-value">+4,190%</span>
+                <span class="result-metric-label">Spike vs baseline</span>
+              </div>
+            </div>
+            <p class="result-desc">
+              Processed 2,800+ days of platform data and isolated the
+              awards-night spike that outstripped the baseline by roughly 40x.
             </p>
           </article>
-          <article class="step reveal">
-            <span>02</span>
-            <h3>Intel Sustainability Analysis</h3>
-            <p>
+
+          <article class="result-card reveal">
+            <header class="result-card-head">
+              <span class="result-index">02</span>
+              <div class="result-card-head-text">
+                <p class="result-tag">Intel &middot; Sustainability</p>
+                <h3 class="result-title">Device lifecycle impact</h3>
+              </div>
+            </header>
+            <div class="result-metrics">
+              <div class="result-metric result-metric--primary">
+                <span class="result-metric-value">6,768<span class="result-metric-unit">t</span></span>
+                <span class="result-metric-label">CO<sub>2</sub> emissions saved</span>
+              </div>
+              <div class="result-metric">
+                <span class="result-metric-value">601,740</span>
+                <span class="result-metric-label">Devices analyzed</span>
+              </div>
+              <div class="result-metric result-metric--delta">
+                <span class="result-metric-value">Lifecycle</span>
+                <span class="result-metric-label">Extension modeled end-to-end</span>
+              </div>
+            </div>
+            <p class="result-desc">
               Evaluated 601,740 repurposed devices and quantified 6,768 tons of
-              CO2 savings through lifecycle extension.
+              CO<sub>2</sub> savings through lifecycle extension.
             </p>
           </article>
-          <article class="step reveal">
-            <span>03</span>
-            <h3>Technical Community Presence</h3>
-            <p>
-              Current LinkedIn analytics: 620 profile views, 141 post
-              impressions, and 131 search appearances in the past 7 days.
+
+          <article class="result-card reveal">
+            <header class="result-card-head">
+              <span class="result-index">03</span>
+              <div class="result-card-head-text">
+                <p class="result-tag">LinkedIn &middot; Community Presence</p>
+                <h3 class="result-title">Last 7 days of reach</h3>
+              </div>
+            </header>
+            <div class="result-metrics">
+              <div class="result-metric result-metric--primary">
+                <span class="result-metric-value">620</span>
+                <span class="result-metric-label">Profile views</span>
+              </div>
+              <div class="result-metric">
+                <span class="result-metric-value">141</span>
+                <span class="result-metric-label">Post impressions</span>
+              </div>
+              <div class="result-metric result-metric--delta">
+                <span class="result-metric-value">131</span>
+                <span class="result-metric-label">Search appearances</span>
+              </div>
+            </div>
+            <p class="result-desc">
+              Snapshot of a 7-day technical community footprint&mdash;inbound
+              from recruiters, engineering leads, and fellow builders.
             </p>
           </article>
-          <article class="step reveal">
-            <span>04</span>
-            <h3>Current Focus</h3>
-            <p>
-              Mastering DSA, building real-world AI apps, and growing toward a
-              high-impact sales engineering career.
-            </p>
+
+          <article class="result-card result-card--focus reveal">
+            <header class="result-card-head">
+              <span class="result-index">04</span>
+              <div class="result-card-head-text">
+                <p class="result-tag">Current Quarter</p>
+                <h3 class="result-title">Where my reps are going</h3>
+              </div>
+            </header>
+            <ul class="result-focus">
+              <li>
+                <span class="result-focus-label">DSA</span>
+                <span class="result-focus-text">Daily pattern-based reps and mock interviews.</span>
+              </li>
+              <li>
+                <span class="result-focus-label">AI</span>
+                <span class="result-focus-text">Shipping real-world AI builds with production polish.</span>
+              </li>
+              <li>
+                <span class="result-focus-label">Arc</span>
+                <span class="result-focus-text">Trajectory toward high-impact sales engineering.</span>
+              </li>
+            </ul>
           </article>
         </div>
       </section>
@@ -503,6 +764,20 @@
           rel="noreferrer"
           >View GitHub</a
         >
+        <button
+          type="button"
+          class="btn btn-ghost magnetic btn-copy-email"
+          data-email="ammarmalick2006@gmail.com"
+          aria-label="Copy email address"
+        >
+          <span class="copy-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+              <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+            </svg>
+          </span>
+          <span class="copy-label">Copy Email</span>
+        </button>
       </div>
       <p class="copyright reveal">
         © <span id="year"></span> Ammar Malick. Built with code, data, and intent.
