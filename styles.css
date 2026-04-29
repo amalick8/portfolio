@@ -1021,38 +1021,8 @@ h2 {
   border-color: rgba(244, 187, 230, 0.28);
 }
 
-.github-overview {
-  display: grid;
-  grid-template-columns: repeat(12, 1fr);
-  gap: 1rem;
-  margin-bottom: 1rem;
-}
-
-.stat-card {
-  grid-column: span 4;
-  border-radius: 20px;
-  padding: 1.2rem;
-  transition: transform 0.28s cubic-bezier(0.22, 1, 0.36, 1), border-color 0.28s ease;
-}
-
-.stat-label {
-  margin: 0;
-  color: #92c5ff;
-  font-size: 0.78rem;
-  text-transform: uppercase;
-  letter-spacing: 0.12em;
-}
-
-.stat-card h3 {
-  margin: 0.5rem 0 0.4rem;
-  font-size: 1.35rem;
-}
-
-.stat-copy {
-  margin: 0;
-  color: var(--muted);
-  line-height: 1.5;
-  font-size: 0.95rem;
+.github .section-head {
+  margin-bottom: 1.1rem;
 }
 
 .repo-grid {
@@ -1147,7 +1117,6 @@ h2 {
 }
 
 .skills-card:hover,
-.stat-card:hover,
 .step:hover {
   transform: translateY(-3px);
   border-color: rgba(255, 255, 255, 0.28);
@@ -1255,7 +1224,6 @@ h2 {
     left: -1.52rem;
   }
 
-  .stat-card,
   .repo-card {
     grid-column: span 6;
   }
@@ -1343,12 +1311,10 @@ h2 {
     grid-template-columns: 1fr;
   }
 
-  .github-overview,
   .repo-grid {
     grid-template-columns: 1fr;
   }
 
-  .stat-card,
   .repo-card {
     grid-column: span 1;
   }
