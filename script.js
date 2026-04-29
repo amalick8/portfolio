@@ -8,7 +8,6 @@ const parallaxItems = document.querySelectorAll(".parallax");
 const yearEl = document.getElementById("year");
 const siteHeader = document.querySelector(".site-header");
 const navLinks = document.querySelectorAll(".site-header nav a");
-const projectScrollRail = document.querySelector("[data-scroll-rail]");
 
 if (yearEl) yearEl.textContent = new Date().getFullYear();
 
@@ -90,19 +89,6 @@ const updateScrollProgress = () => {
   const value = max <= 0 ? 0 : (window.scrollY / max) * 100;
   if (progressBar) progressBar.style.width = `${value}%`;
   if (siteHeader) siteHeader.classList.toggle("is-scrolled", window.scrollY > 24);
-  if (projectScrollRail) {
-    const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
-    const pct = maxScroll <= 0 ? 0 : window.scrollY / maxScroll;
-    projectScrollRail.style.setProperty(
-      "--project-scroll",
-      String(Math.min(1, Math.max(0, pct)))
-    );
-    projectScrollRail.classList.toggle("is-scrolled", window.scrollY > 72);
-    projectScrollRail.classList.toggle(
-      "is-not-scrollable",
-      document.documentElement.scrollHeight <= window.innerHeight + 32
-    );
-  }
 };
 
 window.addEventListener("scroll", updateScrollProgress, { passive: true });
@@ -395,50 +381,6 @@ sideDotMap.forEach((_link, id) => {
   const section = document.getElementById(id);
   if (section) sideDotObserver.observe(section);
 });
-
-// -- Project case study scroll rail (section dots + progress fill) -
-if (projectScrollRail) {
-  const railLinks = projectScrollRail.querySelectorAll(".project-scroll-rail-dots a");
-  const projectRailVisibility = new Map();
-  railLinks.forEach((link) => {
-    const href = link.getAttribute("href");
-    if (!href || !href.startsWith("#")) return;
-    const id = href.slice(1);
-    const el = document.getElementById(id);
-    if (el) projectRailVisibility.set(id, 0);
-  });
-
-  const syncProjectRailDots = () => {
-    let winnerId = "";
-    let winnerRatio = 0;
-    projectRailVisibility.forEach((ratio, id) => {
-      if (ratio > winnerRatio) {
-        winnerRatio = ratio;
-        winnerId = id;
-      }
-    });
-    if (winnerRatio < 0.12) winnerId = "";
-    railLinks.forEach((link) => {
-      const id = (link.getAttribute("href") || "").slice(1);
-      link.classList.toggle("is-active", id === winnerId);
-    });
-  };
-
-  const projectRailObserver = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        projectRailVisibility.set(entry.target.id, entry.intersectionRatio);
-      });
-      syncProjectRailDots();
-    },
-    { threshold: [0.08, 0.2, 0.35, 0.55, 0.75] }
-  );
-
-  projectRailVisibility.forEach((_ratio, id) => {
-    const el = document.getElementById(id);
-    if (el) projectRailObserver.observe(el);
-  });
-}
 
 // -- Mobile drawer --------------------------------------------
 const mobileToggle = document.getElementById("mobileToggle");
