@@ -3030,6 +3030,18 @@ body.project-page {
   .project-bento--stage .project-demo-crossfade {
     height: clamp(248px, 36vh, 360px);
   }
+
+  .project-bento--stage .project-demo-crossfade--video {
+    height: auto;
+    min-height: clamp(288px, 46vh, 520px);
+    overflow: hidden;
+    padding: 0.2rem 0.35rem 0.45rem;
+    box-sizing: border-box;
+  }
+
+  .project-bento--stage .project-demo-crossfade--video .project-demo-video {
+    max-height: min(80vh, 760px);
+  }
 }
 
 @keyframes project-demo-pulse {
@@ -3098,7 +3110,7 @@ body.project-page {
 .project-tech-card {
   margin: 0;
   padding: 0.9rem 1rem 1rem;
-  border-radius: 14px;
+  border-radius: 18px;
   border: 1px solid rgba(255, 255, 255, 0.1);
   background: linear-gradient(
     135deg,
@@ -3139,9 +3151,9 @@ body.project-page {
 .project-tech-heading {
   margin: 0 0 0.5rem;
   padding-top: 0.08rem;
-  font-size: 0.64rem;
+  font-size: 0.7rem;
   font-weight: 650;
-  letter-spacing: 0.2em;
+  letter-spacing: 0.18em;
   text-transform: uppercase;
   color: rgba(196, 206, 240, 0.68);
   position: relative;
@@ -3193,34 +3205,34 @@ body.project-page {
 }
 
 .project-tech-card--compact {
-  padding: 0.5rem 0.55rem 0.55rem;
+  padding: 0.62rem 0.68rem 0.72rem;
 }
 
 .project-tech-card--compact .project-tech-heading {
-  margin: 0 0 0.32rem;
+  margin: 0 0 0.4rem;
   padding-top: 0;
-  font-size: 0.58rem;
-  letter-spacing: 0.18em;
+  font-size: 0.72rem;
+  letter-spacing: 0.16em;
 }
 
 .project-tech-card--compact .skill-pills {
   flex-direction: column;
   align-items: stretch;
-  gap: 0.22rem;
+  gap: 0.28rem;
 }
 
 .project-tech-card--compact .pill {
   width: 100%;
   box-sizing: border-box;
   justify-content: flex-start;
-  border-radius: 8px;
-  font-size: 0.7rem;
-  padding: 0.26rem 0.48rem;
+  border-radius: 999px;
+  font-size: 0.8rem;
+  padding: 0.34rem 0.62rem;
 }
 
 .project-tech-card--compact .pill i {
-  font-size: 0.85rem !important;
-  margin-right: 0.38rem !important;
+  font-size: 0.95rem !important;
+  margin-right: 0.42rem !important;
 }
 
 .project-tech-card--compact .pill:hover {
@@ -3230,7 +3242,7 @@ body.project-page {
 
 .project-link-stack {
   padding: 0.72rem 0.78rem 0.78rem;
-  border-radius: 14px;
+  border-radius: 18px;
   border: 1px solid rgba(255, 255, 255, 0.09);
   position: relative;
   overflow: hidden;
@@ -3245,17 +3257,17 @@ body.project-page {
   );
   box-shadow: 0 16px 42px rgba(8, 10, 28, 0.4);
   align-self: stretch;
-  padding: 0.55rem 0.62rem 0.6rem;
+  padding: 0.62rem 0.72rem 0.68rem;
 }
 
 .project-link-stack--masthead .project-cta-list {
-  gap: 0.3rem;
+  gap: 0.34rem;
 }
 
 .project-link-stack--masthead .project-cta {
-  padding: 0.44rem 0.62rem;
-  border-radius: 11px;
-  font-size: 0.76rem;
+  padding: 0.52rem 0.78rem;
+  border-radius: 999px;
+  font-size: 0.84rem;
   font-weight: 600;
   letter-spacing: -0.01em;
 }
@@ -3309,25 +3321,25 @@ body.project-page {
 }
 
 .project-link-stack-head {
-  margin-bottom: 0.5rem;
-  padding-bottom: 0.48rem;
+  margin-bottom: 0.52rem;
+  padding-bottom: 0.52rem;
   border-bottom: 1px solid rgba(255, 255, 255, 0.07);
 }
 
 .project-link-stack-head h3 {
-  margin: 0 0 0.3rem;
-  font-size: 0.62rem;
-  letter-spacing: 0.22em;
+  margin: 0 0 0.34rem;
+  font-size: 0.74rem;
+  letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: rgba(188, 200, 228, 0.72);
+  color: rgba(198, 208, 236, 0.82);
   font-weight: 650;
 }
 
 .project-link-stack-sub {
   margin: 0;
-  font-size: 0.72rem;
-  line-height: 1.45;
-  color: rgba(150, 168, 210, 0.62);
+  font-size: 0.84rem;
+  line-height: 1.48;
+  color: rgba(165, 182, 218, 0.76);
 }
 
 .project-cta-list {
@@ -3345,9 +3357,9 @@ body.project-page {
   width: 100%;
   box-sizing: border-box;
   padding: 0.64rem 0.88rem;
-  border-radius: 13px;
+  border-radius: 16px;
   font-family: inherit;
-  font-size: 0.81rem;
+  font-size: 0.84rem;
   font-weight: 650;
   letter-spacing: -0.012em;
   line-height: 1.25;
@@ -3562,7 +3574,7 @@ button.project-cta {
 }
 
 .project-demo-window {
-  border-radius: 12px;
+  border-radius: 16px;
   padding: 0;
   overflow: hidden;
   border: 1px solid rgba(255, 255, 255, 0.12);
@@ -3756,7 +3768,9 @@ button.project-cta {
   overflow: hidden;
   background: #070710;
   height: auto;
-  min-height: clamp(200px, 36vh, 320px);
+  min-height: clamp(228px, 42vh, 400px);
+  padding: 0.18rem 0.32rem 0.42rem;
+  box-sizing: border-box;
 }
 
 .project-demo-crossfade--video .project-demo-video {
@@ -3765,14 +3779,14 @@ button.project-cta {
   display: block;
   object-fit: contain;
   object-position: top center;
-  max-height: min(72vh, 640px);
+  max-height: min(80vh, 760px);
   background: #070710;
 }
 
 .project-body {
   margin: 0;
   padding: 1.15rem 1.25rem 1.35rem;
-  border-radius: 14px;
+  border-radius: 18px;
   border: 1px solid rgba(255, 255, 255, 0.08);
   background: rgba(255, 255, 255, 0.04);
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05);
@@ -4052,6 +4066,16 @@ button.project-cta {
 
   .project-demo-crossfade {
     height: clamp(160px, 32vh, 280px);
+  }
+
+  .project-demo-crossfade--video {
+    height: auto;
+    min-height: clamp(200px, 40vh, 480px);
+    padding: 0.15rem 0.28rem 0.4rem;
+  }
+
+  .project-demo-crossfade--video .project-demo-video {
+    max-height: min(75vh, 640px);
   }
 
   .project-bento--stage {
