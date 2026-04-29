@@ -9,7 +9,7 @@ const yearEl = document.getElementById("year");
 const siteHeader = document.querySelector(".site-header");
 const navLinks = document.querySelectorAll(".site-header nav a");
 
-yearEl.textContent = new Date().getFullYear();
+if (yearEl) yearEl.textContent = new Date().getFullYear();
 
 // -- Logo: sick spin on click --------------------------------
 const logoEl = document.querySelector(".logo");
@@ -47,8 +47,8 @@ revealElements.forEach((el, index) => {
 const updateScrollProgress = () => {
   const max = document.documentElement.scrollHeight - window.innerHeight;
   const value = max <= 0 ? 0 : (window.scrollY / max) * 100;
-  progressBar.style.width = `${value}%`;
-  siteHeader.classList.toggle("is-scrolled", window.scrollY > 24);
+  if (progressBar) progressBar.style.width = `${value}%`;
+  if (siteHeader) siteHeader.classList.toggle("is-scrolled", window.scrollY > 24);
 };
 
 window.addEventListener("scroll", updateScrollProgress, { passive: true });
@@ -148,11 +148,13 @@ renderFrame();
 const interactiveTargets = document.querySelectorAll("a, button, .project-card");
 interactiveTargets.forEach((target) => {
   target.addEventListener("mouseenter", () => {
+    if (!ring) return;
     ring.style.width = "58px";
     ring.style.height = "58px";
     ring.style.borderColor = "rgba(255,255,255,0.78)";
   });
   target.addEventListener("mouseleave", () => {
+    if (!ring) return;
     ring.style.width = "34px";
     ring.style.height = "34px";
     ring.style.borderColor = "rgba(255,255,255,0.45)";
@@ -611,11 +613,12 @@ window.addEventListener("keydown", (e) => {
   const modifier = isMac ? e.metaKey : e.ctrlKey;
   if (modifier && e.key.toLowerCase() === "k") {
     e.preventDefault();
+    if (!cmdPalette) return;
     if (cmdPalette.classList.contains("is-open")) closeCmdPalette();
     else openCmdPalette();
     return;
   }
-  if (!cmdPalette.classList.contains("is-open")) return;
+  if (!cmdPalette || !cmdPalette.classList.contains("is-open")) return;
   const items = filteredCommands();
   if (e.key === "Escape") {
     e.preventDefault();

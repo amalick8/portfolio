@@ -2869,3 +2869,322 @@ input:focus-visible {
     font-size: 1.85rem;
   }
 }
+
+/* ================================================================
+ *  Project case study pages (PetroView, etc.)
+ * ================================================================ */
+.project-page .project-shell {
+  max-width: 920px;
+  margin: 0 auto;
+  padding: 5.25rem 1.5rem 3rem;
+}
+
+.project-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  margin-bottom: 1.75rem;
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: rgba(196, 206, 232, 0.9);
+  text-decoration: none;
+  padding: 0.48rem 0.95rem;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.04);
+  transition: border-color 0.25s ease, background 0.25s ease, color 0.25s ease;
+}
+
+.project-back:hover {
+  border-color: rgba(143, 227, 255, 0.4);
+  background: rgba(143, 227, 255, 0.08);
+  color: #fff;
+}
+
+.project-hero h1 {
+  font-size: clamp(2rem, 4.5vw, 2.85rem);
+  margin: 0.35rem 0 0.85rem;
+  letter-spacing: -0.02em;
+}
+
+.project-lede {
+  font-size: 1.06rem;
+  line-height: 1.65;
+  color: var(--muted);
+  max-width: 54ch;
+  margin: 0;
+}
+
+.project-tech {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 1.35rem;
+}
+
+.project-tech span {
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 0.38rem 0.7rem;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.04);
+  color: rgba(220, 228, 255, 0.88);
+}
+
+.project-demo-section {
+  margin-top: 2.85rem;
+}
+
+.project-demo-section h2 {
+  font-size: 1.12rem;
+  margin: 0 0 0.4rem;
+}
+
+.project-demo-hint {
+  font-size: 0.84rem;
+  color: rgba(196, 206, 232, 0.55);
+  margin: 0 0 1.05rem;
+  max-width: 60ch;
+  line-height: 1.5;
+}
+
+.project-demo-hint code {
+  font-size: 0.88em;
+  color: rgba(143, 231, 255, 0.95);
+}
+
+.project-demo-window {
+  border-radius: 22px;
+  padding: 1px;
+  background: linear-gradient(
+    125deg,
+    rgba(12, 146, 255, 0.45),
+    rgba(40, 243, 177, 0.25),
+    rgba(12, 75, 255, 0.4)
+  );
+  box-shadow: 0 24px 48px rgba(6, 8, 24, 0.45);
+}
+
+.project-demo-crossfade {
+  position: relative;
+  border-radius: 21px;
+  overflow: hidden;
+  background: #070710;
+  aspect-ratio: 16 / 10;
+}
+
+.project-demo-crossfade img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+}
+
+.project-demo-crossfade img:first-of-type {
+  animation: projectShotA 7.5s ease-in-out infinite;
+}
+
+.project-demo-crossfade img:last-of-type {
+  animation: projectShotB 7.5s ease-in-out infinite;
+}
+
+@keyframes projectShotA {
+  0%,
+  40% {
+    opacity: 1;
+  }
+  50%,
+  90% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes projectShotB {
+  0%,
+  40% {
+    opacity: 0;
+  }
+  50%,
+  90% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+.project-body {
+  margin-top: 3rem;
+}
+
+.project-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 280px);
+  gap: 2.25rem;
+  align-items: start;
+}
+
+.project-copy h2 {
+  font-size: 1.15rem;
+  margin: 0 0 0.65rem;
+}
+
+.project-h2-spaced {
+  margin-top: 1.75rem !important;
+}
+
+.project-prose {
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.65;
+  font-size: 0.97rem;
+}
+
+.project-prose strong {
+  color: rgba(232, 238, 255, 0.92);
+  font-weight: 600;
+}
+
+.project-highlights {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+}
+
+.project-highlights li {
+  position: relative;
+  padding-left: 1.15rem;
+  color: var(--muted);
+  line-height: 1.55;
+  font-size: 0.95rem;
+}
+
+.project-highlights li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.6rem;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #00d8ff, #8f67ff);
+}
+
+.project-link-stack {
+  padding: 1.35rem 1.3rem;
+  border-radius: 18px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  position: sticky;
+  top: 5.5rem;
+}
+
+.project-link-stack h3 {
+  margin: 0 0 1.05rem;
+  font-size: 0.78rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(196, 206, 232, 0.55);
+}
+
+.project-link-stack .btn {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  margin-bottom: 0.7rem;
+  text-align: center;
+  box-sizing: border-box;
+}
+
+.project-link-stack .btn:last-child {
+  margin-bottom: 0;
+}
+
+.repo-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.65rem;
+  margin-top: 1.05rem;
+  align-items: center;
+}
+
+.repo-actions a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 0 !important;
+  font-size: 0.85rem;
+  font-weight: 600;
+  padding: 0.5rem 0.95rem;
+  border-radius: 999px;
+  border: 1px solid rgba(143, 103, 255, 0.35);
+  background: rgba(143, 103, 255, 0.14);
+  text-decoration: none !important;
+  color: #fff !important;
+  text-decoration-color: transparent !important;
+  transition: border-color 0.22s ease, background 0.22s ease, transform 0.2s ease;
+}
+
+.repo-actions a:hover {
+  border-color: rgba(0, 216, 255, 0.45);
+  background: rgba(0, 216, 255, 0.12);
+  transform: translateY(-1px);
+}
+
+.repo-actions a.repo-actions-secondary {
+  background: rgba(255, 255, 255, 0.04);
+  border-color: rgba(255, 255, 255, 0.14);
+}
+
+.repo-actions a.repo-actions-secondary:hover {
+  border-color: rgba(255, 255, 255, 0.28);
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.project-page-footer {
+  padding-top: 2rem;
+  padding-bottom: 2.5rem;
+}
+
+.project-page-footer .copyright a {
+  margin-left: 0.5rem;
+  color: rgba(143, 227, 255, 0.88);
+  font-weight: 600;
+  text-decoration: none;
+  border-bottom: 1px solid rgba(143, 227, 255, 0.35);
+}
+
+.project-page-footer .copyright a:hover {
+  border-bottom-color: rgba(143, 227, 255, 0.7);
+}
+
+@media (max-width: 840px) {
+  .project-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .project-link-stack {
+    position: static;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .project-demo-crossfade img:first-of-type,
+  .project-demo-crossfade img:last-of-type {
+    animation: none !important;
+  }
+
+  .project-demo-crossfade img:last-of-type {
+    display: none;
+  }
+}
