@@ -11,6 +11,15 @@ const navLinks = document.querySelectorAll(".site-header nav a");
 
 if (yearEl) yearEl.textContent = new Date().getFullYear();
 
+const projectDemoVideo = document.querySelector(".project-demo-video");
+if (
+  projectDemoVideo &&
+  window.matchMedia("(prefers-reduced-motion: reduce)").matches
+) {
+  projectDemoVideo.removeAttribute("autoplay");
+  projectDemoVideo.pause();
+}
+
 // -- Logo: sick spin on click --------------------------------
 const logoEl = document.querySelector(".logo");
 if (logoEl) {

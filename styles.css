@@ -3686,6 +3686,89 @@ button.project-cta {
   }
 }
 
+.project-demo-crossfade--static {
+  display: flex;
+  align-items: stretch;
+  height: auto;
+  min-height: clamp(200px, 30vh, 280px);
+}
+
+.project-demo-crossfade--static img {
+  display: none;
+}
+
+.project-demo-placeholder-shell {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 1.25rem;
+  background: linear-gradient(145deg, rgba(16, 20, 42, 0.94), rgba(8, 10, 24, 0.98));
+  text-align: center;
+}
+
+.project-demo-placeholder-title {
+  margin: 0 0 0.35rem;
+  font-size: clamp(1.05rem, 2.4vw, 1.2rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: rgba(244, 246, 255, 0.95);
+}
+
+.project-demo-placeholder-copy {
+  margin: 0 0 1rem;
+  font-size: 0.8rem;
+  line-height: 1.5;
+  color: rgba(170, 186, 220, 0.72);
+  max-width: 34ch;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.project-demo-placeholder-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.45rem 0.95rem;
+  border-radius: 999px;
+  font-size: 0.72rem;
+  font-weight: 650;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: rgba(143, 231, 255, 0.95);
+  border: 1px solid rgba(0, 209, 255, 0.35);
+  background: rgba(0, 209, 255, 0.08);
+  text-decoration: none;
+  transition:
+    border-color 0.25s ease,
+    background 0.25s ease,
+    transform 0.2s ease;
+}
+
+.project-demo-placeholder-cta:hover {
+  border-color: rgba(0, 209, 255, 0.55);
+  background: rgba(0, 209, 255, 0.14);
+  transform: translateY(-1px);
+}
+
+.project-demo-crossfade--video {
+  position: relative;
+  overflow: hidden;
+  background: #070710;
+  height: auto;
+  min-height: clamp(200px, 36vh, 320px);
+}
+
+.project-demo-crossfade--video .project-demo-video {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: contain;
+  object-position: top center;
+  max-height: min(72vh, 640px);
+  background: #070710;
+}
+
 .project-body {
   margin: 0;
   padding: 1.15rem 1.25rem 1.35rem;

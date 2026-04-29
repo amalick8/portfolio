@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#070710" />
+    <title>Camera Mouse Controller — Ammar Malick</title>
+    <meta
+      name="description"
+      content="Hands-free mouse control with OpenCV and MediaPipe—gesture-based cursor movement and actions. Case study and GitHub repository."
+    />
+    <link rel="icon" type="image/svg+xml" href="favicon.svg?v=6" />
+    <link rel="shortcut icon" href="favicon.svg?v=6" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Space+Grotesk:wght@500;700&family=Playfair+Display:wght@600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css"
+    />
+    <link rel="stylesheet" href="styles.css?v=gp12" />
+  </head>
+  <body class="project-page">
+    <div class="noise-overlay" aria-hidden="true"></div>
+    <div class="global-orbs" aria-hidden="true">
+      <div class="orb global-orb global-orb-1 parallax" data-depth="0.08"></div>
+      <div class="orb global-orb global-orb-2 parallax" data-depth="0.12"></div>
+      <div class="orb global-orb global-orb-3 parallax" data-depth="0.06"></div>
+      <div class="orb global-orb global-orb-4 parallax" data-depth="0.1"></div>
+      <div class="orb global-orb global-orb-5 parallax" data-depth="0.09"></div>
+    </div>
+    <div class="cursor-dot" aria-hidden="true"></div>
+    <div class="cursor-ring" aria-hidden="true"></div>
+    <div class="scroll-progress" aria-hidden="true"></div>
+
+    <header class="site-header glass site-header--subpage">
+      <a class="logo" href="index.html#top" aria-label="Ammar Malick — home">a</a>
+      <nav>
+        <a href="index.html#github">Portfolio</a>
+        <a
+          href="https://github.com/amalick8/Camera-Mouse-Controller"
+          target="_blank"
+          rel="noreferrer"
+          >Repository</a
+        >
+        <a href="index.html#contact">Contact</a>
+      </nav>
+      <a class="nav-cta magnetic" href="index.html#contact">Hire me</a>
+      <button
+        class="mobile-toggle"
+        id="mobileToggle"
+        type="button"
+        aria-label="Toggle navigation"
+        aria-expanded="false"
+        aria-controls="mobileDrawer"
+      >
+        <span></span><span></span><span></span>
+      </button>
+    </header>
+
+    <aside class="mobile-drawer" id="mobileDrawer" aria-hidden="true">
+      <div class="mobile-drawer-backdrop" data-drawer-close></div>
+      <div class="mobile-drawer-panel glass">
+        <nav aria-label="Mobile navigation">
+          <a href="index.html#github" data-drawer-close>Portfolio</a>
+          <a
+            href="https://github.com/amalick8/Camera-Mouse-Controller"
+            target="_blank"
+            rel="noreferrer"
+            data-drawer-close
+            >Repository</a
+          >
+          <a href="index.html#contact" data-drawer-close>Contact</a>
+        </nav>
+      </div>
+    </aside>
+
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+    <main id="top" class="project-shell">
+      <div class="project-masthead reveal">
+        <div class="project-masthead-main">
+          <a class="project-back magnetic" href="index.html#github">&larr; Back to portfolio</a>
+          <header class="project-hero">
+            <p class="eyebrow">Case study</p>
+            <h1><span class="gradient-text">Camera Mouse</span></h1>
+            <ul class="project-hero-badges" aria-label="Project focus">
+              <li>Computer vision</li>
+              <li>Accessibility</li>
+              <li>Real-time control</li>
+            </ul>
+            <p class="project-lede">
+              Hands-free controller that maps webcam input to cursor motion and actions with OpenCV
+              and MediaPipe—built to explore low-latency gesture pipelines on everyday hardware.
+            </p>
+          </header>
+        </div>
+        <aside
+          class="project-link-stack glass project-link-stack--masthead"
+          aria-labelledby="links-heading"
+        >
+          <div class="project-link-stack-head">
+            <h3 id="links-heading">Next step</h3>
+            <p class="project-link-stack-sub">Clone for setup instructions, demos, and issue threads.</p>
+          </div>
+          <div class="project-cta-list">
+            <a
+              class="project-cta project-cta--primary magnetic"
+              href="https://github.com/amalick8/Camera-Mouse-Controller"
+              target="_blank"
+              rel="noreferrer"
+            >
+              <span class="project-cta-text">Open repository</span>
+              <span class="project-cta-glow" aria-hidden="true"></span>
+              <svg class="project-cta-icon" width="15" height="15" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path d="M7 17L17 7M17 7H7M17 7V17" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </a>
+            <a class="project-cta project-cta--glass magnetic" href="index.html#contact">
+              <span class="project-cta-text">Collaborate</span>
+              <svg class="project-cta-icon" width="15" height="15" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path d="M7 17L17 7M17 7H7M17 7V17" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </a>
+            <a class="project-cta project-cta--quiet magnetic" href="index.html#github">
+              <span class="project-cta-pair">
+                <svg class="project-cta-icon project-cta-icon--start" width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <path d="M15.5 18.5 9 12l6.5-6.5M20 12H9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                <span>All projects</span>
+              </span>
+            </a>
+          </div>
+        </aside>
+      </div>
+
+      <div class="project-bento project-bento--stage glass">
+        <section class="project-demo-section reveal" aria-labelledby="demo-heading">
+          <div class="project-demo-head">
+            <div class="project-demo-label">
+              <span class="project-demo-dot" aria-hidden="true"></span>
+              <h2 id="demo-heading">Preview</h2>
+            </div>
+            <p class="project-demo-hint">
+              Demo clips and calibration notes ship with the repo—local run is the best preview.
+            </p>
+          </div>
+          <div class="project-demo-window">
+            <div class="project-demo-chrome" aria-hidden="true">
+              <div class="project-demo-chrome-dots">
+                <span></span><span></span><span></span>
+              </div>
+              <span class="project-demo-chrome-url">github.com / amalick8 / Camera-Mouse-Controller</span>
+            </div>
+            <div
+              class="project-demo-crossfade project-demo-crossfade--static"
+              role="img"
+              aria-label="Camera mouse project preview"
+            >
+              <div class="project-demo-placeholder-shell">
+                <div>
+                  <p class="project-demo-placeholder-title">Camera Mouse Controller</p>
+                  <p class="project-demo-placeholder-copy">
+                    Video demos and usage docs are in the repository.
+                  </p>
+                  <a
+                    class="project-demo-placeholder-cta magnetic"
+                    href="https://github.com/amalick8/Camera-Mouse-Controller"
+                    target="_blank"
+                    rel="noreferrer"
+                    >Browse on GitHub</a
+                  >
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <article class="skills-card glass project-tech-card project-tech-card--compact reveal" aria-label="Tech stack">
+          <h3 class="project-tech-heading">Stack</h3>
+          <div class="skill-pills">
+            <span class="pill project-pill-lang"
+              ><i class="devicon-python-plain" aria-hidden="true"></i>Python</span
+            >
+            <span class="pill project-pill-data"
+              ><i class="devicon-opencv-plain" aria-hidden="true"></i>OpenCV</span
+            >
+            <span class="pill project-pill-tools"
+              ><i class="pill-symbol" aria-hidden="true">◆</i>MediaPipe</span
+            >
+            <span class="pill project-pill-tools"
+              ><i class="pill-symbol" aria-hidden="true">◆</i>Input automation</span
+            >
+          </div>
+        </article>
+
+        <div class="project-body glass">
+          <div class="project-detail-grid">
+            <div class="project-body-two-col">
+              <div class="project-copy">
+                <h2>Impact</h2>
+                <p class="project-prose">
+                  Pointer control without a desk-bound device is useful for accessibility
+                  experiments, rapid prototyping, and proof-of-concept ergonomic setups. The project
+                  focuses on stable landmark tracking and sane defaults so the loop stays responsive.
+                </p>
+                <h2 class="project-h2-spaced">Architecture</h2>
+                <p class="project-prose">
+                  <strong>Capture:</strong> webcam frames through OpenCV with tuned resolution and
+                  FPS targets for latency.
+                </p>
+                <p class="project-prose project-prose--tight">
+                  <strong>Understanding:</strong> MediaPipe hands/ pose pipelines to derive screen
+                  mapping from gestures.
+                </p>
+                <p class="project-prose project-prose--tight">
+                  <strong>Control:</strong> OS-level mouse events with smoothing and dead zones to
+                  reduce jitter.
+                </p>
+              </div>
+              <div class="project-copy project-copy--highlights">
+                <h2>Shipped</h2>
+                <ul class="project-highlights">
+                  <li>Gesture-to-cursor pipeline with configurable sensitivity</li>
+                  <li>Modular capture and inference stages</li>
+                  <li>Documentation for dependencies and camera permissions</li>
+                  <li>Foundation for additional gestures or accessibility profiles</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <footer class="footer section project-page-footer">
+      <div class="footer-actions reveal project-footer-bar">
+        <a
+          class="project-cta project-cta--footer project-cta--footer-primary magnetic"
+          href="https://www.linkedin.com/in/ammar-malick-1023b9278"
+          target="_blank"
+          rel="noreferrer"
+        >
+          <span class="project-cta-text">LinkedIn</span>
+          <svg class="project-cta-icon" width="17" height="17" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="M7 17L17 7M17 7H7M17 7V17" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </a>
+        <button
+          type="button"
+          class="project-cta project-cta--footer project-cta--footer-ghost magnetic btn-copy-email"
+          data-email="ammarmalick2006@gmail.com"
+          aria-label="Copy email address"
+        >
+          <span class="project-cta-text">Copy email</span>
+          <svg class="project-cta-icon" width="17" height="17" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <rect x="9" y="9" width="11" height="11" rx="2" stroke="currentColor" stroke-width="2"/>
+            <path d="M5 15V5a2 2 0 0 1 2-2h10" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+        </button>
+      </div>
+      <p class="copyright reveal">
+        © <span id="year"></span> Ammar Malick.
+        <a href="index.html#github">Back to portfolio</a>
+      </p>
+    </footer>
+
+    <script src="script.js?v=gp12" defer></script>
+  </body>
+</html>
