@@ -17,7 +17,11 @@
       href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Space+Grotesk:wght@500;700&family=Playfair+Display:wght@600;700&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="styles.css?v=gp1" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css"
+    />
+    <link rel="stylesheet" href="styles.css?v=gp11" />
   </head>
   <body class="project-page">
     <div class="noise-overlay" aria-hidden="true"></div>
@@ -32,7 +36,7 @@
     <div class="cursor-ring" aria-hidden="true"></div>
     <div class="scroll-progress" aria-hidden="true"></div>
 
-    <header class="site-header glass">
+    <header class="site-header glass site-header--subpage">
       <a class="logo" href="index.html#top" aria-label="Ammar Malick — home">a</a>
       <nav>
         <a href="index.html#github">Portfolio</a>
@@ -74,122 +78,204 @@
     <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
     <main id="top" class="project-shell">
-      <a class="project-back magnetic" href="index.html#github">&larr; Back to portfolio</a>
-
-      <header class="project-hero reveal">
-        <p class="eyebrow">Case study</p>
-        <h1>PetroView</h1>
-        <p class="project-lede">
-          Full-stack energy intelligence: oil-market signals, regime and
-          volatility context, and decision-grade dashboards built on real series
-          and statistical models.
-        </p>
-        <div class="project-tech" aria-label="Tech stack">
-          <span>Next.js</span>
-          <span>TypeScript</span>
-          <span>Tailwind</span>
-          <span>FastAPI</span>
-          <span>Python</span>
-          <span>pandas</span>
-          <span>scikit-learn</span>
-          <span>FRED &middot; OWID</span>
-        </div>
-      </header>
-
-      <section class="project-demo-section reveal" aria-labelledby="demo-heading">
-        <h2 id="demo-heading">Product preview</h2>
-        <p class="project-demo-hint">
-          Live UI screenshots from the repo, cross-fading on a loop. Replace with
-          <code>assets/petroview-demo.gif</code> (or a video) whenever you have a
-          capture.
-        </p>
-        <div class="project-demo-window glass">
-          <div class="project-demo-crossfade" role="img" aria-label="PetroView dashboard screenshots">
-            <img
-              src="https://raw.githubusercontent.com/amalick8/PetroView/main/screenshots/Screenshot%202026-03-28%20at%207.47.42%E2%80%AFPM.png"
-              alt="PetroView dashboard — overview"
-              width="1600"
-              height="1000"
-              loading="lazy"
-              decoding="async"
-            />
-            <img
-              src="https://raw.githubusercontent.com/amalick8/PetroView/main/screenshots/Screenshot%202026-03-28%20at%207.48.25%E2%80%AFPM.png"
-              alt="PetroView dashboard — analytics view"
-              width="1600"
-              height="1000"
-              loading="lazy"
-              decoding="async"
-            />
-          </div>
-        </div>
-      </section>
-
-      <div class="project-body reveal">
-        <div class="project-grid">
-          <div class="project-copy">
-            <h2>What it does</h2>
-            <p class="project-prose">
-              PetroView connects global oil signals into a single operational
-              view: structure, risk, and volatility alongside forecasts and
-              narrative context. It is built as a reproducible stack with clear
-              data lineage from ingestion through reports.
-            </p>
-            <h2 class="project-h2-spaced">Highlights</h2>
-            <ul class="project-highlights">
-              <li>Time series ingestion, normalization, and validation.</li>
-              <li>Supply, demand, and pricing signal analysis.</li>
-              <li>Multi-model forecasting (naive, regression, ARIMA, ensembles).</li>
-              <li>Regime and volatility tracking for live dashboards.</li>
-              <li>Interactive dashboards and exportable research outputs.</li>
+      <div class="project-masthead reveal">
+        <div class="project-masthead-main">
+          <a class="project-back magnetic" href="index.html#github">&larr; Back to portfolio</a>
+          <header class="project-hero">
+            <p class="eyebrow">Featured case study</p>
+            <h1><span class="gradient-text">PetroView</span></h1>
+            <ul class="project-hero-badges" aria-label="Project focus">
+              <li>Energy intelligence</li>
+              <li>Full-stack</li>
+              <li>Forecasting &amp; regimes</li>
             </ul>
-            <h2 class="project-h2-spaced">Architecture</h2>
-            <p class="project-prose">
-              <strong>Frontend:</strong> Next.js (App Router), TypeScript,
-              Tailwind, Recharts.
-              <strong>Backend:</strong> FastAPI, SQLModel, pandas, statsmodels,
-              scikit-learn. Data sources include FRED and OWID energy series.
+            <p class="project-lede">
+              Dashboards and pipelines for oil-market signals&mdash;structure, risk, volatility, and
+              model-driven views. Built for reproducibility with clear lineage from ingestion through
+              the UI.
             </p>
+          </header>
+        </div>
+        <aside
+          class="project-link-stack glass project-link-stack--masthead"
+          aria-labelledby="links-heading"
+        >
+          <div class="project-link-stack-head">
+            <h3 id="links-heading">Next step</h3>
+            <p class="project-link-stack-sub">Live demo, source, or back to the full portfolio.</p>
           </div>
-
-          <aside class="project-link-stack glass" aria-labelledby="links-heading">
-            <h3 id="links-heading">Links</h3>
+          <div class="project-cta-list">
             <a
-              class="btn btn-primary magnetic"
+              class="project-cta project-cta--primary magnetic"
               href="https://petro-view-six.vercel.app/dashboard"
               target="_blank"
               rel="noreferrer"
-              >Open live app</a
             >
+              <span class="project-cta-text">Open live app</span>
+              <span class="project-cta-glow" aria-hidden="true"></span>
+              <svg class="project-cta-icon" width="15" height="15" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path d="M7 17L17 7M17 7H7M17 7V17" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </a>
             <a
-              class="btn btn-ghost magnetic"
+              class="project-cta project-cta--glass magnetic"
               href="https://github.com/amalick8/PetroView"
               target="_blank"
               rel="noreferrer"
-              >View on GitHub</a
             >
-            <a class="btn btn-ghost magnetic" href="index.html#github">&larr; All projects</a>
-          </aside>
+              <span class="project-cta-text">View source</span>
+              <svg class="project-cta-icon" width="15" height="15" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path d="M7 17L17 7M17 7H7M17 7V17" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </a>
+            <a class="project-cta project-cta--quiet magnetic" href="index.html#github">
+              <span class="project-cta-pair">
+                <svg class="project-cta-icon project-cta-icon--start" width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <path d="M15.5 18.5 9 12l6.5-6.5M20 12H9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                <span>All projects</span>
+              </span>
+            </a>
+          </div>
+        </aside>
+      </div>
+
+      <div class="project-bento project-bento--stage glass">
+        <section class="project-demo-section reveal" aria-labelledby="demo-heading">
+          <div class="project-demo-head">
+            <div class="project-demo-label">
+              <span class="project-demo-dot" aria-hidden="true"></span>
+              <h2 id="demo-heading">Product preview</h2>
+            </div>
+            <p class="project-demo-hint">
+              Live cross-fade from repo screenshots. Swap in <code class="project-demo-code">assets/petroview-demo.gif</code> when ready.
+            </p>
+          </div>
+          <div class="project-demo-window">
+            <div class="project-demo-chrome" aria-hidden="true">
+              <div class="project-demo-chrome-dots">
+                <span></span><span></span><span></span>
+              </div>
+              <span class="project-demo-chrome-url">petroview.app / dashboard</span>
+            </div>
+            <div
+              class="project-demo-crossfade"
+              role="img"
+              aria-label="PetroView dashboard screenshots"
+            >
+              <img
+                src="https://raw.githubusercontent.com/amalick8/PetroView/main/screenshots/Screenshot%202026-03-28%20at%207.47.42%E2%80%AFPM.png"
+                alt="PetroView dashboard — overview"
+                width="1600"
+                height="1000"
+                loading="eager"
+                decoding="async"
+                fetchpriority="high"
+              />
+              <img
+                src="https://raw.githubusercontent.com/amalick8/PetroView/main/screenshots/Screenshot%202026-03-28%20at%207.48.25%E2%80%AFPM.png"
+                alt="PetroView dashboard — analytics view"
+                width="1600"
+                height="1000"
+                loading="eager"
+                decoding="async"
+              />
+            </div>
+          </div>
+        </section>
+
+        <article class="skills-card glass project-tech-card project-tech-card--compact reveal" aria-label="Tech stack">
+          <h3 class="project-tech-heading">Stack</h3>
+          <div class="skill-pills">
+            <span class="pill project-pill-web"
+              ><i class="devicon-nextjs-plain" aria-hidden="true"></i>Next.js</span
+            >
+            <span class="pill project-pill-web"
+              ><i class="devicon-typescript-plain" aria-hidden="true"></i>TypeScript</span
+            >
+            <span class="pill project-pill-web"
+              ><i class="devicon-tailwindcss-plain" aria-hidden="true"></i>Tailwind</span
+            >
+            <span class="pill project-pill-data"
+              ><i class="devicon-fastapi-original" aria-hidden="true"></i>FastAPI</span
+            >
+            <span class="pill project-pill-lang"
+              ><i class="devicon-python-plain" aria-hidden="true"></i>Python</span
+            >
+            <span class="pill project-pill-data"
+              ><i class="devicon-pandas-original" aria-hidden="true"></i>pandas</span
+            >
+            <span class="pill project-pill-data"
+              ><i class="devicon-scikitlearn-plain" aria-hidden="true"></i>scikit-learn</span
+            >
+            <span class="pill project-pill-tools"
+              ><i class="pill-symbol" aria-hidden="true">◆</i>FRED / OWID</span
+            >
+          </div>
+        </article>
+
+        <div class="project-body glass">
+          <div class="project-detail-grid">
+            <div class="project-body-two-col">
+              <div class="project-copy">
+                <h2>Impact</h2>
+                <p class="project-prose">
+                  PetroView pulls global oil signals into one operational lens: volatility, regimes,
+                  and forecasts sit next to narrative context, so decisions aren&rsquo;t split across
+                  spreadsheets. The stack is reproducible from ingest through the dashboard.
+                </p>
+                <h2 class="project-h2-spaced">Architecture</h2>
+                <p class="project-prose">
+                  <strong>Frontend:</strong> Next.js (App Router), TypeScript, Tailwind, Recharts.
+                </p>
+                <p class="project-prose project-prose--tight">
+                  <strong>API &amp; modeling:</strong> FastAPI, SQLModel, pandas, statsmodels,
+                  scikit-learn.
+                </p>
+                <p class="project-prose project-prose--tight">
+                  <strong>Data:</strong> FRED and OWID energy and macro series.
+                </p>
+              </div>
+              <div class="project-copy project-copy--highlights">
+                <h2>Shipped</h2>
+                <ul class="project-highlights">
+                  <li>Time series ingestion, normalization, and validation</li>
+                  <li>Supply, demand, and pricing signal analysis</li>
+                  <li>Forecasting: naive, regression, ARIMA, and ensembles</li>
+                  <li>Regime and volatility tracking for live dashboards</li>
+                  <li>Interactive dashboards and exportable research outputs</li>
+                </ul>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </main>
 
     <footer class="footer section project-page-footer">
-      <div class="footer-actions reveal">
+      <div class="footer-actions reveal project-footer-bar">
         <a
-          class="btn btn-primary magnetic btn-linkedin"
+          class="project-cta project-cta--footer project-cta--footer-primary magnetic"
           href="https://www.linkedin.com/in/ammar-malick-1023b9278"
           target="_blank"
           rel="noreferrer"
-          >LinkedIn</a
         >
+          <span class="project-cta-text">LinkedIn</span>
+          <svg class="project-cta-icon" width="17" height="17" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="M7 17L17 7M17 7H7M17 7V17" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </a>
         <button
           type="button"
-          class="btn btn-ghost magnetic btn-copy-email"
+          class="project-cta project-cta--footer project-cta--footer-ghost magnetic btn-copy-email"
           data-email="ammarmalick2006@gmail.com"
           aria-label="Copy email address"
         >
-          <span class="copy-label">Copy Email</span>
+          <span class="project-cta-text">Copy email</span>
+          <svg class="project-cta-icon" width="17" height="17" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <rect x="9" y="9" width="11" height="11" rx="2" stroke="currentColor" stroke-width="2"/>
+            <path d="M5 15V5a2 2 0 0 1 2-2h10" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          </svg>
         </button>
       </div>
       <p class="copyright reveal">
@@ -198,6 +284,6 @@
       </p>
     </footer>
 
-    <script src="script.js?v=gp1" defer></script>
+    <script src="script.js?v=gp11" defer></script>
   </body>
 </html>

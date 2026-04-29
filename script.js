@@ -14,16 +14,47 @@ if (yearEl) yearEl.textContent = new Date().getFullYear();
 // -- Logo: sick spin on click --------------------------------
 const logoEl = document.querySelector(".logo");
 if (logoEl) {
-  logoEl.addEventListener("click", () => {
+  const logoSpinDone = (fn) => {
+    const onEnd = (e) => {
+      if (e.animationName !== "logo-sick-spin") return;
+      logoEl.classList.remove("is-spinning");
+      if (typeof fn === "function") fn();
+    };
+    logoEl.addEventListener("animationend", onEnd, { once: true });
+  };
+
+  logoEl.addEventListener("click", (e) => {
+    const href = logoEl.getAttribute("href");
+    const skipSpin = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (!href || href === "#") {
+      if (!skipSpin) {
+        logoEl.classList.remove("is-spinning");
+        void logoEl.offsetWidth;
+        logoEl.classList.add("is-spinning");
+        logoSpinDone();
+      }
+      return;
+    }
+
+    if (href.startsWith("#")) {
+      if (!skipSpin) {
+        logoEl.classList.remove("is-spinning");
+        void logoEl.offsetWidth;
+        logoEl.classList.add("is-spinning");
+        logoSpinDone();
+      }
+      return;
+    }
+
+    if (skipSpin) return;
+
+    e.preventDefault();
     logoEl.classList.remove("is-spinning");
-    // Force reflow so the animation can restart on rapid clicks
     void logoEl.offsetWidth;
     logoEl.classList.add("is-spinning");
-  });
-  logoEl.addEventListener("animationend", (e) => {
-    if (e.animationName === "logo-sick-spin") {
-      logoEl.classList.remove("is-spinning");
-    }
+    logoSpinDone(() => {
+      window.location.assign(href);
+    });
   });
 }
 
