@@ -1,26 +1,159 @@
-@import "tailwindcss";
+@import "tailwindcss"; /* washi */
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Washi & Sakura — sumi-e ink on Japanese paper */
+  --color-bg: #faf6f1;
+  --color-bg-soft: #f5f0e8;
+  --color-surface: #ffffff;
+  --color-stage: #f0ebe2;
+  --color-ink: #1c0f0b;
+  --color-ink-muted: rgba(28,15,11,0.6);
+  --color-ink-faint: rgba(28,15,11,0.35);
+  --color-line: rgba(28,15,11,0.09);
+  --color-line-strong: rgba(28,15,11,0.18);
+  --color-accent: #c9507a;
+  --color-accent-soft: #e88aaa;
+  --color-accent-deep: #7a1040;
+  --color-paper: #faf6f1;
+  --color-paper-ink: #1c0f0b;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
+  --color-bg: var(--color-bg);
+  --color-bg-soft: var(--color-bg-soft);
+  --color-surface: var(--color-surface);
+  --color-stage: var(--color-stage);
+  --color-ink: var(--color-ink);
+  --color-ink-muted: var(--color-ink-muted);
+  --color-ink-faint: var(--color-ink-faint);
+  --color-line: var(--color-line);
+  --color-line-strong: var(--color-line-strong);
+  --color-accent: var(--color-accent);
+  --color-accent-soft: var(--color-accent-soft);
+  --color-accent-deep: var(--color-accent-deep);
+  --color-paper: var(--color-paper);
+  --color-paper-ink: var(--color-paper-ink);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+  --font-display: var(--font-display);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* Lenis smooth scroll */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--color-bg);
+  color: var(--color-ink);
+  font-family: var(--font-sans), Arial, Helvetica, sans-serif;
+  cursor: none;
+}
+
+a, button, [role="button"], input, select, textarea, label {
+  cursor: none;
+}
+
+::selection {
+  background: var(--color-accent);
+  color: var(--color-paper);
+}
+
+.font-display {
+  font-family: var(--font-display), Georgia, serif;
+}
+
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+@keyframes marquee-reverse {
+  from { transform: translateX(-50%); }
+  to   { transform: translateX(0); }
+}
+
+@keyframes float-slow {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  33%       { transform: translateY(-18px) rotate(1.5deg); }
+  66%       { transform: translateY(-8px) rotate(-1deg); }
+}
+
+@keyframes pulse-ring {
+  0%   { transform: scale(0.85); opacity: 0.7; }
+  70%  { transform: scale(1.05); opacity: 0; }
+  100% { transform: scale(0.85); opacity: 0; }
+}
+
+@keyframes slide-in-up {
+  from { opacity: 0; transform: translateY(60px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes clip-reveal {
+  from { clip-path: inset(0 100% 0 0); }
+  to   { clip-path: inset(0 0% 0 0); }
+}
+
+@keyframes border-spin {
+  from { --border-angle: 0deg; }
+  to   { --border-angle: 360deg; }
+}
+
+/* Dot-grid — subtle ink dots on washi paper */
+.dot-grid {
+  background-image: radial-gradient(circle, rgba(28,15,11,0.06) 1px, transparent 1px);
+  background-size: 28px 28px;
+}
+
+/* Stat glow — sakura pink */
+@keyframes stat-glow {
+  0%, 100% { text-shadow: 0 0 0px transparent; }
+  50%       { text-shadow: 0 0 20px rgba(201,80,122,0.4), 0 0 40px rgba(201,80,122,0.15); }
+}
+.stat-glow-animate {
+  animation: stat-glow 2.4s ease-in-out infinite;
+}
+
+/* Sakura shimmer on key headings */
+@keyframes sakura-shimmer {
+  0%   { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+.sakura-shimmer {
+  background: linear-gradient(90deg, #c9507a 0%, #f0a0c0 45%, #e88aaa 55%, #c9507a 100%);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: sakura-shimmer 4s linear infinite;
+}
+
+/* Gradient-border card */
+.gradient-border {
+  position: relative;
+}
+.gradient-border::before {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(135deg, rgba(201,80,122,0.45), rgba(201,80,122,0.05) 40%, rgba(201,80,122,0.35));
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+.gradient-border:hover::before {
+  opacity: 1;
 }
