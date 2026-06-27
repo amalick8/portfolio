@@ -11,26 +11,20 @@ import Impact from "@/components/Impact";
 import Contact from "@/components/Contact";
 import QuickActions from "@/components/QuickActions";
 import DesignOptions from "@/components/DesignOptions";
-
 export default function Home() {
   return (
     <div className="flex flex-col flex-1">
       <ScrollProgress />
       <Nav />
       <main className="flex-1">
-        {/* Dark sections */}
         <Hero />
         <Marquee />
-        {/* Light sections */}
         <About />
         <Journey />
-        {/* 3D Ribbon transition: dark bg above, work bg below */}
         <DynamicRibbon />
-        {/* Dark sections */}
         <Work />
         <Hackathons />
         <Impact />
-        {/* Bold accent contact */}
         <Contact />
       </main>
       <QuickActions />

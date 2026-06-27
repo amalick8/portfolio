@@ -10,7 +10,7 @@ export default function Nav() {
   const [activeSection, setActiveSection] = useState<string>("");
   const [menuOpen, setMenuOpen] = useState(false);
   const [mounted, setMounted] = useState(false);
-  const [logoVariant, setLogoVariant] = useState<LogoVariant>("underline");
+  const [logoVariant, setLogoVariant] = useState<LogoVariant>("stamp");
   const observerRef = useRef<IntersectionObserver | null>(null);
 
   const { scrollY } = useScroll();

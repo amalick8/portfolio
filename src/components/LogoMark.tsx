@@ -8,18 +8,40 @@ export default function LogoMark({ variant }: { variant: LogoVariant }) {
   if (variant === "stamp") {
     return (
       <motion.span
-        className="relative grid size-10 place-items-center rounded-[0.42rem] border-2 border-accent text-accent"
-        whileHover={{ rotate: -4, scale: 1.06 }}
-        transition={{ type: "spring", stiffness: 320, damping: 18 }}
+        className="inline-flex"
+        whileHover={{ rotate: 8, scale: 1.12 }}
+        whileTap={{ scale: 0.88, rotate: 3 }}
+        transition={{ type: "spring", stiffness: 280, damping: 16 }}
         aria-label="AM home"
       >
-        <motion.span
-          className="absolute inset-[-5px] rounded-[0.58rem] border border-accent/20"
-          initial={{ opacity: 0, scale: 0.84 }}
-          animate={{ opacity: [0, 0.45, 0], scale: [0.84, 1.18, 1.34] }}
-          transition={{ duration: 2.6, repeat: Infinity, repeatDelay: 0.8 }}
-        />
-        <span className="font-display text-[1.15rem] italic leading-none">AM</span>
+        <svg width="44" height="44" viewBox="0 0 44 44" aria-hidden="true" style={{ overflow: "visible" }}>
+          <defs>
+            <filter id="hk-ink" x="-14%" y="-14%" width="128%" height="128%">
+              <feTurbulence type="fractalNoise" baseFrequency="0.062" numOctaves="5" seed="11" result="noise" />
+              <feDisplacementMap in="SourceGraphic" in2="noise" scale="2.8" xChannelSelector="R" yChannelSelector="G" />
+            </filter>
+          </defs>
+          {/* Outer rough circle */}
+          <circle cx="22" cy="22" r="19.5" fill="none" stroke="#c9507a" strokeWidth="2.2" filter="url(#hk-ink)" />
+          {/* Inner thin ring */}
+          <circle cx="22" cy="22" r="16" fill="none" stroke="#c9507a" strokeWidth="0.7" opacity="0.32" filter="url(#hk-ink)" />
+          {/* Horizontal rule lines */}
+          <line x1="6" y1="22" x2="11" y2="22" stroke="#c9507a" strokeWidth="1" opacity="0.38" />
+          <line x1="33" y1="22" x2="38" y2="22" stroke="#c9507a" strokeWidth="1" opacity="0.38" />
+          {/* AM italic */}
+          <text
+            x="22" y="27"
+            textAnchor="middle"
+            fontFamily="Georgia,'Times New Roman',serif"
+            fontStyle="italic"
+            fontSize="13.5"
+            fill="#c9507a"
+            letterSpacing="1.5"
+          >AM</text>
+          {/* Top/bottom accent dots */}
+          <circle cx="22" cy="4" r="1.6" fill="#c9507a" opacity="0.38" />
+          <circle cx="22" cy="40" r="1.6" fill="#c9507a" opacity="0.38" />
+        </svg>
       </motion.span>
     );
   }
