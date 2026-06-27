@@ -134,6 +134,31 @@ export default function SakuraPetals() {
     let prevScrollY = window.scrollY;
     let scrollVel   = 0;
 
+    // Branch petal spawns — petals fall from section-edge blossom positions
+    const onBranchPetal = (e: Event) => {
+      const { x, y } = (e as CustomEvent<{ x: number; y: number }>).detail;
+      const li = Math.floor(Math.random() * LAYERS.length);
+      const L  = LAYERS[li];
+      const [r, g, b] = COLORS[Math.floor(Math.random() * COLORS.length)];
+      petals.push({
+        x: x + (Math.random() - 0.5) * 22,
+        y: y + (Math.random() - 0.5) * 12,
+        vx: (Math.random() - 0.5) * 0.9,
+        vy: L.speedMin + Math.random() * (L.speedMax - L.speedMin),
+        angle:    Math.random() * Math.PI * 2,
+        av:       (Math.random() - 0.5) * 0.018,
+        size:     L.sizeMin + Math.random() * (L.sizeMax - L.sizeMin),
+        opacity:  L.opMin  + Math.random() * (L.opMax - L.opMin),
+        r, g, b,
+        layer: li, windPhase: Math.random() * Math.PI * 2, windResp: L.wind,
+        isBlossom: li === 0 && Math.random() < 0.25,
+      });
+      // Prevent the pool growing unbounded — trim oldest if over soft cap
+      const softCap = LAYERS.reduce((s, l) => s + l.count, 0) + 40;
+      if (petals.length > softCap) petals.splice(0, petals.length - softCap);
+    };
+    window.addEventListener("sakura:branch-petal", onBranchPetal);
+
     let lastT = 0, raf: number;
 
     const tick = (t: number) => {
@@ -154,8 +179,8 @@ export default function SakuraPetals() {
       }
       windVx += (windTarget - windVx) * 0.011;
 
-      // Boost when scrolling down, slow when scrolling up (capped so it stays smooth)
-      const scrollBoost = Math.max(-0.4, Math.min(1.8, scrollVel * 40));
+      // Boost when scrolling down — never negative so petals always fall forward
+      const scrollBoost = Math.max(0, Math.min(1.8, scrollVel * 40));
 
       // Is the Contact section currently visible in the viewport?
       const contactEl = document.getElementById("contact");
@@ -214,6 +239,7 @@ export default function SakuraPetals() {
       window.removeEventListener("resize", resize);
       document.removeEventListener("mousemove", onMouse);
       document.removeEventListener("mouseleave", onLeave);
+      window.removeEventListener("sakura:branch-petal", onBranchPetal);
     };
   }, []);
 

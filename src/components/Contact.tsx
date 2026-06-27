@@ -27,7 +27,7 @@ export default function Contact() {
   return (
     <section
       id="contact"
-      className="relative px-5 sm:px-8 py-28 sm:py-40 overflow-hidden"
+      className="relative min-h-screen flex flex-col justify-center px-5 sm:px-8 py-20 sm:py-28 overflow-hidden"
       style={{ background: "var(--color-accent-deep)" }}
     >
       {/* Particle layer */}
@@ -57,8 +57,8 @@ export default function Contact() {
         </motion.p>
 
         <div
-          className="font-display leading-[0.92] tracking-tight mb-14 pb-3"
-          style={{ fontSize: "clamp(3.5rem, 12vw, 10rem)", color: "var(--color-paper)" }}
+          className="font-display leading-[0.92] tracking-tight mb-8 pb-2"
+          style={{ fontSize: "clamp(3rem, 9vw, 7rem)", color: "var(--color-paper)" }}
         >
           <SplitText
             text="let's build"
@@ -152,7 +152,7 @@ export default function Contact() {
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.4 }}
-          className="font-mono text-[10px] uppercase tracking-widest mt-20"
+          className="font-mono text-[10px] uppercase tracking-widest mt-10"
           style={{ color: "rgba(245,241,232,0.25)" }}
         >
           © 2026 {profile.fullName} · Built with code, data, and intent.

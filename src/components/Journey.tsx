@@ -5,6 +5,7 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import { experience } from "@/lib/data";
 import SplitText from "@/components/SplitText";
 import TiltCard from "@/components/TiltCard";
+import SakuraBranchDecor from "@/components/SakuraBranchDecor";
 
 function TimelineSVG() {
   const ref = useRef<SVGSVGElement>(null);
@@ -59,8 +60,9 @@ export default function Journey() {
   return (
     <section
       id="journey"
-      className="bg-paper text-paper-ink px-5 sm:px-8 py-20 sm:py-28 border-t border-paper-ink/10"
+      className="relative overflow-hidden bg-paper text-paper-ink px-5 sm:px-8 py-20 sm:py-28 border-t border-paper-ink/10"
     >
+      <SakuraBranchDecor side="left" />
       <div className="mx-auto max-w-6xl relative z-[5]">
         <motion.p
           initial={{ opacity: 0 }}

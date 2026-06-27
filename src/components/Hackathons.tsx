@@ -5,12 +5,14 @@ import { motion, AnimatePresence } from "framer-motion";
 import { hackathons } from "@/lib/data";
 import SplitText from "@/components/SplitText";
 import TiltCard from "@/components/TiltCard";
+import SakuraBranchDecor from "@/components/SakuraBranchDecor";
 
 export default function Hackathons() {
   const [active, setActive] = useState<string | null>(null);
 
   return (
-    <section id="hackathons" className="px-5 sm:px-8 py-20 sm:py-28 bg-stage dot-grid">
+    <section id="hackathons" className="relative overflow-hidden px-5 sm:px-8 py-20 sm:py-28 bg-stage dot-grid">
+      <SakuraBranchDecor side="right" />
       <div className="mx-auto max-w-6xl relative z-[5]">
         <motion.p
           initial={{ opacity: 0 }}

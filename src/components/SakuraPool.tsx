@@ -12,7 +12,7 @@ const SPRING_K_X = 0.028;
 const SPRING_K_Y = 0.014;
 const GRAVITY    = 0.22;
 const DAMPING    = 0.82;
-const REPEL_R    = 160;
+const REPEL_R    = 128;
 const REPEL_STR  = 36000;
 const COUNT      = 320;
 

@@ -5,10 +5,12 @@ import { profile, skills } from "@/lib/data";
 import SplitText from "@/components/SplitText";
 import TextScramble from "@/components/TextScramble";
 import BrushstrokeUnderline from "@/components/BrushstrokeUnderline";
+import SakuraBranchDecor from "@/components/SakuraBranchDecor";
 
 export default function About() {
   return (
-    <section id="about" className="bg-paper text-paper-ink px-5 sm:px-8 pt-20 pb-24 sm:pt-28 sm:pb-32">
+    <section id="about" className="relative overflow-hidden bg-paper text-paper-ink px-5 sm:px-8 pt-20 pb-24 sm:pt-28 sm:pb-32">
+      <SakuraBranchDecor side="right" />
       <div className="mx-auto max-w-6xl relative z-[5]">
         <motion.p
           initial={{ opacity: 0 }}
