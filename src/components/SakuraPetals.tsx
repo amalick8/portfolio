@@ -51,6 +51,14 @@ type Petal = {
   isBlossom: boolean;
 };
 
+type FloorPetal = {
+  x: number; y: number; angle: number;
+  size: number; r: number; g: number; b: number;
+  depth: number; isBlossom: boolean;
+};
+
+const FLOOR_MAX = 700;
+
 function drawLoose(ctx: CanvasRenderingContext2D, p: Petal) {
   ctx.save();
   ctx.translate(p.x, p.y);
@@ -123,6 +131,9 @@ export default function SakuraPetals() {
     const petals: Petal[] = [];
     LAYERS.forEach((L, li) => { for (let i = 0; i < L.count; i++) petals.push(makePetal(W, H, li, true)); });
 
+    // Floor pile — petals that have landed at the viewport bottom, accumulate over session
+    const floor: FloorPetal[] = [];
+
     let windVx = -0.18, windTarget = -0.18, gustCooldown = 0;
     const mouse = { x: -9999, y: -9999 };
     const onMouse = (e: MouseEvent) => { mouse.x = e.clientX; mouse.y = e.clientY; };
@@ -182,13 +193,38 @@ export default function SakuraPetals() {
       // Boost when scrolling down — never negative so petals always fall forward
       const scrollBoost = Math.max(0, Math.min(1.8, scrollVel * 40));
 
-      // Is the Contact section currently visible in the viewport?
-      const contactEl = document.getElementById("contact");
-      const contactVisible = contactEl
-        ? contactEl.getBoundingClientRect().top < H + 60
-        : false;
-
       ctx.clearRect(0, 0, W, H);
+
+      // ── Draw floor pile first (under falling petals) ──────────────────────────
+      for (const f of floor) {
+        const scY = 0.20 + f.depth * 0.22;
+        const op  = 0.36 + f.depth * 0.58;
+        if (f.isBlossom) {
+          const s = f.size;
+          ctx.beginPath();
+          for (let i = 0; i < 5; i++) {
+            const ang = f.angle + (i / 5) * Math.PI * 2;
+            const ox = f.x + Math.sin(ang) * s * 0.55;
+            const oy = f.y - Math.cos(ang) * s * 0.55 * scY;
+            ctx.moveTo(ox + s * 0.24, oy);
+            ctx.ellipse(ox, oy, s * 0.24, s * 0.42 * scY, ang + Math.PI / 2, 0, Math.PI * 2);
+          }
+          ctx.fillStyle = `rgba(${f.r},${f.g},${f.b},${op})`;
+          ctx.fill();
+          ctx.beginPath();
+          ctx.arc(f.x, f.y, s * 0.15, 0, Math.PI * 2);
+          ctx.fillStyle = `rgba(255,242,178,${op * 0.9})`;
+          ctx.fill();
+        } else {
+          ctx.save();
+          ctx.translate(f.x, f.y);
+          ctx.rotate(f.angle);
+          ctx.scale(f.size, f.size * scY);
+          ctx.fillStyle = `rgba(${f.r},${f.g},${f.b},${op})`;
+          ctx.fill(PETAL_PATH);
+          ctx.restore();
+        }
+      }
 
       for (let i = 0; i < petals.length; i++) {
         const p = petals[i];
@@ -213,12 +249,24 @@ export default function SakuraPetals() {
         p.x += p.vx; p.y += p.vy; p.angle += p.av;
 
         if (p.y > H + 26) {
-          // Hand off to pool when Contact is visible — creates cohesive fall-to-pile feel
-          if (contactVisible) {
-            window.dispatchEvent(new CustomEvent("sakura:land", {
-              detail: { x: p.x, size: p.size, r: p.r, g: p.g, b: p.b },
-            }));
-          }
+          // Settle into the viewport floor pile — grows naturally over the session
+          const pileH = Math.min(floor.length * 0.18, 110); // pile grows taller as petals accumulate
+          const depth = 0.3 + Math.random() * 0.7;
+          floor.push({
+            x: p.x + (Math.random() - 0.5) * 14,
+            y: H - 5 - Math.random() * (10 + pileH),
+            angle: Math.random() * Math.PI * 2,
+            size: p.size,
+            r: p.r, g: p.g, b: p.b,
+            depth,
+            isBlossom: p.isBlossom,
+          });
+          if (floor.length > FLOOR_MAX) floor.shift();
+
+          // Also notify SakuraPool so the Contact section pile stays in sync
+          window.dispatchEvent(new CustomEvent("sakura:land", {
+            detail: { x: p.x, vx: p.vx, vy: p.vy, size: p.size, r: p.r, g: p.g, b: p.b },
+          }));
           petals[i] = makePetal(W, H, p.layer, false);
           continue;
         }

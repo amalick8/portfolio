@@ -148,21 +148,29 @@ export default function SakuraPool() {
     const incoming: Incoming[] = [];
 
     const onLand = (e: Event) => {
-      const { x: vpX, size, r, g, b } = (e as CustomEvent).detail;
+      const { x: vpX, vx: pvx, vy: pvy, size, r, g, b } = (e as CustomEvent).detail;
       const rect = canvas.getBoundingClientRect();
       if (rect.height === 0) return;
       const localX = vpX - rect.left;
-      // Clamp to canvas bounds
       if (localX < -20 || localX > W + 20) return;
-      // Pick a rest-y in the main pile zone as the landing target
-      const targetRy = H * (0.78 + Math.random() * 0.20);
+
+      // Where the petal crossed from the viewport bottom into the pool canvas
+      const entryY = window.innerHeight - rect.top;
+      // Clamp: if pool is off-screen the entry is outside canvas bounds
+      const startY = Math.min(Math.max(entryY, -size * 2), H * 0.5);
+      const targetRy = Math.max(startY + 40, H * (0.82 + Math.random() * 0.16));
+
+      // When pool is visible use the petal's actual slow speed; off-screen use faster fall
+      const poolVisible = rect.top < window.innerHeight && rect.bottom > 0;
+      const initVy = poolVisible ? Math.max(pvy, 0.28) : 2.2 + Math.random() * 0.8;
+
       incoming.push({
-        x: localX + (Math.random() - 0.5) * 30,
-        y: -size,                        // start just above canvas
-        vy: 1.5 + Math.random() * 1.0,
-        vx: (Math.random() - 0.5) * 0.8,
+        x: localX + (Math.random() - 0.5) * 12,
+        y: startY,
+        vy: initVy,
+        vx: pvx,
         angle: Math.random() * Math.PI * 2,
-        av: (Math.random() - 0.5) * 0.03,
+        av: (Math.random() - 0.5) * 0.012,
         size, r, g, b,
         targetRy,
       });
@@ -199,14 +207,14 @@ export default function SakuraPool() {
       // ── Animate incoming petals falling from above ─────────────────────────
       for (let i = incoming.length - 1; i >= 0; i--) {
         const inc = incoming[i];
-        inc.vy += 0.28;          // gravity
-        inc.vx *= 0.97;          // air resistance
+        inc.vy += 0.016;         // gentle gravity — matches the slow petal fall speed
+        inc.vx *= 0.994;         // light air resistance
         inc.y  += inc.vy;
         inc.x  += inc.vx;
         inc.angle += inc.av;
 
         if (inc.y >= inc.targetRy) {
-          // Settled — give nearby pool petals a tiny ripple impulse
+          // Ripple nearby petals
           for (const p of petals) {
             const ddx = p.rx - inc.x;
             if (Math.abs(ddx) < 50) {
@@ -214,6 +222,19 @@ export default function SakuraPool() {
               p.vx += ddx > 0 ? 0.2 : -0.2;
             }
           }
+          // Permanently add to pool so petals accumulate over time
+          const depth = Math.max(0, Math.min(1, (inc.targetRy / H - 0.55) / 0.45));
+          petals.push({
+            rx: inc.x, ry: inc.targetRy,
+            x: inc.x,  y: inc.targetRy,
+            vx: inc.vx * 0.3, vy: 0,
+            angle: inc.angle,
+            av: (Math.random() - 0.5) * 0.003,
+            size: inc.size,
+            r: inc.r, g: inc.g, b: inc.b,
+            depth,
+            isBlossom: Math.random() < 0.12,
+          });
           incoming.splice(i, 1);
           continue;
         }
