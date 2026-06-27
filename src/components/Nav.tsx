@@ -4,11 +4,13 @@ import { useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence, useScroll, useTransform } from "framer-motion";
 import { nav } from "@/lib/data";
 import TextScramble from "@/components/TextScramble";
+import LogoMark, { type LogoVariant } from "@/components/LogoMark";
 
 export default function Nav() {
   const [activeSection, setActiveSection] = useState<string>("");
   const [menuOpen, setMenuOpen] = useState(false);
   const [mounted, setMounted] = useState(false);
+  const [logoVariant, setLogoVariant] = useState<LogoVariant>("underline");
   const observerRef = useRef<IntersectionObserver | null>(null);
 
   const { scrollY } = useScroll();
@@ -17,6 +19,15 @@ export default function Nav() {
 
   useEffect(() => {
     setMounted(true);
+    const savedLogo = localStorage.getItem("am-logo-preview") as LogoVariant | null;
+    if (savedLogo) setLogoVariant(savedLogo);
+
+    const onLogoPreview = (event: Event) => {
+      setLogoVariant((event as CustomEvent<LogoVariant>).detail);
+    };
+
+    window.addEventListener("am-logo-preview", onLogoPreview);
+
     const sectionIds = nav.map((n) => n.href.replace("#", ""));
     const sections = sectionIds
       .map((id) => document.getElementById(id))
@@ -31,7 +42,10 @@ export default function Nav() {
       { rootMargin: "-40% 0px -40% 0px", threshold: 0 }
     );
     sections.forEach((s) => observerRef.current!.observe(s));
-    return () => observerRef.current?.disconnect();
+    return () => {
+      observerRef.current?.disconnect();
+      window.removeEventListener("am-logo-preview", onLogoPreview);
+    };
   }, []);
 
   const close = () => setMenuOpen(false);
@@ -50,9 +64,9 @@ export default function Nav() {
             initial={{ opacity: 0, y: -12 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.1 }}
-            className="font-display italic text-2xl tracking-tight"
+            className="inline-flex min-w-12 items-center"
           >
-            AM.
+            <LogoMark variant={logoVariant} />
           </motion.a>
 
           {/* Desktop nav — stagger cascade */}

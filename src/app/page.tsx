@@ -10,6 +10,7 @@ import Hackathons from "@/components/Hackathons";
 import Impact from "@/components/Impact";
 import Contact from "@/components/Contact";
 import QuickActions from "@/components/QuickActions";
+import DesignOptions from "@/components/DesignOptions";
 
 export default function Home() {
   return (
@@ -33,6 +34,7 @@ export default function Home() {
         <Contact />
       </main>
       <QuickActions />
+      <DesignOptions />
     </div>
   );
 }
