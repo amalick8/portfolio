@@ -41,29 +41,27 @@ function seed(i: number, W: number, H: number): P {
   const [r, g, b] = COLORS[Math.floor(Math.random() * COLORS.length)];
   const rand = Math.random();
 
-  // Extreme bottom concentration — dense pile at the floor
+  // Tightly concentrated at the very bottom — no hovering petals
   let ry: number;
-  if      (rand < 0.82) ry = H * (0.78 + Math.random() * 0.20);  // main pile: 78–98%
-  else if (rand < 0.94) ry = H * (0.60 + Math.random() * 0.18);  // mid: 60–78%
-  else                  ry = H * (0.20 + Math.random() * 0.40);  // scattered: 20–60%
+  if   (rand < 0.88) ry = H * (0.88 + Math.random() * 0.11);  // dense floor: 88–99%
+  else               ry = H * (0.76 + Math.random() * 0.12);  // shallow fringe: 76–88%
 
   const rx    = W * (0.01 + Math.random() * 0.98);
-  const depth = Math.max(0, Math.min(1, (ry / H - 0.55) / 0.45));
+  const depth = Math.max(0, Math.min(1, (ry / H - 0.76) / 0.23));
 
   return {
     rx, ry, x: rx, y: ry, vx: 0, vy: 0,
     angle: Math.random() * Math.PI * 2,
     av: (Math.random() - 0.5) * 0.004,
-    size: 9 + depth * 12 + Math.random() * 6,  // 9–27px — largest at bottom
+    size: 7 + depth * 14 + Math.random() * 5,
     r, g, b, depth,
     isBlossom: i % 6 === 0,
   };
 }
 
 function drawGroundPetal(ctx: CanvasRenderingContext2D, p: P) {
-  // Ground-plane: compress Y to simulate petals lying flat
-  const scY = 0.28 + p.depth * 0.22;
-  const op  = 0.42 + p.depth * 0.54;
+  const scY = 0.12 + p.depth * 0.18;  // 12–30% height — clearly lying flat
+  const op  = 0.45 + p.depth * 0.50;
   ctx.save();
   ctx.translate(p.x, p.y);
   ctx.rotate(p.angle);
@@ -75,8 +73,8 @@ function drawGroundPetal(ctx: CanvasRenderingContext2D, p: P) {
 
 function drawGroundBlossom(ctx: CanvasRenderingContext2D, p: P) {
   const s   = p.size;
-  const scY = 0.28 + p.depth * 0.22;
-  const op  = 0.42 + p.depth * 0.54;
+  const scY = 0.12 + p.depth * 0.18;
+  const op  = 0.45 + p.depth * 0.50;
   ctx.beginPath();
   for (let i = 0; i < 5; i++) {
     const ang = p.angle + (i / 5) * Math.PI * 2;
@@ -138,50 +136,10 @@ export default function SakuraPool() {
     document.addEventListener("mousemove", onMouse);
     document.addEventListener("mouseleave", onLeave);
 
-    // ── Incoming petals: handed off from SakuraPetals when they hit the floor ──
-    type Incoming = {
-      x: number; y: number; vy: number; vx: number;
-      angle: number; av: number;
-      size: number; r: number; g: number; b: number;
-      targetRy: number;
-    };
-    const incoming: Incoming[] = [];
-
-    const onLand = (e: Event) => {
-      const { x: vpX, vx: pvx, vy: pvy, size, r, g, b } = (e as CustomEvent).detail;
-      const rect = canvas.getBoundingClientRect();
-      if (rect.height === 0) return;
-      const localX = vpX - rect.left;
-      if (localX < -20 || localX > W + 20) return;
-
-      // Where the petal crossed from the viewport bottom into the pool canvas
-      const entryY = window.innerHeight - rect.top;
-      // Clamp: if pool is off-screen the entry is outside canvas bounds
-      const startY = Math.min(Math.max(entryY, -size * 2), H * 0.5);
-      const targetRy = Math.max(startY + 40, H * (0.82 + Math.random() * 0.16));
-
-      // When pool is visible use the petal's actual slow speed; off-screen use faster fall
-      const poolVisible = rect.top < window.innerHeight && rect.bottom > 0;
-      const initVy = poolVisible ? Math.max(pvy, 0.28) : 2.2 + Math.random() * 0.8;
-
-      incoming.push({
-        x: localX + (Math.random() - 0.5) * 12,
-        y: startY,
-        vy: initVy,
-        vx: pvx,
-        angle: Math.random() * Math.PI * 2,
-        av: (Math.random() - 0.5) * 0.012,
-        size, r, g, b,
-        targetRy,
-      });
-    };
-    window.addEventListener("sakura:land", onLand);
-
     let raf: number;
     const tick = () => {
       ctx.clearRect(0, 0, W, H);
 
-      // ── Draw settled pool ──────────────────────────────────────────────────
       for (const p of petals) {
         let ax = (p.rx - p.x) * SPRING_K_X;
         let ay = (p.ry - p.y) * SPRING_K_Y;
@@ -204,54 +162,6 @@ export default function SakuraPool() {
         else             drawGroundPetal(ctx, p);
       }
 
-      // ── Animate incoming petals falling from above ─────────────────────────
-      for (let i = incoming.length - 1; i >= 0; i--) {
-        const inc = incoming[i];
-        inc.vy += 0.016;         // gentle gravity — matches the slow petal fall speed
-        inc.vx *= 0.994;         // light air resistance
-        inc.y  += inc.vy;
-        inc.x  += inc.vx;
-        inc.angle += inc.av;
-
-        if (inc.y >= inc.targetRy) {
-          // Ripple nearby petals
-          for (const p of petals) {
-            const ddx = p.rx - inc.x;
-            if (Math.abs(ddx) < 50) {
-              p.vy -= 0.4 * (1 - Math.abs(ddx) / 50);
-              p.vx += ddx > 0 ? 0.2 : -0.2;
-            }
-          }
-          // Permanently add to pool so petals accumulate over time
-          const depth = Math.max(0, Math.min(1, (inc.targetRy / H - 0.55) / 0.45));
-          petals.push({
-            rx: inc.x, ry: inc.targetRy,
-            x: inc.x,  y: inc.targetRy,
-            vx: inc.vx * 0.3, vy: 0,
-            angle: inc.angle,
-            av: (Math.random() - 0.5) * 0.003,
-            size: inc.size,
-            r: inc.r, g: inc.g, b: inc.b,
-            depth,
-            isBlossom: Math.random() < 0.12,
-          });
-          incoming.splice(i, 1);
-          continue;
-        }
-
-        // Draw the incoming petal using same ground-plane style
-        const depth = Math.max(0, Math.min(1, (inc.targetRy / H - 0.55) / 0.45));
-        const scY   = 0.28 + depth * 0.22;
-        const op    = 0.55 + depth * 0.40;
-        ctx.save();
-        ctx.translate(inc.x, inc.y);
-        ctx.rotate(inc.angle);
-        ctx.scale(inc.size, inc.size * scY);
-        ctx.fillStyle = `rgba(${inc.r},${inc.g},${inc.b},${op})`;
-        ctx.fill(POOL_PATH);
-        ctx.restore();
-      }
-
       raf = requestAnimationFrame(tick);
     };
     raf = requestAnimationFrame(tick);
@@ -263,7 +173,6 @@ export default function SakuraPool() {
       cancelAnimationFrame(raf);
       document.removeEventListener("mousemove", onMouse);
       document.removeEventListener("mouseleave", onLeave);
-      window.removeEventListener("sakura:land", onLand);
       ro.disconnect();
     };
   }, []);

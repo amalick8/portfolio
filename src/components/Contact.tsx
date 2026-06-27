@@ -33,8 +33,9 @@ export default function Contact() {
       {/* Particle layer */}
       <FloatingParticles />
 
-      {/* Sakura petal pool — repels from cursor */}
+      {/* Sakura petal pool — static pile, repels from cursor */}
       <SakuraPool />
+
 
       {/* Radial glow */}
       <div
