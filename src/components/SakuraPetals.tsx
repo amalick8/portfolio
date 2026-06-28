@@ -9,9 +9,9 @@ const COLORS: [number, number, number][] = [
 ];
 
 const LAYERS = [
-  { sizeMin: 10, sizeMax: 16, speedMin: 0.65, speedMax: 1.10, opMin: 0.78, opMax: 0.95, wind: 1.4, count: 28 },
-  { sizeMin:  7, sizeMax: 11, speedMin: 0.42, speedMax: 0.70, opMin: 0.52, opMax: 0.78, wind: 1.0, count: 36 },
-  { sizeMin:  4, sizeMax:  7, speedMin: 0.22, speedMax: 0.40, opMin: 0.28, opMax: 0.52, wind: 0.6, count: 22 },
+  { sizeMin: 10, sizeMax: 16, speedMin: 0.90, speedMax: 1.50, opMin: 0.78, opMax: 0.95, wind: 1.4, count: 16 },
+  { sizeMin:  7, sizeMax: 11, speedMin: 0.58, speedMax: 0.95, opMin: 0.52, opMax: 0.78, wind: 1.0, count: 21 },
+  { sizeMin:  4, sizeMax:  7, speedMin: 0.32, speedMax: 0.55, opMin: 0.28, opMax: 0.52, wind: 0.6, count: 13 },
 ] as const;
 
 // ─── Pre-built unit Path2D — created ONCE, reused every frame ────────────────
@@ -24,22 +24,21 @@ const PETAL_PATH = (() => {
   return p;
 })();
 
-// ─── Blossom spawn origins (weighted) ────────────────────────────────────────
+// ─── Spawn origins — all at y≈0 (nav/menu bar), spread across full width ─────
 const ORIGINS: [number, number, number][] = [
-  [0.528, 0.044, 4.0], [0.550, 0.027, 3.5], [0.457, 0.002, 2.0],
-  [0.583, 0.100, 2.5], [0.709, 0.156, 2.0], [0.874, 0.261, 1.0],
-  [0.944, 0.144, 0.8], [0.791, 0.378, 0.8],
+  [0.08, 0.0, 1.5], [0.20, 0.0, 2.0], [0.33, 0.0, 2.8],
+  [0.46, 0.0, 3.5], [0.57, 0.0, 4.0], [0.69, 0.0, 3.2],
+  [0.81, 0.0, 2.5], [0.92, 0.0, 1.8],
 ];
 const ORIGIN_TOTAL = ORIGINS.reduce((s, o) => s + o[2], 0);
 
-function pickOrigin(W: number, H: number) {
-  if (W < 640) return { x: W * (0.5 + Math.random() * 0.5), y: H * Math.random() * 0.2 };
+function pickOrigin(W: number, _H: number) {
   let r = Math.random() * ORIGIN_TOTAL;
-  for (const [nx, ny, w] of ORIGINS) {
+  for (const [nx, , w] of ORIGINS) {
     r -= w;
-    if (r <= 0) return { x: nx * W + (Math.random() - 0.5) * 28, y: ny * H + (Math.random() - 0.5) * 18 };
+    if (r <= 0) return { x: nx * W + (Math.random() - 0.5) * 32, y: (Math.random() - 0.5) * 5 };
   }
-  return { x: ORIGINS[0][0] * W, y: ORIGINS[0][1] * H };
+  return { x: ORIGINS[0][0] * W, y: 0 };
 }
 
 type Petal = {
@@ -208,6 +207,9 @@ for (let i = 0; i < petals.length; i++) {
         p.x += p.vx; p.y += p.vy; p.angle += p.av;
 
         if (p.y > H + 26) {
+          window.dispatchEvent(new CustomEvent("sakura:land", {
+            detail: { x: p.x, size: p.size, r: p.r, g: p.g, b: p.b, isBlossom: p.isBlossom },
+          }));
           petals[i] = makePetal(W, H, p.layer, false);
           continue;
         }

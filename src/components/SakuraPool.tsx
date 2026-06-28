@@ -8,15 +8,19 @@ const COLORS: [number, number, number][] = [
   [210, 135, 168], [255, 245, 250], [250, 178, 205],
 ];
 
-const SPRING_K_X = 0.028;
-const SPRING_K_Y = 0.014;
-const GRAVITY    = 0.22;
+const SPRING_K_X = 0.038;
+const SPRING_K_Y = 0.022;
+const GRAVITY    = 0.28;
 const DAMPING    = 0.82;
-const REPEL_R    = 128;
-const REPEL_STR  = 36000;
-const COUNT      = 320;
+const REPEL_R    = 120;
+const REPEL_STR  = 5500;
+const REPEL_MIN_D2 = 1600; // clamp minimum d to 40px — prevents explosion in dense piles
 
-// Pre-built unit petal Path2D — created once, reused every frame
+const COUNT    = 5000;
+const POOL_MAX = 12000;
+
+const FLOOR_TOP = 0.82; // pile = bottom 18% of Contact section
+
 const POOL_PATH = (() => {
   const p = new Path2D();
   p.moveTo(0, -1.0);
@@ -33,35 +37,28 @@ type P = {
   angle: number; av: number;
   size: number;
   r: number; g: number; b: number;
-  depth: number;   // 0 = far/top, 1 = near/bottom
+  depth: number;
   isBlossom: boolean;
 };
 
 function seed(i: number, W: number, H: number): P {
   const [r, g, b] = COLORS[Math.floor(Math.random() * COLORS.length)];
-  const rand = Math.random();
-
-  // Tightly concentrated at the very bottom — no hovering petals
-  let ry: number;
-  if   (rand < 0.88) ry = H * (0.88 + Math.random() * 0.11);  // dense floor: 88–99%
-  else               ry = H * (0.76 + Math.random() * 0.12);  // shallow fringe: 76–88%
-
-  const rx    = W * (0.01 + Math.random() * 0.98);
-  const depth = Math.max(0, Math.min(1, (ry / H - 0.76) / 0.23));
-
+  const ry    = H * (FLOOR_TOP + Math.random() * (1 - FLOOR_TOP));
+  const rx    = W * (Math.random() * 1.04 - 0.02); // slightly beyond edges so pile looks full
+  const depth = Math.max(0, Math.min(1, (ry / H - FLOOR_TOP) / (1 - FLOOR_TOP)));
   return {
     rx, ry, x: rx, y: ry, vx: 0, vy: 0,
     angle: Math.random() * Math.PI * 2,
-    av: (Math.random() - 0.5) * 0.004,
-    size: 7 + depth * 14 + Math.random() * 5,
+    av: (Math.random() - 0.5) * 0.002,
+    size: 10 + Math.random() * 13,
     r, g, b, depth,
-    isBlossom: i % 6 === 0,
+    isBlossom: i % 5 === 0,
   };
 }
 
 function drawGroundPetal(ctx: CanvasRenderingContext2D, p: P) {
-  const scY = 0.12 + p.depth * 0.18;  // 12–30% height — clearly lying flat
-  const op  = 0.45 + p.depth * 0.50;
+  const scY = 0.14;
+  const op  = 0.88;
   ctx.save();
   ctx.translate(p.x, p.y);
   ctx.rotate(p.angle);
@@ -73,8 +70,8 @@ function drawGroundPetal(ctx: CanvasRenderingContext2D, p: P) {
 
 function drawGroundBlossom(ctx: CanvasRenderingContext2D, p: P) {
   const s   = p.size;
-  const scY = 0.12 + p.depth * 0.18;
-  const op  = 0.45 + p.depth * 0.50;
+  const scY = 0.14;
+  const op  = 0.88;
   ctx.beginPath();
   for (let i = 0; i < 5; i++) {
     const ang = p.angle + (i / 5) * Math.PI * 2;
@@ -116,17 +113,17 @@ export default function SakuraPool() {
       if (petals.length === 0) {
         for (let i = 0; i < COUNT; i++) petals.push(seed(i, W, H));
       } else {
-        petals.forEach((p, i) => {
+        const base = Math.min(petals.length, COUNT);
+        for (let i = 0; i < base; i++) {
           const n = seed(i, W, H);
-          p.rx = n.rx; p.ry = n.ry; p.depth = n.depth; p.size = n.size;
-        });
+          petals[i].rx = n.rx; petals[i].ry = n.ry;
+          petals[i].depth = n.depth; petals[i].size = n.size;
+        }
       }
-      // Sort ONCE by rest-y (painter's algorithm) — bottom petals drawn last = on top
       petals.sort((a, b) => a.ry - b.ry);
     };
     buildAndSort();
 
-    // Document-level mouse: convert viewport → canvas-local coords
     const onMouse = (e: MouseEvent) => {
       const rect = canvas.getBoundingClientRect();
       mouse.x = e.clientX - rect.left;
@@ -149,7 +146,7 @@ export default function SakuraPool() {
         const d2 = dx * dx + dy * dy;
         if (d2 < REPEL_R * REPEL_R && d2 > 1) {
           const d = Math.sqrt(d2);
-          const f = REPEL_STR / d2;
+          const f = REPEL_STR / Math.max(d2, REPEL_MIN_D2);
           ax += (dx / d) * f;
           ay += (dy / d) * f * 0.70;
         }
@@ -157,6 +154,8 @@ export default function SakuraPool() {
         p.vx = p.vx * DAMPING + ax;
         p.vy = p.vy * DAMPING + ay;
         p.x += p.vx; p.y += p.vy; p.angle += p.av;
+
+        if (p.y > H - 1) { p.y = H - 1; p.vy = 0; }
 
         if (p.isBlossom) drawGroundBlossom(ctx, p);
         else             drawGroundPetal(ctx, p);
@@ -166,6 +165,31 @@ export default function SakuraPool() {
     };
     raf = requestAnimationFrame(tick);
 
+    // Permanently add landed petals — pile grows over time
+    const onLand = (e: Event) => {
+      if (petals.length >= POOL_MAX || H === 0) return;
+      const { x: vpX, size, r, g, b, isBlossom } = (e as CustomEvent).detail;
+      const rect = canvas.getBoundingClientRect();
+      const localX = vpX - rect.left;
+      if (localX < -size || localX > W + size) return;
+
+      // Top bound rises as pile fills — pile grows upward over time
+      const fillRatio = Math.min(1, (petals.length - COUNT) / (POOL_MAX - COUNT));
+      const topBound = FLOOR_TOP - fillRatio * 0.25;
+      const ry = H * (topBound + Math.random() * (1 - topBound));
+      const depth = Math.max(0, Math.min(1, (ry / H - topBound) / (1 - topBound)));
+
+      petals.push({
+        rx: localX, ry,
+        x: localX, y: ry,
+        vx: 0, vy: 0,
+        angle: Math.random() * Math.PI * 2,
+        av: (Math.random() - 0.5) * 0.002,
+        size: size * (0.9 + depth * 0.2), r, g, b, depth, isBlossom,
+      });
+    };
+    window.addEventListener("sakura:land", onLand);
+
     const ro = new ResizeObserver(buildAndSort);
     ro.observe(canvas.parentElement!);
 
@@ -173,6 +197,7 @@ export default function SakuraPool() {
       cancelAnimationFrame(raf);
       document.removeEventListener("mousemove", onMouse);
       document.removeEventListener("mouseleave", onLeave);
+      window.removeEventListener("sakura:land", onLand);
       ro.disconnect();
     };
   }, []);

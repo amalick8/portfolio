@@ -26,7 +26,7 @@ export default function Hero() {
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ duration: 0.8, delay: 1.8 }}
+        transition={{ duration: 0.8, delay: 2.0 }}
         className="absolute top-8 left-5 sm:left-8 flex items-center gap-3 pointer-events-none"
       >
         <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-ink/30">
@@ -36,7 +36,7 @@ export default function Hero() {
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ duration: 0.8, delay: 1.8 }}
+        transition={{ duration: 0.8, delay: 2.0 }}
         className="absolute top-8 right-5 sm:right-8 pointer-events-none"
       >
         <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-ink/30">
@@ -44,11 +44,11 @@ export default function Hero() {
         </span>
       </motion.div>
 
-      {/* Cherry blossom branch — full-height right-side overlay */}
+      {/* Cherry blossom branch — comes in first */}
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ duration: 1.8, delay: 1.2 }}
+        transition={{ duration: 2.2, delay: 0.3 }}
         className="absolute right-0 top-0 w-[62%] sm:w-[55%] h-full pointer-events-none hidden sm:block"
         style={{ zIndex: 0 }}
       >
@@ -65,15 +65,17 @@ export default function Hero() {
             <SplitText
               text="i'm ammar,"
               as="h1"
-              delay={1.7}
-              stagger={0.06}
+              delay={1.9}
+              stagger={0.08}
+              duration={0.95}
               className="block"
             />
             <SplitText
               text="i architect exits."
               as="h1"
-              delay={1.86}
-              stagger={0.07}
+              delay={2.1}
+              stagger={0.09}
+              duration={0.95}
               className="block"
               colorWords={{ "exits.": "var(--color-accent)" }}
               accentClassName="sakura-shimmer"
@@ -83,7 +85,7 @@ export default function Hero() {
           <motion.p
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 1.9 }}
+            transition={{ duration: 0.8, delay: 2.3 }}
             className="mt-7 max-w-xl text-base sm:text-lg text-ink-muted leading-relaxed"
           >
             Software Engineering &amp; Honors student at UTA. Building AI systems, full-stack
@@ -93,7 +95,7 @@ export default function Hero() {
           <motion.div
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 2.0 }}
+            transition={{ duration: 0.8, delay: 2.5 }}
             className="mt-9 flex flex-wrap items-center gap-3"
           >
             <MagneticButton>
@@ -139,7 +141,7 @@ export default function Hero() {
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ duration: 0.6, delay: 2.1 }}
+            transition={{ duration: 0.6, delay: 2.5 }}
             className="mt-14 grid grid-cols-3 max-w-lg border-t border-line pt-6 gap-4"
           >
             {heroStats.map((s) => (
@@ -158,7 +160,7 @@ export default function Hero() {
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ duration: 0.8, delay: 2.2 }}
+        transition={{ duration: 0.8, delay: 2.65 }}
         className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 pointer-events-none"
       >
         <span className="font-mono text-[9px] uppercase tracking-[0.25em] text-ink/25">Scroll</span>

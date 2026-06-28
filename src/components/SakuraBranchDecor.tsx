@@ -170,24 +170,6 @@ export default function SakuraBranchDecor({ side }: { side: "left" | "right" }) 
         <B cx={160} cy={220} r={15} color={PINK.light} d={1.20} />
         <B cx={110} cy={322} r={16} color={PINK.soft}  d={1.28} />
 
-        {/* Loose petals */}
-        {([
-          [178, 310, 25,  PINK.light, 1.4],
-          [94,  390, -18, PINK.soft,  1.44],
-          [228, 248, 40,  PINK.mid,   1.48],
-          [142, 196, -30, PINK.light, 1.52],
-          [60,  440, 22,  PINK.soft,  1.56],
-        ] as [number, number, number, string, number][]).map(([cx, cy, angle, color, delay], i) => (
-          <motion.ellipse
-            key={i}
-            cx={cx} cy={cy} rx={8} ry={12}
-            fill={color} opacity={0}
-            transform={`rotate(${angle}, ${cx}, ${cy})`}
-            whileInView={{ opacity: 0.72 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8, delay, ease: TE }}
-          />
-        ))}
       </svg>
     </div>
   );

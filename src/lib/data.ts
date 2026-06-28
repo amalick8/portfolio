@@ -229,7 +229,6 @@ export const projects: Project[] = [
 export const githubStats = [
   { value: "42", label: "repositories" },
   { value: "1,000+", label: "commits" },
-  { value: "2", label: "followers" },
   { value: "Pull Shark + YOLO", label: "achievements" },
 ];
 

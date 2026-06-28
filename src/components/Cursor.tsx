@@ -1,93 +1,95 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
-import { motion, useMotionValue, useSpring } from "framer-motion";
-
-type CursorType = "default" | "link" | "drag";
+import { useEffect, useRef } from "react";
 
 export default function Cursor() {
-  const mouseX = useMotionValue(-100);
-  const mouseY = useMotionValue(-100);
-  const [cursorType, setCursorType] = useState<CursorType>("default");
-  const [visible, setVisible] = useState(false);
-
-  // Outer ring — laggy
-  const outerX = useSpring(mouseX, { stiffness: 140, damping: 18, mass: 0.4 });
-  const outerY = useSpring(mouseY, { stiffness: 140, damping: 18, mass: 0.4 });
-
-  // Inner dot — snappy
-  const innerX = useSpring(mouseX, { stiffness: 900, damping: 50 });
-  const innerY = useSpring(mouseY, { stiffness: 900, damping: 50 });
+  const canvasRef = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {
-    // Hide on touch devices
     if (window.matchMedia("(pointer: coarse)").matches) return;
 
-    const onMove = (e: MouseEvent) => {
-      mouseX.set(e.clientX);
-      mouseY.set(e.clientY);
-      if (!visible) setVisible(true);
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    const ctx = canvas.getContext("2d", { alpha: true });
+    if (!ctx) return;
 
-      // Detect cursor type from data-cursor attribute
-      const target = e.target as HTMLElement;
-      const el = target.closest("[data-cursor]");
-      const type = (el?.getAttribute("data-cursor") as CursorType) ?? "default";
-      setCursorType(type);
+    const dpr = Math.min(window.devicePixelRatio || 1, 2);
+    let W = window.innerWidth, H = window.innerHeight;
+
+    const resize = () => {
+      W = window.innerWidth; H = window.innerHeight;
+      canvas.width  = W * dpr; canvas.height = H * dpr;
+      canvas.style.width  = W + "px"; canvas.style.height = H + "px";
+      ctx.setTransform(1, 0, 0, 1, 0, 0);
+      ctx.scale(dpr, dpr);
     };
+    resize();
 
-    const onLeave = () => setVisible(false);
-    const onEnter = () => setVisible(true);
+    let mx = -999, my = -999;
+    let bx = -999, by = -999;
+    let visible = false;
+    let isLink = false;
+    let targetR = 10, currentR = 10;
+
+    const onMove = (e: MouseEvent) => {
+      mx = e.clientX; my = e.clientY;
+      visible = true;
+      const el = document.elementFromPoint(mx, my) as HTMLElement | null;
+      isLink = !!el?.closest('a, button, [data-cursor="link"]');
+    };
+    const onLeave = () => { visible = false; };
+    const onEnter = () => { visible = true; };
 
     document.addEventListener("mousemove", onMove);
     document.addEventListener("mouseleave", onLeave);
     document.addEventListener("mouseenter", onEnter);
+
+    let raf: number;
+    const tick = () => {
+      ctx.clearRect(0, 0, W, H);
+
+      if (visible && mx > -900) {
+        if (bx < -900) { bx = mx; by = my; }
+        bx += (mx - bx) * 0.14;
+        by += (my - by) * 0.14;
+
+        targetR = isLink ? 16 : 10;
+        currentR += (targetR - currentR) * 0.12;
+
+        // Outer ring
+        ctx.beginPath();
+        ctx.arc(bx, by, currentR, 0, Math.PI * 2);
+        ctx.strokeStyle = "rgba(255,200,220,0.55)";
+        ctx.lineWidth = 1;
+        ctx.stroke();
+
+        // Center dot
+        ctx.beginPath();
+        ctx.arc(bx, by, 1.5, 0, Math.PI * 2);
+        ctx.fillStyle = "rgba(255,210,225,0.70)";
+        ctx.fill();
+      }
+
+      raf = requestAnimationFrame(tick);
+    };
+    raf = requestAnimationFrame(tick);
+    window.addEventListener("resize", resize);
+
     return () => {
+      cancelAnimationFrame(raf);
+      window.removeEventListener("resize", resize);
       document.removeEventListener("mousemove", onMove);
       document.removeEventListener("mouseleave", onLeave);
       document.removeEventListener("mouseenter", onEnter);
     };
-  }, [mouseX, mouseY, visible]);
-
-  const outerSize = cursorType === "link" ? 56 : cursorType === "drag" ? 72 : 36;
-  const showLabel = cursorType === "drag";
+  }, []);
 
   return (
-    <>
-      {/* Outer ring */}
-      <motion.div
-        className="fixed top-0 left-0 pointer-events-none z-[9999] rounded-full border border-white flex items-center justify-center"
-        style={{
-          x: outerX,
-          y: outerY,
-          width: outerSize,
-          height: outerSize,
-          translateX: "-50%",
-          translateY: "-50%",
-          mixBlendMode: "difference",
-          opacity: visible ? 1 : 0,
-        }}
-        animate={{ width: outerSize, height: outerSize }}
-        transition={{ duration: 0.2, ease: [0.16, 1, 0.3, 1] }}
-      >
-        {showLabel && (
-          <span className="text-white text-[8px] font-mono uppercase tracking-widest select-none">
-            drag
-          </span>
-        )}
-      </motion.div>
-
-      {/* Inner dot */}
-      <motion.div
-        className="fixed top-0 left-0 pointer-events-none z-[9999] w-1.5 h-1.5 rounded-full bg-white"
-        style={{
-          x: innerX,
-          y: innerY,
-          translateX: "-50%",
-          translateY: "-50%",
-          mixBlendMode: "difference",
-          opacity: visible ? 1 : 0,
-        }}
-      />
-    </>
+    <canvas
+      ref={canvasRef}
+      aria-hidden
+      className="fixed inset-0 pointer-events-none"
+      style={{ zIndex: 9999 }}
+    />
   );
 }
