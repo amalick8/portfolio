@@ -8,6 +8,7 @@ const GrainOverlay    = dynamic(() => import("@/components/GrainOverlay"),    { 
 const SakuraPetals    = dynamic(() => import("@/components/SakuraPetals"),    { ssr: false });
 const ScrollProgress  = dynamic(() => import("@/components/ScrollProgress"),  { ssr: false });
 const QuickActions    = dynamic(() => import("@/components/QuickActions"),    { ssr: false });
+const SiteGuard       = dynamic(() => import("@/components/SiteGuard"),       { ssr: false });
 
 export default function ClientProviders({ children }: { children: React.ReactNode }) {
   return (
@@ -18,6 +19,7 @@ export default function ClientProviders({ children }: { children: React.ReactNod
       {children}
       <Cursor />
       <QuickActions />
+      <SiteGuard />
     </SmoothScroll>
   );
 }

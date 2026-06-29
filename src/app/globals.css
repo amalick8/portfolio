@@ -61,6 +61,17 @@ a, button, [role="button"], input, select, textarea, label {
   cursor: none;
 }
 
+/* Prevent casual copying */
+img, svg, canvas {
+  -webkit-user-drag: none;
+  user-select: none;
+}
+
+h1, h2, h3, h4, h5, h6, p, span, li {
+  user-select: none;
+  -webkit-user-select: none;
+}
+
 ::selection {
   background: var(--color-accent);
   color: var(--color-paper);
