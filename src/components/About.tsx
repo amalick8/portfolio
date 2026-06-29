@@ -23,16 +23,16 @@ export default function About() {
         </motion.p>
 
         <div className="font-display text-[3.5rem] sm:text-[5.5rem] lg:text-[7.5rem] leading-[0.92] tracking-tight mb-6 pb-3">
-          <SplitText text="from data," as="h2" delay={0} stagger={0.07} className="block text-paper-ink" />
-          <SplitText text="to systems," as="h2" delay={0.18} stagger={0.07} className="block" colorWords={{ to: "var(--color-accent)" }} />
-          <SplitText text="to impact." as="h2" delay={0.36} stagger={0.07} className="block text-paper-ink" />
+          <SplitText text="technical depth," as="h2" delay={0} stagger={0.07} className="block text-paper-ink" />
+          <SplitText text="commercial" as="h2" delay={0.18} stagger={0.07} className="block" colorWords={{ commercial: "var(--color-accent)" }} />
+          <SplitText text="instinct." as="h2" delay={0.36} stagger={0.07} className="block text-paper-ink" />
         </div>
         <BrushstrokeUnderline delay={0.7} className="mb-14 max-w-2xl" />
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-20">
           {[
             profile.bio,
-            "The throughline is leverage. Automation pipelines that cut manual work by 30%. Analytics that turned 2,300 days of dead data into a living strategy. Computer vision shipped under hackathon pressure. Every engagement — EY, Intel, Recording Academy, BlueCiate — had an exit I designed on the way in.",
+            "My edge is the overlap — I can whiteboard the architecture with the engineering team in the morning and present the business case to the VP by afternoon. At EY, Intel, and the Recording Academy I wasn't just building pipelines; I was translating technical output into decisions stakeholders could act on.",
           ].map((text, i) => (
             <motion.p
               key={i}

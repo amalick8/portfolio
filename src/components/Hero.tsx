@@ -88,8 +88,8 @@ export default function Hero() {
             transition={{ duration: 0.8, delay: 2.3 }}
             className="mt-7 max-w-xl text-base sm:text-lg text-ink-muted leading-relaxed"
           >
-            Software Engineering &amp; Honors student at UTA. I don't just build — I architect
-            outcomes. AI systems, data pipelines, full-stack products. I find the exit before the room does.
+            Software Engineering &amp; Honors student at UTA. I build the POC, run the demo,
+            and field the technical objections. Most people are either builders or sellers — I'm training to be both.
           </motion.p>
 
           <motion.div
