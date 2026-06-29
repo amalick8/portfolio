@@ -32,7 +32,7 @@ export default function About() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-20">
           {[
             profile.bio,
-            "The throughline is real-world systems that ship — automation pipelines, AI analytics, computer vision, and full-stack builds across startups, nonprofits, and industry partners at the Recording Academy, Intel, EY, and beyond.",
+            "The throughline is leverage. Automation pipelines that cut manual work by 30%. Analytics that turned 2,300 days of dead data into a living strategy. Computer vision shipped under hackathon pressure. Every engagement — EY, Intel, Recording Academy, BlueCiate — had an exit I designed on the way in.",
           ].map((text, i) => (
             <motion.p
               key={i}

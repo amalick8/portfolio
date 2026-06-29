@@ -1,9 +1,9 @@
 export const profile = {
   name: "Ammar Malick",
   fullName: "M. Ammar Malick",
-  tagline: "Software Engineering & Honors @ UTA · AI + Full-Stack Builder",
-  headline: "I build real-world software with measurable impact.",
-  bio: "I'm Ammar Malick, a Software Engineering student (3.95 GPA) focused on AI-driven and full-stack systems. I have experience across startups, industry, and data projects through BlueCiate, EY Expedition, Intel, and The Recording Academy.",
+  tagline: "Software Engineering & Honors @ UTA · I find the exit before the room does.",
+  headline: "I architect exits. Every system I touch gets a way out.",
+  bio: "I'm Ammar — Software Engineering student at UTA (3.95 GPA), but I think less like a student and more like a deal architect. I enter a problem the way a raider enters a position: find the leverage, map the exit, execute before the room catches up.",
   email: "ammarmalick2006@gmail.com",
   github: "https://github.com/amalick8",
   githubHandle: "amalick8",
