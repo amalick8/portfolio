@@ -8,7 +8,7 @@ import TiltCard from "@/components/TiltCard";
 import SakuraBranchDecor from "@/components/SakuraBranchDecor";
 
 function TimelineSVG() {
-  const ref = useRef<SVGSVGElement>(null);
+  const ref = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
     target: ref,
     offset: ["start 90%", "end 10%"],
@@ -16,9 +16,9 @@ function TimelineSVG() {
   const pathLen = useTransform(scrollYProgress, [0, 1], [0, 1]);
 
   return (
+    <div ref={ref} className="absolute left-0 top-0 h-full hidden lg:block" style={{ width: 24 }}>
     <svg
-      ref={ref}
-      className="absolute left-0 top-0 h-full hidden lg:block"
+      className="absolute left-0 top-0 h-full"
       width="24"
       style={{ overflow: "visible" }}
       preserveAspectRatio="none"
@@ -53,6 +53,7 @@ function TimelineSVG() {
         />
       ))}
     </svg>
+    </div>
   );
 }
 

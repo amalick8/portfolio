@@ -4,6 +4,7 @@ import { useRef, useState } from "react";
 import { motion, useMotionValueEvent, useScroll, useTransform } from "framer-motion";
 import { ArrowUpRight, Lock } from "lucide-react";
 import { projects } from "@/lib/data";
+import TextScramble from "@/components/TextScramble";
 
 export default function Work() {
   const targetRef = useRef<HTMLDivElement>(null);
@@ -25,7 +26,7 @@ export default function Work() {
         {/* Section header — top bar */}
         <div className="px-5 sm:px-8 pt-8 pb-4 flex items-center justify-between border-b border-line shrink-0">
           <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-ink/30">
-            03 — Projects
+            <TextScramble text="03 — Projects" />
           </p>
           <div className="flex items-center gap-6">
             <span className="font-mono text-xs text-ink/30 hidden sm:inline">

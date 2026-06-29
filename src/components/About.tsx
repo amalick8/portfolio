@@ -15,7 +15,7 @@ export default function About() {
         <motion.p
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
+          viewport={{ once: true, margin: "-8% 0px" }}
           transition={{ duration: 0.6 }}
           className="font-mono text-[11px] uppercase tracking-[0.2em] text-paper-ink/40 mb-10"
         >
@@ -64,7 +64,7 @@ export default function About() {
                 key={s.category}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
+                viewport={{ once: true, margin: "-8% 0px" }}
                 transition={{ duration: 0.5, delay: 0.05 * si }}
               >
                 <p className="font-mono text-[10px] uppercase tracking-widest text-paper-ink/40 mb-3">
@@ -77,7 +77,7 @@ export default function About() {
                       data-cursor="link"
                       initial={{ opacity: 0, scale: 0.85, rotate: ii % 2 === 0 ? -3 : 3 }}
                       whileInView={{ opacity: 1, scale: 1, rotate: 0 }}
-                      viewport={{ once: true }}
+                      viewport={{ once: true, margin: "-8% 0px" }}
                       transition={{ duration: 0.4, delay: 0.04 * si + 0.03 * ii, type: "spring", stiffness: 300, damping: 20 }}
                       whileHover={{
                         boxShadow: "0 0 18px rgba(201,80,122,0.3)",

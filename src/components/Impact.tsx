@@ -5,6 +5,8 @@ import { focusAreas, results } from "@/lib/data";
 import AnimatedStat from "@/components/AnimatedStat";
 import ParallaxBlob from "@/components/ParallaxBlob";
 import TiltCard from "@/components/TiltCard";
+import SplitText from "@/components/SplitText";
+import TextScramble from "@/components/TextScramble";
 
 export default function Impact() {
   return (
@@ -20,24 +22,16 @@ export default function Impact() {
         <motion.p
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
+          viewport={{ once: true, margin: "-5% 0px" }}
+          transition={{ duration: 0.5 }}
           className="font-mono text-[11px] uppercase tracking-[0.2em] text-accent-soft mb-3"
         >
-          05 — Impact
+          <TextScramble text="05 — Impact" />
         </motion.p>
-        <motion.h2
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-          className="font-display text-4xl sm:text-5xl mb-12 max-w-2xl"
-        >
-          Numbers that show{" "}
-          <span className="italic" style={{ color: "var(--color-accent)" }}>
-            traction
-          </span>{" "}
-          across projects.
-        </motion.h2>
+        <div className="font-display text-4xl sm:text-5xl mb-12 max-w-2xl leading-tight">
+          <SplitText text="numbers that show" as="h2" delay={0} stagger={0.06} className="block" />
+          <SplitText text="traction." as="h2" delay={0.2} stagger={0.07} className="block" colorWords={{ "traction.": "var(--color-accent)" }} />
+        </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-5 mb-10">
           {results.map((r, idx) => (
