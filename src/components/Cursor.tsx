@@ -50,8 +50,8 @@ export default function Cursor() {
 
       if (visible && mx > -900) {
         if (bx < -900) { bx = mx; by = my; }
-        bx += (mx - bx) * 0.14;
-        by += (my - by) * 0.14;
+        bx += (mx - bx) * 0.85;
+        by += (my - by) * 0.85;
 
         targetR = isLink ? 16 : 10;
         currentR += (targetR - currentR) * 0.12;
@@ -59,14 +59,14 @@ export default function Cursor() {
         // Outer ring
         ctx.beginPath();
         ctx.arc(bx, by, currentR, 0, Math.PI * 2);
-        ctx.strokeStyle = "rgba(255,200,220,0.55)";
-        ctx.lineWidth = 1;
+        ctx.strokeStyle = "rgba(201,80,122,0.75)";
+        ctx.lineWidth = 1.5;
         ctx.stroke();
 
         // Center dot
         ctx.beginPath();
-        ctx.arc(bx, by, 1.5, 0, Math.PI * 2);
-        ctx.fillStyle = "rgba(255,210,225,0.70)";
+        ctx.arc(bx, by, 2, 0, Math.PI * 2);
+        ctx.fillStyle = "rgba(201,80,122,0.90)";
         ctx.fill();
       }
 

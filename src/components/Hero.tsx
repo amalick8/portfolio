@@ -40,7 +40,7 @@ export default function Hero() {
         className="absolute top-8 right-5 sm:right-8 pointer-events-none"
       >
         <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-ink/30">
-          Dallas, TX · CST
+          Vancouver, BC · Dallas, TX
         </span>
       </motion.div>
 

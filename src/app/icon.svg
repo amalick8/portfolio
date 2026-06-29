@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+  <rect width="32" height="32" rx="8" fill="#1c0f0b"/>
+  <!-- 5-petal sakura blossom -->
+  <g transform="translate(16,16)">
+    <ellipse cx="0" cy="-7" rx="3.2" ry="5.2" fill="#c9507a" opacity="0.95" transform="rotate(0)"/>
+    <ellipse cx="0" cy="-7" rx="3.2" ry="5.2" fill="#c9507a" opacity="0.95" transform="rotate(72)"/>
+    <ellipse cx="0" cy="-7" rx="3.2" ry="5.2" fill="#c9507a" opacity="0.95" transform="rotate(144)"/>
+    <ellipse cx="0" cy="-7" rx="3.2" ry="5.2" fill="#c9507a" opacity="0.95" transform="rotate(216)"/>
+    <ellipse cx="0" cy="-7" rx="3.2" ry="5.2" fill="#c9507a" opacity="0.95" transform="rotate(288)"/>
+    <circle cx="0" cy="0" r="2.8" fill="#f9f0b0"/>
+  </g>
+</svg>

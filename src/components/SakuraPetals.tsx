@@ -95,7 +95,7 @@ function makePetal(W: number, H: number, li: number, initialY = false): Petal {
     opacity: L.opMin  + Math.random() * (L.opMax - L.opMin),
     r, g, b,
     layer: li, windPhase: Math.random() * Math.PI * 2, windResp: L.wind,
-    isBlossom: li === 0 && Math.random() < 0.20,
+    isBlossom: Math.random() < 0.45,
   };
 }
 

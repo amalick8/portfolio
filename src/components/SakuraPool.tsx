@@ -173,11 +173,10 @@ export default function SakuraPool() {
       const localX = vpX - rect.left;
       if (localX < -size || localX > W + size) return;
 
-      // Top bound rises as pile fills — pile grows upward over time
-      const fillRatio = Math.min(1, (petals.length - COUNT) / (POOL_MAX - COUNT));
-      const topBound = FLOOR_TOP - fillRatio * 0.25;
-      const ry = H * (topBound + Math.random() * (1 - topBound));
-      const depth = Math.max(0, Math.min(1, (ry / H - topBound) / (1 - topBound)));
+      // Land only in the lower 55% of the pile band — adds density without raising the top
+      const bandStart = FLOOR_TOP + (1 - FLOOR_TOP) * 0.45;
+      const ry = H * (bandStart + Math.random() * (1 - bandStart));
+      const depth = Math.max(0, Math.min(1, (ry / H - FLOOR_TOP) / (1 - FLOOR_TOP)));
 
       petals.push({
         rx: localX, ry,

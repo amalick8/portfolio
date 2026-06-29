@@ -297,36 +297,6 @@ export default function SakuraBranch() {
         <Blossom cx={292} cy={128} r={18} color={PINK.deep}  delay={1.40} />
         <Blossom cx={150} cy={82}  r={16} color={PINK.light} delay={1.48} />
 
-        {/* ── LOOSE PETALS ── */}
-        {([
-          [340, 178, 28,  PINK.light, 1.62],
-          [188, 340, -22, PINK.soft,  1.66],
-          [462, 248, 45,  PINK.light, 1.70],
-          [78,  382, -15, PINK.mid,   1.72],
-          [276, 462, 30,  PINK.light, 1.74],
-          [542, 338, -35, PINK.soft,  1.76],
-          [138, 528, 20,  PINK.light, 1.78],
-          [418, 432, -10, PINK.soft,  1.80],
-          [58,  262, 55,  PINK.mid,   1.82],
-          [502, 378, 18,  PINK.light, 1.84],
-          [238, 224, -28, PINK.soft,  1.86],
-          [368, 558, 40,  PINK.light, 1.88],
-          [480, 130, -18, PINK.mid,   1.90],
-          [160, 460,  32, PINK.light, 1.92],
-        ] as [number, number, number, string, number][]).map(([cx, cy, angle, color, delay], i) => (
-          <motion.ellipse
-            key={i}
-            cx={cx}
-            cy={cy}
-            rx={10}
-            ry={14}
-            fill={color}
-            opacity={0}
-            transform={`rotate(${angle}, ${cx}, ${cy})`}
-            animate={{ opacity: 0.80 }}
-            transition={{ duration: 0.8, delay, ease: T_EASE }}
-          />
-        ))}
       </svg>
     </div>
   );

@@ -21,7 +21,7 @@ const instrumentSerif = Instrument_Serif({
 });
 
 export const metadata: Metadata = {
-  title: "Ammar Malick — Software Engineer",
+  title: "ammar.",
   description:
     "Software Engineering student building AI-driven and full-stack systems with measurable, real-world impact.",
 };
