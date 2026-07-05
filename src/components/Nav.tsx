@@ -10,11 +10,21 @@ import { useLenis } from "@/components/SmoothScroll";
 
 const NAV_HEIGHT = 64; // px — matches header's h-16, keeps section top flush with nav bottom
 
+// The hanko re-stamps itself per section, mirroring the ghost kanji watermarks
+const SECTION_GLYPH: Record<string, string> = {
+  about: "心",
+  journey: "道",
+  work: "作",
+  impact: "果",
+  contact: "縁",
+};
+
 export default function Nav() {
   const [activeSection, setActiveSection] = useState<string>("");
   const [menuOpen, setMenuOpen] = useState(false);
   const [mounted, setMounted] = useState(false);
   const [logoVariant, setLogoVariant] = useState<LogoVariant>("stamp");
+  const [bleed, setBleed] = useState(0);
   const observerRef = useRef<IntersectionObserver | null>(null);
   const { lenis } = useLenis();
 
@@ -41,7 +51,12 @@ export default function Nav() {
     observerRef.current = new IntersectionObserver(
       (entries) => {
         for (const entry of entries) {
-          if (entry.isIntersecting) setActiveSection(entry.target.id);
+          if (entry.isIntersecting) {
+            setActiveSection(entry.target.id);
+          } else if (entry.target.id === "about" && entry.boundingClientRect.top > 0) {
+            // Scrolled back above the first section — we're home
+            setActiveSection("");
+          }
         }
       },
       { rootMargin: "-40% 0px -40% 0px", threshold: 0 }
@@ -98,17 +113,41 @@ export default function Nav() {
         style={{ backgroundColor: navBg, borderColor: navBorder }}
       >
         <div className="mx-auto max-w-6xl px-5 sm:px-8 h-16 flex items-center justify-between">
-          {/* Logo — stagger entrance */}
+          {/* Logo — living hanko: stagger entrance, ink bleed on press */}
           <motion.a
             href="#home"
-            onClick={(e) => scrollToSection(e, "#home")}
+            onClick={(e) => {
+              setBleed((b) => b + 1);
+              scrollToSection(e, "#home");
+            }}
             data-cursor="link"
             initial={{ opacity: 0, y: -12 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.1 }}
-            className="inline-flex min-w-12 items-center"
+            className="relative inline-flex min-w-12 items-center"
           >
-            <LogoMark variant={logoVariant} />
+            <AnimatePresence>
+              {bleed > 0 && (
+                <motion.span
+                  key={bleed}
+                  aria-hidden="true"
+                  className="pointer-events-none absolute left-[22px] top-1/2 h-11 w-11 rounded-full"
+                  style={{
+                    translate: "-50% -50%",
+                    background:
+                      "radial-gradient(circle, rgba(122,16,64,0.5) 0%, rgba(201,80,122,0.22) 45%, transparent 70%)",
+                    filter: "blur(3px)",
+                  }}
+                  initial={{ scale: 0.3, opacity: 0.75 }}
+                  animate={{ scale: 6.5, opacity: 0 }}
+                  exit={{ opacity: 0 }}
+                  transition={{ duration: 0.9, ease: "easeOut" }}
+                />
+              )}
+            </AnimatePresence>
+            <span className="relative">
+              <LogoMark variant={logoVariant} glyph={SECTION_GLYPH[activeSection] ?? "AM"} />
+            </span>
           </motion.a>
 
           {/* Desktop nav — stagger cascade */}
