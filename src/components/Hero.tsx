@@ -150,7 +150,7 @@ export default function Hero() {
                 key={s.label}
                 className={si === 0 ? "pr-4" : "pl-4 border-l border-line"}
               >
-                <div className="font-display text-2xl sm:text-3xl text-accent-soft">
+                <div className="font-display text-2xl sm:text-3xl font-medium text-accent">
                   <AnimatedStat value={s.value} />
                 </div>
                 <div className="mt-1 text-xs text-ink-faint leading-snug">{s.label}</div>

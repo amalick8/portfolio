@@ -147,19 +147,29 @@ export default function QuickActions() {
                 className="flex items-center gap-3 px-4 py-3 select-none"
                 style={{ background: "#1a0b0f", borderBottom: "1px solid rgba(201,80,122,0.14)" }}
               >
-                <div className="flex gap-2">
+                <div className="flex items-center gap-2">
+                  {/* Every dot shares the same 20px hit-box so the three stay
+                      perfectly aligned — only the red one is functional */}
                   <button
                     type="button"
-                    onClick={() => { console.log("[close-debug] handler ran"); setOpen(false); }}
+                    onClick={() => setOpen(false)}
                     aria-label="Close terminal"
-                    // Visual dot stays 14px, but the actual hit target is padded
-                    // out so a single click lands reliably (was a 14px miss-prone target).
-                    className="relative flex h-6 w-6 shrink-0 items-center justify-center rounded-full"
+                    className="group relative flex h-5 w-5 shrink-0 items-center justify-center rounded-full"
                   >
                     <span className="h-3.5 w-3.5 rounded-full" style={{ background: "#ff5f57" }} />
+                    <svg
+                      viewBox="0 0 10 10"
+                      className="absolute h-[7px] w-[7px] opacity-0 transition-opacity group-hover:opacity-100"
+                    >
+                      <path d="M1.5 1.5L8.5 8.5M8.5 1.5L1.5 8.5" stroke="#7a0d0a" strokeWidth="1.4" strokeLinecap="round" />
+                    </svg>
                   </button>
-                  <div className="w-3.5 h-3.5 rounded-full" style={{ background: "#ffbd2e" }} />
-                  <div className="w-3.5 h-3.5 rounded-full" style={{ background: "#28c840" }} />
+                  <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full">
+                    <span className="h-3.5 w-3.5 rounded-full" style={{ background: "#ffbd2e" }} />
+                  </span>
+                  <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full">
+                    <span className="h-3.5 w-3.5 rounded-full" style={{ background: "#28c840" }} />
+                  </span>
                 </div>
                 <span
                   className="flex-1 text-center font-mono text-[12px] tracking-wide"
