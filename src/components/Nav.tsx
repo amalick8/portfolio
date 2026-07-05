@@ -2,9 +2,13 @@
 
 import { useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence, useScroll, useTransform } from "framer-motion";
+import { Command } from "lucide-react";
 import { nav } from "@/lib/data";
 import TextScramble from "@/components/TextScramble";
 import LogoMark, { type LogoVariant } from "@/components/LogoMark";
+import { useLenis } from "@/components/SmoothScroll";
+
+const NAV_HEIGHT = 64; // px — matches header's h-16, keeps section top flush with nav bottom
 
 export default function Nav() {
   const [activeSection, setActiveSection] = useState<string>("");
@@ -12,6 +16,7 @@ export default function Nav() {
   const [mounted, setMounted] = useState(false);
   const [logoVariant, setLogoVariant] = useState<LogoVariant>("stamp");
   const observerRef = useRef<IntersectionObserver | null>(null);
+  const { lenis } = useLenis();
 
   const { scrollY } = useScroll();
   const navBg = useTransform(scrollY, [0, 80], ["rgba(250,246,241,0.72)", "rgba(250,246,241,0.92)"]);
@@ -50,6 +55,42 @@ export default function Nav() {
 
   const close = () => setMenuOpen(false);
 
+  const goToSection = (href: string) => {
+    const id = href.replace("#", "");
+
+    // Contact is the last section and its petal pile sits at the very
+    // bottom — scroll all the way to the page end so the pile is in frame,
+    // instead of stopping at the section's top edge.
+    if (id === "contact") {
+      if (lenis) {
+        lenis.scrollTo("bottom");
+      } else {
+        window.scrollTo({ top: document.documentElement.scrollHeight, behavior: "smooth" });
+      }
+      history.pushState(null, "", href);
+      return;
+    }
+
+    const el = document.getElementById(id);
+    if (el) {
+      if (lenis) {
+        // Lenis already subtracts the section's CSS scroll-margin-top (set to
+        // match NAV_HEIGHT in globals.css), so no extra offset here — passing
+        // one too would double-subtract and leave a gap under the header.
+        lenis.scrollTo(el);
+      } else {
+        const top = el.getBoundingClientRect().top + window.scrollY - NAV_HEIGHT;
+        window.scrollTo({ top, behavior: "smooth" });
+      }
+    }
+    history.pushState(null, "", href);
+  };
+
+  const scrollToSection = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    e.preventDefault();
+    goToSection(href);
+  };
+
   return (
     <>
       <motion.header
@@ -60,6 +101,7 @@ export default function Nav() {
           {/* Logo — stagger entrance */}
           <motion.a
             href="#home"
+            onClick={(e) => scrollToSection(e, "#home")}
             data-cursor="link"
             initial={{ opacity: 0, y: -12 }}
             animate={{ opacity: 1, y: 0 }}
@@ -78,12 +120,13 @@ export default function Nav() {
                 <motion.a
                   key={item.href}
                   href={item.href}
+                  onClick={(e) => scrollToSection(e, item.href)}
                   data-cursor="link"
                   initial={{ opacity: 0, y: -10 }}
                   animate={mounted ? { opacity: 1, y: 0 } : {}}
                   transition={{ duration: 0.4, delay: 0.15 + i * 0.06 }}
                   className="relative py-0.5"
-                  style={{ color: isActive ? "var(--color-accent-soft)" : undefined }}
+                  style={{ color: isActive ? "var(--color-accent)" : undefined }}
                 >
                   <TextScramble text={item.label} />
                   {isActive && (
@@ -100,6 +143,18 @@ export default function Nav() {
           </nav>
 
           <div className="flex items-center gap-3">
+            <motion.button
+              onClick={() => window.dispatchEvent(new CustomEvent("am-open-terminal"))}
+              data-cursor="link"
+              aria-label="Open terminal"
+              initial={{ opacity: 0, y: -10 }}
+              animate={mounted ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.4, delay: 0.55 }}
+              whileHover={{ borderColor: "rgba(201,80,122,0.5)", color: "var(--color-accent)" }}
+              className="hidden md:inline-flex items-center gap-1.5 rounded-full border border-line-strong px-3.5 py-2 font-mono text-[11px] uppercase tracking-widest text-ink-muted transition-colors"
+            >
+              <Command size={13} strokeWidth={2} /> K
+            </motion.button>
             <button
               onClick={() => setMenuOpen(!menuOpen)}
               data-cursor="link"
@@ -128,13 +183,18 @@ export default function Nav() {
               <motion.a
                 key={item.href}
                 href={item.href}
-                onClick={close}
+                onClick={(e) => {
+                  e.preventDefault();
+                  close();
+                  // let the clip-path exit animation clear before scrolling
+                  setTimeout(() => goToSection(item.href), 260);
+                }}
                 data-cursor="link"
                 initial={{ opacity: 0, y: 24 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: 12 }}
                 transition={{ duration: 0.35, delay: 0.06 * i }}
-                className="font-display text-5xl sm:text-6xl text-ink hover:text-accent-soft transition-colors"
+                className="font-display text-3xl sm:text-4xl text-ink hover:text-accent-soft transition-colors"
               >
                 <TextScramble text={item.label} />
               </motion.a>

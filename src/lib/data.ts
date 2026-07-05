@@ -20,7 +20,6 @@ export const nav = [
   { label: "About", href: "#about" },
   { label: "Journey", href: "#journey" },
   { label: "Work", href: "#work" },
-  { label: "Hackathons", href: "#hackathons" },
   { label: "Impact", href: "#impact" },
   { label: "Contact", href: "#contact" },
 ];
@@ -272,14 +271,13 @@ export const results: ResultCase[] = [
     index: "03",
     org: "LinkedIn",
     domain: "Community Presence",
-    title: "Connections & 7-day reach",
+    title: "Connections & network reach",
     stats: [
       { value: "3,600+", label: "LinkedIn followers" },
-      { value: "141", label: "Post impressions" },
       { value: "131", label: "Search appearances" },
     ],
     description:
-      "Audience of 3,600+ LinkedIn followers with a recent 7-day snapshot: 141 post impressions and 131 search appearances — inbound from recruiters, engineering leads, and fellow builders.",
+      "Audience of 3,600+ LinkedIn followers, with consistent inbound from recruiters, engineering leads, and fellow builders.",
   },
 ];
 
@@ -289,37 +287,3 @@ export const focusAreas = [
   { tag: "Arc", description: "Trajectory toward high-impact sales engineering." },
 ];
 
-export type Hackathon = {
-  index: string;
-  name: string;
-  placement: string;
-  domain: string;
-  description: string;
-};
-
-export const hackathons: Hackathon[] = [
-  {
-    index: "01",
-    name: "HackUTA 2024",
-    placement: "Top 10",
-    domain: "Computer Vision · Python",
-    description:
-      "Built a hands-free accessibility controller using OpenCV and MediaPipe — real-time gesture recognition driving mouse cursor movement and click actions.",
-  },
-  {
-    index: "02",
-    name: "AI Build Sprint",
-    placement: "Finalist",
-    domain: "AI · Next.js",
-    description:
-      "Developed an AI-powered career analysis tool that parsed resumes and GitHub activity to surface actionable readiness signals for technical roles.",
-  },
-  {
-    index: "03",
-    name: "DataThon @ UTA",
-    placement: "1st Place",
-    domain: "Data Analytics · Python",
-    description:
-      "Analyzed energy and sustainability datasets to model CO2 savings from device lifecycle extension — built interactive dashboards for real-time exploration.",
-  },
-];

@@ -4,7 +4,7 @@ import { useRef } from "react";
 import { useScroll, useVelocity, useSpring, useMotionValueEvent } from "framer-motion";
 
 const TICKER_TEXT =
-  "UTA · SOFTWARE ENGINEERING · HONORS PROGRAM · 3.95 GPA · DALLAS, TX · AI + FULL-STACK · OPEN TO WORK · ";
+  "SALES ENGINEERING · UTA HONORS · 3.95 GPA · AI + FULL-STACK · VANCOUVER, BC · DALLAS, TX · OPEN TO WORK · ";
 
 export default function Marquee() {
   const track1Ref = useRef<HTMLDivElement>(null);
@@ -48,7 +48,7 @@ export default function Marquee() {
 
   return (
     <div
-      className="overflow-hidden border-t border-line py-2 select-none bg-bg"
+      className="overflow-hidden border-t border-line py-2 select-none bg-bg marquee-mask"
       onMouseEnter={pauseAll}
       onMouseLeave={resumeAll}
     >

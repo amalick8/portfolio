@@ -26,7 +26,7 @@ export default function Hero() {
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ duration: 0.8, delay: 2.0 }}
+        transition={{ duration: 0.8, delay: 1.0 }}
         className="absolute top-8 left-5 sm:left-8 flex items-center gap-3 pointer-events-none"
       >
         <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-ink/30">
@@ -36,7 +36,7 @@ export default function Hero() {
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ duration: 0.8, delay: 2.0 }}
+        transition={{ duration: 0.8, delay: 1.0 }}
         className="absolute top-8 right-5 sm:right-8 pointer-events-none"
       >
         <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-ink/30">
@@ -46,9 +46,10 @@ export default function Hero() {
 
       {/* Cherry blossom branch — comes in first */}
       <motion.div
+        aria-hidden="true"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ duration: 2.2, delay: 0.3 }}
+        transition={{ duration: 1.6, delay: 0.2 }}
         className="absolute right-0 top-0 w-[62%] sm:w-[55%] h-full pointer-events-none hidden sm:block"
         style={{ zIndex: 0 }}
       >
@@ -60,12 +61,12 @@ export default function Hero() {
         <div>
           <div
             className="font-display leading-[0.92] tracking-tight"
-            style={{ fontSize: "clamp(2.8rem, 7vw, 5.2rem)" }}
+            style={{ fontSize: "clamp(3.1rem, 7.6vw, 5.8rem)" }}
           >
             <SplitText
               text="i'm ammar,"
               as="h1"
-              delay={1.9}
+              delay={0.7}
               stagger={0.08}
               duration={0.95}
               className="block"
@@ -73,7 +74,7 @@ export default function Hero() {
             <SplitText
               text="i architect exits."
               as="h1"
-              delay={2.1}
+              delay={0.9}
               stagger={0.09}
               duration={0.95}
               className="block"
@@ -85,7 +86,7 @@ export default function Hero() {
           <motion.p
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 2.3 }}
+            transition={{ duration: 0.8, delay: 1.25 }}
             className="mt-7 max-w-xl text-base sm:text-lg text-ink-muted leading-relaxed"
           >
             Software Engineering &amp; Honors student at UTA. I build the POC, run the demo,
@@ -95,7 +96,7 @@ export default function Hero() {
           <motion.div
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 2.5 }}
+            transition={{ duration: 0.8, delay: 1.45 }}
             className="mt-9 flex flex-wrap items-center gap-3"
           >
             <MagneticButton>
@@ -141,11 +142,14 @@ export default function Hero() {
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ duration: 0.6, delay: 2.5 }}
-            className="mt-14 grid grid-cols-3 max-w-lg border-t border-line pt-6 gap-4"
+            transition={{ duration: 0.6, delay: 1.6 }}
+            className="mt-14 grid grid-cols-3 max-w-lg border-t border-line pt-6"
           >
-            {heroStats.map((s) => (
-              <div key={s.label}>
+            {heroStats.map((s, si) => (
+              <div
+                key={s.label}
+                className={si === 0 ? "pr-4" : "pl-4 border-l border-line"}
+              >
                 <div className="font-display text-2xl sm:text-3xl text-accent-soft">
                   <AnimatedStat value={s.value} />
                 </div>
@@ -156,11 +160,33 @@ export default function Hero() {
         </div>
       </div>
 
+      {/* Vertical Japanese caption — 出口を設計する = "design the exit" */}
+      <motion.div
+        aria-hidden="true"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 1.4, delay: 1.9 }}
+        className="absolute left-8 top-1/2 -translate-y-1/2 hidden xl:flex flex-col items-center gap-4 pointer-events-none select-none"
+        style={{ zIndex: 1 }}
+      >
+        <span className="w-px h-14 bg-line-strong" />
+        <span
+          className="font-serif text-[13px] tracking-[0.4em] text-ink/30"
+          style={{ writingMode: "vertical-rl" }}
+        >
+          出口を設計する
+        </span>
+        <span
+          className="w-1.5 h-1.5 rounded-full"
+          style={{ background: "var(--color-accent)", opacity: 0.5 }}
+        />
+      </motion.div>
+
       {/* SCROLL indicator */}
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ duration: 0.8, delay: 2.65 }}
+        transition={{ duration: 0.8, delay: 1.8 }}
         className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 pointer-events-none"
       >
         <span className="font-mono text-[9px] uppercase tracking-[0.25em] text-ink/25">Scroll</span>

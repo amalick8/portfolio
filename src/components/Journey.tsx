@@ -64,6 +64,14 @@ export default function Journey() {
       className="relative overflow-hidden bg-paper text-paper-ink px-5 sm:px-8 py-20 sm:py-28 border-t border-paper-ink/10"
     >
       <SakuraBranchDecor side="left" />
+      {/* Ghost kanji — 道 (michi): the path, the way */}
+      <span
+        aria-hidden="true"
+        className="absolute top-8 right-[5%] font-serif leading-none select-none pointer-events-none"
+        style={{ fontSize: "clamp(12rem, 24vw, 22rem)", color: "rgba(28,15,11,0.035)" }}
+      >
+        道
+      </span>
       <div className="mx-auto max-w-6xl relative z-[5]">
         <motion.p
           initial={{ opacity: 0 }}
@@ -111,7 +119,7 @@ export default function Journey() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-5% 0px" }}
                 transition={{ duration: 0.55, delay: i * 0.04, ease: [0.16, 1, 0.3, 1] }}
-                className="py-8 border-t border-paper-ink/10 last:border-b"
+                className="group py-8 lg:px-5 lg:-mx-5 border-t border-paper-ink/10 last:border-b rounded-lg transition-colors duration-300 hover:bg-[rgba(201,80,122,0.03)]"
               >
                 <TiltCard intensity={4} className="w-full">
                   <div className="grid grid-cols-1 lg:grid-cols-[1fr_200px] gap-6">

@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Check, Copy } from "lucide-react";
+import { Check, Copy, FileDown } from "lucide-react";
 import { motion } from "framer-motion";
 import { profile } from "@/lib/data";
 import { copyToClipboard } from "@/lib/clipboard";
@@ -37,6 +37,15 @@ export default function Contact() {
       <SakuraPool />
 
 
+      {/* Ghost kanji — 縁 (en): connection, fate */}
+      <span
+        aria-hidden="true"
+        className="absolute top-8 right-[4%] font-serif leading-none select-none pointer-events-none z-[1]"
+        style={{ fontSize: "clamp(12rem, 26vw, 24rem)", color: "rgba(250,246,241,0.05)" }}
+      >
+        縁
+      </span>
+
       {/* Radial glow */}
       <div
         className="absolute inset-0 pointer-events-none z-[1]"
@@ -54,7 +63,7 @@ export default function Contact() {
           className="font-mono text-[11px] uppercase tracking-[0.2em] mb-8"
           style={{ color: "rgba(245,241,232,0.45)" }}
         >
-          <TextScramble text="06 — Contact" />
+          <TextScramble text="05 — Contact" />
         </motion.p>
 
         <div
@@ -148,12 +157,36 @@ export default function Contact() {
           ))}
         </motion.div>
 
+        <motion.div
+          initial={{ opacity: 0, y: 12 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, delay: 0.35 }}
+          className="mt-10"
+        >
+          <MagneticButton>
+            <motion.a
+              href="/resume.pdf"
+              target="_blank"
+              rel="noreferrer"
+              download
+              data-cursor="link"
+              whileHover={{ scale: 1.04, borderColor: "rgba(245,241,232,0.55)", color: "var(--color-paper)" }}
+              whileTap={{ scale: 0.97 }}
+              className="inline-flex items-center gap-2 rounded-full border px-5 py-2.5 text-xs font-mono uppercase tracking-widest transition-colors"
+              style={{ borderColor: "rgba(245,241,232,0.3)", color: "rgba(245,241,232,0.6)" }}
+            >
+              <FileDown size={13} /> Download résumé
+            </motion.a>
+          </MagneticButton>
+        </motion.div>
+
         <motion.p
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.4 }}
-          className="font-mono text-[10px] uppercase tracking-widest mt-10"
+          className="font-mono text-[10px] uppercase tracking-widest mt-6"
           style={{ color: "rgba(245,241,232,0.25)" }}
         >
           © 2026 {profile.fullName} · Built with code, data, and intent.

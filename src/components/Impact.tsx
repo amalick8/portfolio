@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { focusAreas, results } from "@/lib/data";
 import AnimatedStat from "@/components/AnimatedStat";
 import ParallaxBlob from "@/components/ParallaxBlob";
+import SakuraBranchDecor from "@/components/SakuraBranchDecor";
 import TiltCard from "@/components/TiltCard";
 import SplitText from "@/components/SplitText";
 import TextScramble from "@/components/TextScramble";
@@ -18,6 +19,15 @@ export default function Impact() {
         className="absolute top-1/3 left-1/2 w-[34rem] h-[34rem] -translate-x-1/2 rounded-full bg-accent-deep/[0.04] blur-[130px]"
         range={70}
       />
+      <SakuraBranchDecor side="right" />
+      {/* Ghost kanji — 果 (ka): result, fruit */}
+      <span
+        aria-hidden="true"
+        className="absolute -top-10 right-[5%] font-serif leading-none select-none pointer-events-none"
+        style={{ fontSize: "clamp(12rem, 24vw, 22rem)", color: "rgba(28,15,11,0.035)" }}
+      >
+        果
+      </span>
       <div className="mx-auto max-w-6xl relative z-[5]">
         <motion.p
           initial={{ opacity: 0 }}
@@ -26,11 +36,11 @@ export default function Impact() {
           transition={{ duration: 0.5 }}
           className="font-mono text-[11px] uppercase tracking-[0.2em] text-accent-soft mb-3"
         >
-          <TextScramble text="05 — Impact" />
+          <TextScramble text="04 — Impact" />
         </motion.p>
-        <div className="font-display text-4xl sm:text-5xl mb-12 max-w-2xl leading-tight">
-          <SplitText text="numbers that show" as="h2" delay={0} stagger={0.06} className="block" />
-          <SplitText text="traction." as="h2" delay={0.2} stagger={0.07} className="block" colorWords={{ "traction.": "var(--color-accent)" }} />
+        <div className="font-display text-[2.8rem] sm:text-[4.5rem] lg:text-[6rem] leading-[0.92] tracking-tight mb-14 pb-3">
+          <SplitText text="numbers that" as="h2" delay={0} stagger={0.06} className="block" />
+          <SplitText text="show traction." as="h2" delay={0.18} stagger={0.07} className="block" colorWords={{ "traction.": "var(--color-accent)" }} />
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-5 mb-10">
@@ -48,7 +58,10 @@ export default function Impact() {
                     {r.org} · {r.domain}
                   </p>
                   <h3 className="font-display text-xl mb-5">{r.title}</h3>
-                  <div className="grid grid-cols-3 gap-2 mb-5 pb-5 border-b border-line">
+                  <div
+                    className="grid gap-2 mb-5 pb-5 border-b border-line"
+                    style={{ gridTemplateColumns: `repeat(${r.stats.length}, minmax(0,1fr))` }}
+                  >
                     {r.stats.map((s) => (
                       <div key={s.label}>
                         <motion.div

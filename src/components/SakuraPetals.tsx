@@ -193,17 +193,19 @@ for (let i = 0; i < petals.length; i++) {
 
         const dx = p.x - mouse.x, dy = p.y - mouse.y;
         const d2 = dx * dx + dy * dy;
-        if (d2 < 14400 && d2 > 0.1) {
+        if (d2 < 12100 && d2 > 0.1) {
           const d = Math.sqrt(d2);
-          const f = 8500 / d2;
-          p.vx += (dx / d) * f * 0.13;
-          p.vy += (dy / d) * f * 0.06;
+          // Capped force — uncapped 1/d² made petals rocket away at close range
+          const f = Math.min(2.2, 6500 / d2);
+          p.vx += (dx / d) * f * 0.12;
+          p.vy += (dy / d) * f * 0.05;
         }
 
         // Apply scroll boost (all layers, proportional to wind response)
         const boost = scrollBoost * (0.5 + p.windResp * 0.35);
         p.vx *= 0.979;
         p.vy = p.vy * 0.989 + 0.004 + Math.max(0, boost * 0.015);
+        p.vy = Math.max(-0.8, Math.min(3.2, p.vy));
         p.x += p.vx; p.y += p.vy; p.angle += p.av;
 
         if (p.y > H + 26) {

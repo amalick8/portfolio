@@ -25,24 +25,9 @@ export default function SiteGuard() {
     };
     document.addEventListener("keydown", noSelect);
 
-    // Detect devtools open via size difference
-    const devtoolsCheck = () => {
-      const threshold = 160;
-      if (
-        window.outerWidth - window.innerWidth > threshold ||
-        window.outerHeight - window.innerHeight > threshold
-      ) {
-        document.body.style.display = "none";
-      } else {
-        document.body.style.display = "";
-      }
-    };
-    window.addEventListener("resize", devtoolsCheck);
-
     return () => {
       document.removeEventListener("contextmenu", noContext);
       document.removeEventListener("keydown", noSelect);
-      window.removeEventListener("resize", devtoolsCheck);
     };
   }, []);
 

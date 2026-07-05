@@ -124,10 +124,11 @@ export default function SakuraPool() {
     };
     buildAndSort();
 
+    // Store viewport coords; convert per-frame so the crater tracks the real
+    // cursor even while Lenis scrolls the canvas underneath a stationary mouse
     const onMouse = (e: MouseEvent) => {
-      const rect = canvas.getBoundingClientRect();
-      mouse.x = e.clientX - rect.left;
-      mouse.y = e.clientY - rect.top;
+      mouse.x = e.clientX;
+      mouse.y = e.clientY;
     };
     const onLeave = () => { mouse.x = -9999; mouse.y = -9999; };
     document.addEventListener("mousemove", onMouse);
@@ -137,12 +138,16 @@ export default function SakuraPool() {
     const tick = () => {
       ctx.clearRect(0, 0, W, H);
 
+      const rect = canvas.getBoundingClientRect();
+      const mx = mouse.x - rect.left;
+      const my = mouse.y - rect.top;
+
       for (const p of petals) {
         let ax = (p.rx - p.x) * SPRING_K_X;
         let ay = (p.ry - p.y) * SPRING_K_Y;
         if (p.y < p.ry) ay += GRAVITY;
 
-        const dx = p.x - mouse.x, dy = p.y - mouse.y;
+        const dx = p.x - mx, dy = p.y - my;
         const d2 = dx * dx + dy * dy;
         if (d2 < REPEL_R * REPEL_R && d2 > 1) {
           const d = Math.sqrt(d2);
@@ -151,8 +156,8 @@ export default function SakuraPool() {
           ay += (dy / d) * f * 0.70;
         }
 
-        p.vx = p.vx * DAMPING + ax;
-        p.vy = p.vy * DAMPING + ay;
+        p.vx = Math.max(-12, Math.min(12, p.vx * DAMPING + ax));
+        p.vy = Math.max(-12, Math.min(12, p.vy * DAMPING + ay));
         p.x += p.vx; p.y += p.vy; p.angle += p.av;
 
         if (p.y > H - 1) { p.y = H - 1; p.vy = 0; }

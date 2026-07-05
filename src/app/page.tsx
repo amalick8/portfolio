@@ -5,7 +5,6 @@ import Marquee from "@/components/Marquee";
 import About from "@/components/About";
 import Journey from "@/components/Journey";
 import Work from "@/components/Work";
-import Hackathons from "@/components/Hackathons";
 import Impact from "@/components/Impact";
 import Contact from "@/components/Contact";
 import QuickActions from "@/components/QuickActions";
@@ -20,7 +19,6 @@ export default function Home() {
         <About />
         <Journey />
         <Work />
-        <Hackathons />
         <Impact />
         <Contact />
       </main>

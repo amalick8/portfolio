@@ -2,7 +2,6 @@
 
 import { useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { Command } from "lucide-react";
 import { profile } from "@/lib/data";
 import { copyToClipboard } from "@/lib/clipboard";
 
@@ -47,8 +46,13 @@ export default function QuickActions() {
       }
       if (e.key === "Escape") setOpen(false);
     };
+    const openFromNav = () => setOpen(true);
     window.addEventListener("keydown", handler);
-    return () => window.removeEventListener("keydown", handler);
+    window.addEventListener("am-open-terminal", openFromNav);
+    return () => {
+      window.removeEventListener("keydown", handler);
+      window.removeEventListener("am-open-terminal", openFromNav);
+    };
   }, []);
 
   useEffect(() => {
@@ -73,17 +77,18 @@ export default function QuickActions() {
     setInput("");
 
     if (cmd === "github") {
+      // The actual window.open() already fired synchronously in onKeyDown,
+      // directly on the keypress, so it can't get popup-blocked. This just
+      // logs the output and gives a manual link as a fallback.
       push(
         { type: "output", text: "  opening github..." },
         { type: "link", label: profile.github, href: profile.github }
       );
-      setTimeout(() => window.open(profile.github, "_blank"), 300);
     } else if (cmd === "linkedin") {
       push(
         { type: "output", text: "  opening linkedin..." },
         { type: "link", label: profile.linkedin, href: profile.linkedin }
       );
-      setTimeout(() => window.open(profile.linkedin, "_blank"), 300);
     } else if (cmd === "contact") {
       const ok = await copyToClipboard(profile.email);
       push(
@@ -114,13 +119,6 @@ export default function QuickActions() {
 
   return (
     <>
-      <button
-        onClick={() => setOpen(true)}
-        className="fixed bottom-5 right-5 z-50 inline-flex items-center gap-1.5 rounded-full border border-line-strong bg-bg-soft px-3.5 py-2 font-mono text-[11px] text-ink-faint hover:text-accent-soft hover:border-accent/50 transition-colors"
-      >
-        <Command size={12} /> K
-      </button>
-
       <AnimatePresence>
         {open && (
           <>
@@ -151,10 +149,15 @@ export default function QuickActions() {
               >
                 <div className="flex gap-2">
                   <button
-                    onClick={() => setOpen(false)}
-                    className="w-3.5 h-3.5 rounded-full flex items-center justify-center group"
-                    style={{ background: "#ff5f57" }}
-                  />
+                    type="button"
+                    onClick={() => { console.log("[close-debug] handler ran"); setOpen(false); }}
+                    aria-label="Close terminal"
+                    // Visual dot stays 14px, but the actual hit target is padded
+                    // out so a single click lands reliably (was a 14px miss-prone target).
+                    className="relative flex h-6 w-6 shrink-0 items-center justify-center rounded-full"
+                  >
+                    <span className="h-3.5 w-3.5 rounded-full" style={{ background: "#ff5f57" }} />
+                  </button>
                   <div className="w-3.5 h-3.5 rounded-full" style={{ background: "#ffbd2e" }} />
                   <div className="w-3.5 h-3.5 rounded-full" style={{ background: "#28c840" }} />
                 </div>
@@ -262,7 +265,15 @@ export default function QuickActions() {
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
                 onKeyDown={(e) => {
-                  if (e.key === "Enter") run(input);
+                  if (e.key !== "Enter") return;
+                  // Fire window.open as the very first thing, synchronously
+                  // inside the real keypress — the most direct possible tie
+                  // to the user gesture, so browsers never treat it as a
+                  // blocked popup.
+                  const cmd = input.trim().toLowerCase();
+                  if (cmd === "github") window.open(profile.github, "_blank", "noopener");
+                  else if (cmd === "linkedin") window.open(profile.linkedin, "_blank", "noopener");
+                  run(input);
                 }}
                 className="absolute opacity-0 pointer-events-none"
                 style={{ top: 0, left: 0, width: 1, height: 1 }}

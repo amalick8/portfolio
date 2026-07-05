@@ -2,7 +2,7 @@
 
 import { useRef, useState } from "react";
 import { motion, useMotionValueEvent, useScroll, useTransform } from "framer-motion";
-import { ArrowUpRight, Lock } from "lucide-react";
+import { ArrowUpRight, GitFork, Lock } from "lucide-react";
 import { projects } from "@/lib/data";
 import TextScramble from "@/components/TextScramble";
 
@@ -60,7 +60,7 @@ export default function Work() {
                       transition={{ duration: 0.4, delay: 0 }}
                       className="relative font-mono text-[9px] uppercase tracking-[0.25em] text-ink/25 mb-3"
                     >
-                      Selected System
+                      FIG. {String(i + 1).padStart(2, "0")} — Selected System
                     </motion.p>
                     <motion.h3
                       key={`h3-${p.name}`}
@@ -93,75 +93,78 @@ export default function Work() {
                     </div>
                   </div>
 
-                  {/* RIGHT: Glassmorphic detail card */}
+                  {/* RIGHT: Terminal-style spec card — echoes the ⌘K terminal */}
                   <motion.div
                     key={p.name}
                     initial={{ opacity: 0, x: 30 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-                    className="rounded-2xl border border-line p-7 sm:p-8 flex flex-col gap-6"
+                    className="rounded-xl overflow-hidden"
                     style={{
-                      background: "rgba(26,24,20,0.7)",
-                      backdropFilter: "blur(24px)",
+                      background: "#0e0608",
+                      boxShadow: "0 30px 70px -30px rgba(28,15,11,0.45), 0 0 0 1px rgba(201,80,122,0.14)",
                     }}
                   >
-                    {/* Description */}
-                    <p className="text-sm sm:text-base text-ink/65 leading-relaxed">
-                      {p.description}
-                    </p>
-
-                    {/* Metadata grid */}
-                    <div className="grid grid-cols-2 gap-4 border-t border-line pt-5">
-                      <div>
-                        <p className="font-mono text-[9px] uppercase tracking-widest text-ink/25 mb-1">
-                          Role
-                        </p>
-                        <p className="font-mono text-xs text-ink/65">Solo builder</p>
-                      </div>
-                      <div>
-                        <p className="font-mono text-[9px] uppercase tracking-widest text-ink/25 mb-1">
-                          Access
-                        </p>
-                        <p className="font-mono text-xs text-ink/65">
-                          {p.repo ? "Public GitHub" : "Private — on request"}
-                        </p>
-                      </div>
-                      <div>
-                        <p className="font-mono text-[9px] uppercase tracking-widest text-ink/25 mb-1">
-                          Stack
-                        </p>
-                        <p className="font-mono text-xs text-ink/65">{p.tags}</p>
-                      </div>
-                      <div>
-                        <p className="font-mono text-[9px] uppercase tracking-widest text-ink/25 mb-1">
-                          Status
-                        </p>
-                        <p className="font-mono text-xs text-ink/65">
-                          {p.repo ? "Active" : "Stealth"}
-                        </p>
-                      </div>
+                    {/* Title bar */}
+                    <div
+                      className="flex items-center gap-2 px-4 py-3"
+                      style={{ background: "#1a0b0f", borderBottom: "1px solid rgba(201,80,122,0.14)" }}
+                    >
+                      <span className="w-2.5 h-2.5 rounded-full" style={{ background: "#ff5f57" }} />
+                      <span className="w-2.5 h-2.5 rounded-full" style={{ background: "#ffbd2e" }} />
+                      <span className="w-2.5 h-2.5 rounded-full" style={{ background: "#28c840" }} />
+                      <span
+                        className="flex-1 text-center font-mono text-[11px] tracking-wide"
+                        style={{ color: "rgba(255,200,218,0.28)" }}
+                      >
+                        {p.repo ? `gh repo view ${p.name.toLowerCase()}` : "access — restricted"}
+                      </span>
                     </div>
 
-                    {/* CTA */}
-                    <div>
-                      {p.repo ? (
-                        <motion.a
-                          href={p.repo}
-                          target="_blank"
-                          rel="noreferrer"
-                          data-cursor="link"
-                          whileHover={{ scale: 1.05, boxShadow: "0 0 24px rgba(201,80,122,0.4)" }}
-                          whileTap={{ scale: 0.97 }}
-                          className="inline-flex items-center gap-2 rounded-full px-5 py-2.5 text-sm font-medium"
-                          style={{ background: "var(--color-accent)", color: "var(--color-bg)" }}
-                        >
-                          {p.accessLabel} <ArrowUpRight size={14} />
-                        </motion.a>
-                      ) : (
-                        <span className="inline-flex items-center gap-2 rounded-full border border-line px-5 py-2.5 text-sm font-medium text-ink-faint">
-                          <Lock size={13} /> {p.accessLabel}
-                        </span>
-                      )}
+                    {/* Body */}
+                    <div className="px-6 py-6 font-mono text-[13px] leading-7">
+                      {[
+                        { k: "role", v: "Solo builder" },
+                        { k: "access", v: p.repo ? "Public · GitHub" : "Private — on request" },
+                        { k: "stack", v: p.tags },
+                        { k: "status", v: p.repo ? "Active" : "Stealth" },
+                      ].map((row) => (
+                        <div key={row.k} className="flex gap-3">
+                          <span style={{ color: "#c9507a" }} className="shrink-0 w-16">{row.k}</span>
+                          <span style={{ color: "rgba(240,230,234,0.75)" }}>{row.v}</span>
+                        </div>
+                      ))}
+
+                      <div className="mt-5 pt-5" style={{ borderTop: "1px solid rgba(201,80,122,0.14)" }}>
+                        {p.repo ? (
+                          <motion.a
+                            href={p.repo}
+                            target="_blank"
+                            rel="noreferrer"
+                            data-cursor="link"
+                            whileHover={{ background: "rgba(201,80,122,0.25)", borderColor: "rgba(201,80,122,0.6)" }}
+                            whileTap={{ scale: 0.97 }}
+                            className="inline-flex items-center gap-2 rounded-lg px-4 py-2.5 text-[13px] font-medium transition-colors"
+                            style={{
+                              background: "rgba(201,80,122,0.14)",
+                              border: "1px solid rgba(201,80,122,0.35)",
+                              color: "#f5b8d0",
+                            }}
+                          >
+                            <GitFork size={14} /> {p.accessLabel} <ArrowUpRight size={13} />
+                          </motion.a>
+                        ) : (
+                          <span
+                            className="inline-flex items-center gap-2 rounded-lg px-4 py-2.5 text-[13px] font-medium"
+                            style={{
+                              border: "1px solid rgba(240,230,234,0.15)",
+                              color: "rgba(240,230,234,0.35)",
+                            }}
+                          >
+                            <Lock size={13} /> {p.accessLabel}
+                          </span>
+                        )}
+                      </div>
                     </div>
                   </motion.div>
                 </div>
