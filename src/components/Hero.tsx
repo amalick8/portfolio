@@ -72,13 +72,13 @@ export default function Hero() {
               className="block"
             />
             <SplitText
-              text="i architect exits."
+              text="i build systems that scale."
               as="h1"
               delay={0.9}
               stagger={0.09}
               duration={0.95}
               className="block"
-              colorWords={{ "exits.": "var(--color-accent)" }}
+              colorWords={{ "scale.": "var(--color-accent)" }}
               accentClassName="sakura-shimmer"
             />
           </div>
@@ -89,8 +89,8 @@ export default function Hero() {
             transition={{ duration: 0.8, delay: 1.25 }}
             className="mt-7 max-w-xl text-base sm:text-lg text-ink-muted leading-relaxed"
           >
-            Software Engineering &amp; Honors student at UTA. I build the POC, run the demo,
-            and field the technical objections. Most people are either builders or sellers — I'm training to be both.
+            Software Engineering student transferring to UT Dallas after UTA Honors. I build AI,
+            full-stack, data, and systems projects that turn technical work into measurable outcomes.
           </motion.p>
 
           <motion.div
@@ -159,28 +159,6 @@ export default function Hero() {
           </motion.div>
         </div>
       </div>
-
-      {/* Vertical Japanese caption — 出口を設計する = "design the exit" */}
-      <motion.div
-        aria-hidden="true"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 1.4, delay: 1.9 }}
-        className="absolute left-8 top-1/2 -translate-y-1/2 hidden xl:flex flex-col items-center gap-4 pointer-events-none select-none"
-        style={{ zIndex: 1 }}
-      >
-        <span className="w-px h-14 bg-line-strong" />
-        <span
-          className="font-serif text-[13px] tracking-[0.4em] text-ink/30"
-          style={{ writingMode: "vertical-rl" }}
-        >
-          出口を設計する
-        </span>
-        <span
-          className="w-1.5 h-1.5 rounded-full"
-          style={{ background: "var(--color-accent)", opacity: 0.5 }}
-        />
-      </motion.div>
 
       {/* SCROLL indicator */}
       <motion.div

@@ -20,14 +20,6 @@ export default function Impact() {
         range={70}
       />
       <SakuraBranchDecor side="right" />
-      {/* Ghost kanji — 果 (ka): result, fruit */}
-      <span
-        aria-hidden="true"
-        className="absolute -top-10 right-[5%] font-serif leading-none select-none pointer-events-none"
-        style={{ fontSize: "clamp(12rem, 24vw, 22rem)", color: "rgba(28,15,11,0.035)" }}
-      >
-        果
-      </span>
       <div className="mx-auto max-w-6xl relative z-[5]">
         <motion.p
           initial={{ opacity: 0 }}

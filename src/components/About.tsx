@@ -11,14 +11,6 @@ export default function About() {
   return (
     <section id="about" className="relative overflow-hidden bg-paper text-paper-ink px-5 sm:px-8 pt-20 pb-24 sm:pt-28 sm:pb-32">
       <SakuraBranchDecor side="right" />
-      {/* Ghost kanji — 心 (kokoro): heart, mindset */}
-      <span
-        aria-hidden="true"
-        className="absolute top-4 right-[8%] font-serif leading-none select-none pointer-events-none"
-        style={{ fontSize: "clamp(12rem, 24vw, 22rem)", color: "rgba(28,15,11,0.035)" }}
-      >
-        心
-      </span>
       <div className="mx-auto max-w-6xl relative z-[5]">
         <motion.p
           initial={{ opacity: 0 }}
@@ -40,7 +32,7 @@ export default function About() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-20">
           {[
             profile.bio,
-            "My edge is the overlap — I can whiteboard the architecture with the engineering team in the morning and present the business case to the VP by afternoon. At EY, Intel, and the Recording Academy I wasn't just building pipelines; I was translating technical output into decisions stakeholders could act on.",
+            "My recent work spans a production B2B financial-intelligence platform, a multithreaded C++ search engine, a persistent LSM-tree storage engine, and industry data projects with Intel and The Recording Academy. The throughline is technical depth translated into outcomes people can measure.",
           ].map((text, i) => (
             <motion.p
               key={i}

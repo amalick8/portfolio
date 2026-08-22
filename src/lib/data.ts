@@ -1,9 +1,9 @@
 export const profile = {
   name: "Ammar Malick",
-  fullName: "M. Ammar Malick",
-  tagline: "Software Engineering & Honors @ UTA · Technical sales, AI systems, full-stack",
-  headline: "I speak engineering to engineers and revenue to executives.",
-  bio: "I'm Ammar — Software Engineering student at UTA (3.95 GPA) on a direct path into sales engineering. I build the POC, run the demo, field the technical objections, and close. Most people are either technical or commercial. I'm building to be both.",
+  fullName: "Muhammad Ammar Malick",
+  tagline: "Software Engineering @ UTD · AI systems, full-stack, data infrastructure",
+  headline: "I build real-world software with measurable impact.",
+  bio: "I'm Ammar — a Software Engineering student transferring to UT Dallas after two years in UTA's Honors College. I build production systems across AI, full-stack platforms, data pipelines, information retrieval, and storage engines, with a 3.9 CGPA and a track record of shipping measurable results.",
   email: "ammarmalick2006@gmail.com",
   github: "https://github.com/amalick8",
   githubHandle: "amalick8",
@@ -11,8 +11,8 @@ export const profile = {
 };
 
 export const heroStats = [
-  { value: "3.95", label: "UTA GPA (Software Engineering & Honors)" },
-  { value: "3,600+", label: "LinkedIn followers" },
+  { value: "3.9", label: "CGPA (Software Engineering)" },
+  { value: "4,500+", label: "LinkedIn followers" },
   { value: "1,000+", label: "GitHub commits" },
 ];
 
@@ -38,111 +38,78 @@ export type ExperienceEntry = {
 export const experience: ExperienceEntry[] = [
   {
     index: "01",
-    org: "UT Arlington",
+    org: "The University of Texas at Dallas",
     location: "Dallas, TX",
-    role: "Campus Tour Guide",
-    dates: "Mar 2025 — Present",
+    role: "B.S. Software Engineering",
+    dates: "Aug 2026 — May 2028 (Expected)",
     bullets: [
-      "Representing UTA to prospective students and families through structured campus walkthroughs.",
-      "Strengthening communication and live stakeholder-facing presentation skills.",
+      "Transfer Scholarship Recipient with more than $50,000 awarded.",
+      "Continuing software engineering track after completing two years at UTA's Honors College.",
     ],
   },
   {
     index: "02",
-    org: "EY",
-    location: "Remote",
-    role: "Expedition EY Program Participant",
-    dates: "Mar 2026 — Jun 2026",
+    org: "The University of Texas at Arlington",
+    location: "Arlington, TX",
+    role: "Software Engineering, Honors College",
+    dates: "2024 — 2026",
     bullets: [
-      "Participating in a structured apprenticeship focused on consulting, technology, and delivery workflows.",
-      "Developing stronger business context for engineering decisions in real-world teams.",
+      "Earned a 3.93 GPA while completing honors coursework in software engineering.",
+      "Recognized on the Dean's List 3x and received the Freshman Distinction Award 2x.",
     ],
+    stat: "3.93",
+    statLabel: "UTA GPA",
   },
   {
     index: "03",
-    org: "ACM @ UT Arlington",
-    location: "Dallas, TX",
-    role: "Researcher",
-    dates: "Feb 2026 — May 2026",
+    org: "BlueCiate",
+    location: "Dallas, TX (Hybrid)",
+    role: "Software Engineering Intern",
+    dates: "Oct 2025 — Mar 2026",
     bullets: [
-      "Supporting introductory machine learning research through technical and market analysis.",
-      "Contributing structured research notes and exploratory findings for team discussions.",
+      "Engineered and optimized REST API integrations and backend data workflows, reducing average request latency by 38% across 10K+ monthly operations.",
+      "Collaborated with senior engineers to train and evaluate scikit-learn classification models across accuracy, precision, and recall.",
+      "Refactored database queries and application logic across 15+ production modules, reducing redundant queries by 45% and improving page-load performance by 30%.",
     ],
+    stat: "38%",
+    statLabel: "Request latency reduction",
   },
   {
     index: "04",
-    org: "BlueCiate",
-    location: "Dallas, Hybrid",
-    role: "Software Engineer Intern",
-    dates: "Jan 2026 — Mar 2026",
+    org: "Caliph Digital",
+    location: "Edmonton, AB (Hybrid)",
+    role: "Web Development Intern",
+    dates: "Oct 2024 — May 2025",
     bullets: [
-      "Built Python automation pipelines (pandas + file handling) for recurring internal data prep workflows.",
-      "Reduced manual processing time by roughly 20–25% through repeatable script-based formatting steps.",
-      "Contributed updates to application components while learning React architecture and data flow.",
+      "Optimized rendering, asset delivery, and frontend requests, reducing page-load time by 38% and improving Lighthouse scores by 25+ points.",
+      "Integrated REST APIs, client-side validation, and error-handling states across interactive user flows supporting 1,000+ monthly interactions.",
+      "Developed responsive web experiences across 8+ production pages, translating Figma designs into reusable React components.",
     ],
-    stat: "~22%",
-    statLabel: "Processing time saved",
+    stat: "25+",
+    statLabel: "Lighthouse points gained",
   },
   {
     index: "05",
-    org: "BlueCiate",
-    location: "Internship",
-    role: "Frontend Developer",
-    dates: "Oct 2025 — Dec 2025",
-    bullets: [
-      "Implemented and refined responsive UI components for active product surfaces.",
-      "Shipped incremental front-end improvements using React and modern design patterns.",
-    ],
-  },
-  {
-    index: "06",
-    org: "Recording Academy x GCA",
+    org: "Intel + The Recording Academy",
     location: "Remote",
-    role: "Web Performance",
-    dates: "Jun 2025 — Aug 2025",
+    role: "Industry Data Projects",
+    dates: "Summer 2025",
     bullets: [
-      "Analyzed 2,300+ days of traffic/engagement data using Python (Pandas) to evaluate site behavior.",
-      "Built Plotly visualizations to compare trends before and after the platform split.",
-      "Automated analysis workflows, reducing manual reporting effort by around 30%.",
+      "Analyzed 600K+ Intel devices, quantifying 6,768 tons of CO2 savings and identifying 2x greater per-device energy savings among devices aged 6+ years.",
+      "Applied Python and SQL to industry datasets for Intel and The Recording Academy, transforming raw data into decision-oriented technical findings.",
     ],
-    stat: "2,300+",
-    statLabel: "Days of data analyzed",
-  },
-  {
-    index: "07",
-    org: "Intel x GCA",
-    location: "Remote",
-    role: "Sustainability Analytics",
-    dates: "Jun 2025 — Aug 2025",
-    bullets: [
-      "Used Python (Pandas) and SQL to analyze repurposed-device and environmental impact datasets.",
-      "Built dashboards to explore energy savings, e-waste reduction, and CO2 impact trends.",
-      "Automated cleaning/analysis stages and reduced manual processing by roughly 25–30%.",
-    ],
-    stat: "601K+",
+    stat: "600K+",
     statLabel: "Devices analyzed",
   },
   {
-    index: "08",
-    org: "Caliph Digital",
-    location: "Edmonton, Hybrid",
-    role: "Client Solutions & Web Dev Intern",
-    dates: "Oct 2024 — May 2025",
+    index: "06",
+    org: "EY",
+    location: "Remote",
+    role: "Expedition Fellow",
+    dates: "Mar 2026 — Jun 2026",
     bullets: [
-      "Built and maintained client websites primarily in Webflow with targeted HTML/CSS customizations.",
-      "Improved responsiveness and usability through iterative styling and layout updates.",
-      "Collaborated with team members on feedback cycles and production issue resolution.",
-    ],
-  },
-  {
-    index: "09",
-    org: "Iqra Islamic School",
-    location: "On-site",
-    role: "Admin & IT Support",
-    dates: "Jan 2023 — Jun 2023",
-    bullets: [
-      "Handled daily operations support, basic IT troubleshooting, and documentation tasks.",
-      "Built a foundation for dependable execution in structured, fast-paced environments.",
+      "Completed EY's Expedition Intermediate (Level 2) fellowship focused on technology, data, AI, and digital transformation.",
+      "Developed stronger business context for technical delivery, consulting workflows, and stakeholder-facing decision-making.",
     ],
   },
 ];
@@ -150,19 +117,19 @@ export const experience: ExperienceEntry[] = [
 export const skills = [
   {
     category: "Languages",
-    items: ["Python", "C++", "JavaScript", "PostgreSQL"],
+    items: ["Python", "C++", "TypeScript", "JavaScript", "SQL"],
   },
   {
     category: "Web / Backend",
-    items: ["HTML", "CSS", "React", "Flask", "REST API"],
+    items: ["React", "Next.js", "FastAPI", "Node.js", "REST APIs"],
   },
   {
-    category: "Data / AI",
-    items: ["Pandas", "NumPy", "Scikit-Learn", "PyTorch", "OpenCV", "MediaPipe"],
+    category: "Systems / Data",
+    items: ["PostgreSQL", "Docker", "Linux", "Supabase", "Pandas", "scikit-learn"],
   },
   {
-    category: "Tools",
-    items: ["AWS", "Render", "Docker", "Supabase", "Git", "VS Code", "Cursor", "Claude Code"],
+    category: "AI / Concepts",
+    items: ["LLM APIs", "LoRA Fine-Tuning", "Information Retrieval", "Concurrency", "System Design", "Claude Code", "Codex"],
   },
 ];
 
@@ -176,52 +143,52 @@ export type Project = {
 
 export const projects: Project[] = [
   {
-    name: "ForgeAI",
-    tags: "TypeScript · Python · Next.js",
+    name: "vlens-ai-showcase",
+    tags: "React · TypeScript · Python · FastAPI · PostgreSQL · LLM APIs",
     description:
-      "AI-powered career audit platform analyzing GitHub, LeetCode, resumes, and ATS readiness.",
-    repo: "https://github.com/amalick8/ForgeAI",
+      "Value intelligence platform that transforms messy operating data into evidence-backed, dollar-quantified findings and actionable growth opportunities.",
+    repo: "https://github.com/amalick8/vlens-ai-showcase",
     accessLabel: "Open repo",
   },
   {
-    name: "PetroView",
-    tags: "Python",
+    name: "SearchEngine-CLI",
+    tags: "C++17 · BM25 · TF-IDF · Multithreading",
     description:
-      "AI-driven energy analytics platform exploring oil supply dynamics, pricing shifts, and supply shock patterns.",
-    repo: "https://github.com/amalick8/PetroView",
+      "C++ search engine with inverted indexing, TF-IDF/BM25 ranking, multithreaded document processing, and millisecond query execution.",
+    repo: "https://github.com/amalick8/SearchEngine-CLI",
     accessLabel: "Open repo",
   },
   {
-    name: "Technical-Interview-Preparation",
-    tags: "Python",
+    name: "portfolio",
+    tags: "TypeScript · Next.js · React · Framer Motion",
     description:
-      "Daily DSA preparation with pattern-based reps, clear notes, and consistent execution.",
-    repo: "https://github.com/amalick8/Technical-Interview-Preparation",
+      "Polished portfolio system presenting education, internships, technical projects, measurable impact, and GitHub work through a responsive animated experience.",
+    repo: "https://github.com/amalick8/portfolio",
     accessLabel: "Open repo",
   },
   {
     name: "Camera-Mouse-Controller",
-    tags: "Python + Computer Vision",
+    tags: "Python · OpenCV · MediaPipe",
     description:
-      "Hands-free controller using OpenCV and MediaPipe for gesture-based cursor movement and actions.",
+      "Hands-free accessibility controller using computer vision to move, click, and toggle cursor control through real-time hand gestures and facial landmarks.",
     repo: "https://github.com/amalick8/Camera-Mouse-Controller",
     accessLabel: "Open repo",
   },
   {
     name: "Grammy-Web-Data-Analysis",
-    tags: "Jupyter Notebook",
+    tags: "Jupyter Notebook · Python · Data Analysis",
     description:
-      "Official analytics work for Grammy and Recording Academy web performance and audience engagement.",
+      "Official Grammy and Recording Academy web analytics project turning audience and performance data into clear, decision-oriented technical findings.",
     repo: "https://github.com/amalick8/Grammy-Web-Data-Analysis",
     accessLabel: "Open repo",
   },
   {
-    name: "Overwatch",
-    tags: "TypeScript (Private)",
+    name: "mini-lsm-storage-engine",
+    tags: "Python · LSM Trees · WAL · SSTables · Bloom Filters",
     description:
-      "Real-time operational intelligence dashboard using computer vision to track activity and productivity metrics.",
-    repo: null,
-    accessLabel: "Request access",
+      "Persistent LSM-tree key-value storage engine with memtables, WAL, SSTables, Bloom filters, block caching, leveled compaction, crash recovery, and concurrent reads/writes.",
+    repo: "https://github.com/amalick8/mini-lsm-storage-engine",
+    accessLabel: "Open repo",
   },
 ];
 
@@ -243,47 +210,47 @@ export type ResultCase = {
 export const results: ResultCase[] = [
   {
     index: "01",
-    org: "Recording Academy",
-    domain: "Analytics",
-    title: "Awards-night traffic anomaly",
+    org: "VLens",
+    domain: "B2B Financial Intelligence",
+    title: "Production AI platform",
     stats: [
-      { value: "1.39M", label: "Peak daily traffic" },
-      { value: "~32K", label: "Avg daily baseline" },
-      { value: "+4,190%", label: "Spike vs baseline" },
+      { value: "$50K+", label: "ARR generated" },
+      { value: "10M+", label: "Records processed" },
+      { value: "229", label: "Backend tests passing" },
     ],
     description:
-      "Processed 2,700+ days of platform data and isolated the awards-night spike that outstripped the baseline by roughly 40x.",
+      "Built financial ingestion, validation, permissioning, and LLM-assisted analysis workflows for a production B2B platform serving 10+ businesses.",
   },
   {
     index: "02",
-    org: "Intel",
-    domain: "Sustainability",
-    title: "Device lifecycle impact",
+    org: "SearchEngine",
+    domain: "Information Retrieval",
+    title: "Low-latency retrieval engine",
     stats: [
-      { value: "6,768t", label: "CO2 emissions saved" },
-      { value: "601,740", label: "Devices analyzed" },
-      { value: "Lifecycle", label: "Extension modeled end-to-end" },
+      { value: "1.2M+", label: "Documents indexed" },
+      { value: "61%", label: "p95 latency reduction" },
+      { value: "240+", label: "Queries/sec sustained" },
     ],
     description:
-      "Evaluated 601,740 repurposed devices and quantified 6,768 tons of CO2 savings through lifecycle extension.",
+      "Implemented inverted indexes, BM25/TF-IDF ranking, concurrent query execution, and heap-based top-k retrieval in C++17.",
   },
   {
     index: "03",
-    org: "LinkedIn",
-    domain: "Community Presence",
-    title: "Connections & network reach",
+    org: "Intel + Recording Academy",
+    domain: "Industry Data Projects",
+    title: "Decision-oriented analytics",
     stats: [
-      { value: "3,600+", label: "LinkedIn followers" },
-      { value: "131", label: "Search appearances" },
+      { value: "600K+", label: "Intel devices analyzed" },
+      { value: "6,768t", label: "CO2 savings quantified" },
+      { value: "4,500+", label: "LinkedIn followers" },
     ],
     description:
-      "Audience of 3,600+ LinkedIn followers, with consistent inbound from recruiters, engineering leads, and fellow builders.",
+      "Applied Python and SQL to industry datasets, turning raw sustainability and web-performance data into technical findings stakeholders could use.",
   },
 ];
 
 export const focusAreas = [
   { tag: "DSA", description: "Daily pattern-based reps and mock interviews." },
-  { tag: "AI", description: "Shipping real-world AI builds with production polish." },
-  { tag: "Arc", description: "Trajectory toward high-impact sales engineering." },
+  { tag: "AI", description: "Shipping evidence-grounded LLM systems with production polish." },
+  { tag: "Systems", description: "Building retrieval engines, storage layers, and backend infrastructure." },
 ];
-

@@ -64,14 +64,6 @@ export default function Journey() {
       className="relative overflow-hidden bg-paper text-paper-ink px-5 sm:px-8 py-20 sm:py-28 border-t border-paper-ink/10"
     >
       <SakuraBranchDecor side="left" />
-      {/* Ghost kanji — 道 (michi): the path, the way */}
-      <span
-        aria-hidden="true"
-        className="absolute top-8 right-[5%] font-serif leading-none select-none pointer-events-none"
-        style={{ fontSize: "clamp(12rem, 24vw, 22rem)", color: "rgba(28,15,11,0.035)" }}
-      >
-        道
-      </span>
       <div className="mx-auto max-w-6xl relative z-[5]">
         <motion.p
           initial={{ opacity: 0 }}

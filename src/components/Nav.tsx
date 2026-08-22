@@ -10,15 +10,6 @@ import { useLenis } from "@/components/SmoothScroll";
 
 const NAV_HEIGHT = 64; // px — matches header's h-16, keeps section top flush with nav bottom
 
-// The hanko re-stamps itself per section, mirroring the ghost kanji watermarks
-const SECTION_GLYPH: Record<string, string> = {
-  about: "心",
-  journey: "道",
-  work: "作",
-  impact: "果",
-  contact: "縁",
-};
-
 export default function Nav() {
   const [activeSection, setActiveSection] = useState<string>("");
   const [menuOpen, setMenuOpen] = useState(false);
@@ -146,7 +137,7 @@ export default function Nav() {
               )}
             </AnimatePresence>
             <span className="relative">
-              <LogoMark variant={logoVariant} glyph={SECTION_GLYPH[activeSection] ?? "AM"} />
+              <LogoMark variant={logoVariant} glyph="AM" />
             </span>
           </motion.a>
 

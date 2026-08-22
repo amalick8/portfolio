@@ -37,15 +37,6 @@ export default function Contact() {
       <SakuraPool />
 
 
-      {/* Ghost kanji — 縁 (en): connection, fate */}
-      <span
-        aria-hidden="true"
-        className="absolute top-8 right-[4%] font-serif leading-none select-none pointer-events-none z-[1]"
-        style={{ fontSize: "clamp(12rem, 26vw, 24rem)", color: "rgba(250,246,241,0.05)" }}
-      >
-        縁
-      </span>
-
       {/* Radial glow */}
       <div
         className="absolute inset-0 pointer-events-none z-[1]"
