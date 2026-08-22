@@ -176,7 +176,7 @@ export type Project = {
 
 export const projects: Project[] = [
   {
-    name: "vlens-ai-showcase",
+    name: "vlens-ai-showcase — Founding Engineer",
     tags: "React · TypeScript · Python · FastAPI · PostgreSQL · LLM APIs",
     description:
       "Value intelligence platform that transforms messy operating data into evidence-backed, dollar-quantified findings and actionable growth opportunities.",
